@@ -16,31 +16,29 @@ class SwitchModeLight extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: Container(
-              child: Row(
-                children: [
-                  Container(
-                    height: 25,
-                    width: 25,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage(
-                          "assets/images/icon_questions_light.png",
-                        ),
+            child: Row(
+              children: [
+                Container(
+                  height: 25,
+                  width: 25,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(
+                        "assets/images/icon_questions_light.png",
                       ),
                     ),
                   ),
-                  const SizedBox(width: 10),
-                  const Expanded(
-                    child: Text(
-                      "Clour Scheme",
-                      style: TextStyle(
-                        color: Color(0xFF535763),
-                      ),
+                ),
+                const SizedBox(width: 10),
+                const Expanded(
+                  child: Text(
+                    "Clour Scheme",
+                    style: TextStyle(
+                      color: Color(0xFF535763),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
           Expanded(
@@ -63,7 +61,7 @@ class SwitchModeLight extends StatelessWidget {
                   labels: const ['Light', 'Dark'],
                   radiusStyle: true,
                   onToggle: (index) {
-                    print('switched to: $index');
+                    // print('switched to: $index');
                   },
                 )
               ],

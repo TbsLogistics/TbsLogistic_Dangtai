@@ -5,6 +5,7 @@ import 'package:tbs_logistics_dangtai/config/widget/image_base64.dart';
 class CustomListTitleImage extends StatefulWidget {
   const CustomListTitleImage({
     super.key,
+    // ignore: non_constant_identifier_names
     required this.Stt,
     required this.nameDriver,
     required this.numberPhone,
@@ -12,6 +13,7 @@ class CustomListTitleImage extends StatefulWidget {
     required this.status,
     required this.image,
   });
+  // ignore: non_constant_identifier_names
   final String Stt;
   final String nameDriver;
   final String numberPhone;

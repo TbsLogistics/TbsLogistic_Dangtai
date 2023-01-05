@@ -54,10 +54,12 @@ class ListCustomerModel {
   }
 
   String userAsString() {
+    // ignore: unnecessary_this
     return "#${this.maKhachHang} ${this.tenKhachhang}";
   }
 
   bool isEqual(ListCustomerModel model) {
+    // ignore: unnecessary_this
     return this.maKhachHang == model.maKhachHang;
   }
 

@@ -38,7 +38,8 @@ class CustomFormFiels extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(
               width: 1,
-              color: Color(0xFFF3BD60),
+              // color: Color(0xFFF3BD60),
+              color: Colors.white,
             ),
             color: Colors.white,
             borderRadius: BorderRadius.circular(5.0),

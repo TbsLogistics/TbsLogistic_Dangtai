@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 
-import 'package:tbs_logistics_dangtai/config/widget/image_base64.dart';
-
 class CustomListTitle extends StatefulWidget {
   const CustomListTitle({
     super.key,
+    // ignore: non_constant_identifier_names
     required this.Stt,
     required this.nameDriver,
     required this.numberPhone,
     required this.customer,
     required this.status,
-    required this.image,
   });
+  // ignore: non_constant_identifier_names
   final String Stt;
   final String nameDriver;
   final String numberPhone;
   final String customer;
   final bool status;
-  final String image;
 
   @override
   State<CustomListTitle> createState() => _CustomListTitleState();
@@ -90,57 +88,16 @@ class _CustomListTitleState extends State<CustomListTitle> {
               flex: 1,
               child: Center(
                 child: widget.status == false
-                    ? Icon(
+                    ? const Icon(
                         Icons.adjust_sharp,
                         color: Colors.redAccent,
                       )
-                    : Icon(
+                    : const Icon(
                         Icons.adjust_sharp,
                         color: Colors.green,
                       ),
               ),
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget uploadImage(Size size, String image) {
-    return SizedBox(
-      width: size.width,
-      height: size.width * 0.2,
-      // color: Colors.amberAccent,
-      child: Center(
-        child: Stack(
-          children: [
-            SizedBox(
-              height: size.width * 0.2,
-              width: size.width * 0.2,
-              child: ImageBase64(
-                image: image,
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              right: 0,
-              child: Container(
-                height: 25,
-                width: 25,
-                decoration: BoxDecoration(
-                  // border: Border.all(width: 1.0),
-                  // color: Colors.amberAccent,
-                  borderRadius: BorderRadius.circular(100.0),
-                ),
-                child: const Center(
-                  child: Icon(
-                    Icons.add_a_photo,
-                    size: 24,
-                    color: Colors.blueGrey,
-                  ),
-                ),
-              ),
-            )
           ],
         ),
       ),

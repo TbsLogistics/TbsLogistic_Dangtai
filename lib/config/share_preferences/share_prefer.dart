@@ -27,7 +27,19 @@ class SharePerApi {
     return idKH.toString();
   }
 
-  postLogout() async {
+  Future<String> getIdBophan() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var idBoPhan = prefs.getString(AppConstants.KEY_ID_MABOPHAN);
+    return idBoPhan.toString();
+  }
+
+  Future<String> getidNV() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var maNv = prefs.getString(AppConstants.KEY_ID_MANV);
+    return maNv.toString();
+  }
+
+  Future<void> postLogout() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     pref.remove(AppConstants.KEY_ACCESS_TOKEN);
 

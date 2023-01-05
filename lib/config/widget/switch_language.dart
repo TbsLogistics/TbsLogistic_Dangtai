@@ -16,24 +16,22 @@ class SwitchLanguage extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: Container(
-              child: Row(
-                children: const [
-                  Icon(
-                    Icons.language,
-                    color: Color(0xFF535763),
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Text(
-                      "Language",
-                      style: TextStyle(
-                        color: Color(0xFF535763),
-                      ),
+            child: Row(
+              children: const [
+                Icon(
+                  Icons.language,
+                  color: Color(0xFF535763),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    "Language",
+                    style: TextStyle(
+                      color: Color(0xFF535763),
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
           Expanded(
@@ -55,7 +53,7 @@ class SwitchLanguage extends StatelessWidget {
                   labels: const ['VI', 'ENG'],
                   radiusStyle: true,
                   onToggle: (index) {
-                    print('switched to: $index');
+                    // print('switched to: $index');
                   },
                 )
               ],

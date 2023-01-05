@@ -7,42 +7,44 @@ class RegisterForCustomerModel {
   String? socont2;
   String? cont1seal1;
   String? cont1seal2;
-  String? soKien;
-  String? sokhoi;
-  String? soPO;
+  int? soKien;
+  int? sokhoi;
+  String? soBook;
   bool? trangthaihang;
   bool? trangthaikhoa;
   String? cont2seal1;
   String? cont2seal2;
-  String? sokien1;
-  String? sokhoi1;
-  String? soPO1;
+  int? sokien1;
+  int? sokhoi1;
+  String? soBook1;
   bool? trangthaihang1;
   bool? trangthaikhoa1;
+  String? maloaiHang;
   int? maTaixe;
 
   RegisterForCustomerModel(
-      {this.giodukien,
-      this.kho,
-      this.loaixe,
-      this.soxe,
-      this.socont1,
-      this.socont2,
-      this.cont1seal1,
-      this.cont1seal2,
-      this.soKien,
-      this.sokhoi,
-      this.soPO,
-      this.trangthaihang,
-      this.trangthaikhoa,
-      this.cont2seal1,
-      this.cont2seal2,
-      this.sokien1,
-      this.sokhoi1,
-      this.soPO1,
-      this.trangthaihang1,
-      this.trangthaikhoa1,
-      this.maTaixe});
+      {required this.giodukien,
+      required this.kho,
+      required this.loaixe,
+      required this.soxe,
+      required this.socont1,
+      required this.socont2,
+      required this.cont1seal1,
+      required this.cont1seal2,
+      required this.soKien,
+      required this.sokhoi,
+      required this.soBook,
+      required this.trangthaihang,
+      required this.trangthaikhoa,
+      required this.cont2seal1,
+      required this.cont2seal2,
+      required this.sokien1,
+      required this.sokhoi1,
+      required this.soBook1,
+      required this.trangthaihang1,
+      required this.trangthaikhoa1,
+      required this.maloaiHang,
+      required this.maTaixe});
 
   RegisterForCustomerModel.fromJson(Map<String, dynamic> json) {
     giodukien = json['giodukien'];
@@ -55,16 +57,17 @@ class RegisterForCustomerModel {
     cont1seal2 = json['cont1seal2'];
     soKien = json['SoKien'];
     sokhoi = json['sokhoi'];
-    soPO = json['soPO'];
+    soBook = json['soBook'];
     trangthaihang = json['trangthaihang'];
     trangthaikhoa = json['trangthaikhoa'];
     cont2seal1 = json['cont2seal1'];
     cont2seal2 = json['cont2seal2'];
     sokien1 = json['Sokien1'];
     sokhoi1 = json['sokhoi1'];
-    soPO1 = json['soPO1'];
+    soBook1 = json['soBook1'];
     trangthaihang1 = json['trangthaihang1'];
     trangthaikhoa1 = json['trangthaikhoa1'];
+    maloaiHang = json['maloaiHang'];
     maTaixe = json['maTaixe'];
   }
 
@@ -80,16 +83,17 @@ class RegisterForCustomerModel {
     data['cont1seal2'] = cont1seal2;
     data['SoKien'] = soKien;
     data['sokhoi'] = sokhoi;
-    data['soPO'] = soPO;
+    data['soBook'] = soBook;
     data['trangthaihang'] = trangthaihang;
     data['trangthaikhoa'] = trangthaikhoa;
     data['cont2seal1'] = cont2seal1;
     data['cont2seal2'] = cont2seal2;
     data['Sokien1'] = sokien1;
     data['sokhoi1'] = sokhoi1;
-    data['soPO1'] = soPO1;
+    data['soBook1'] = soBook1;
     data['trangthaihang1'] = trangthaihang1;
     data['trangthaikhoa1'] = trangthaikhoa1;
+    data['maloaiHang'] = maloaiHang;
     data['maTaixe'] = maTaixe;
     return data;
   }

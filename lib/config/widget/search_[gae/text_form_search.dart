@@ -37,45 +37,43 @@ class _TextFormSearchState extends State<TextFormSearch> {
           Row(
             children: [
               Expanded(
-                child: Container(
-                  child: Theme(
-                    data: ThemeData(
-                      inputDecorationTheme:
-                          const InputDecorationTheme(border: InputBorder.none),
+                child: Theme(
+                  data: ThemeData(
+                    inputDecorationTheme:
+                        const InputDecorationTheme(border: InputBorder.none),
+                  ),
+                  child: DropdownSearch<ListCustomerModel>(
+                    // asyncItems: (String? query) {
+                    //   return controller.getData(query);
+                    // },
+                    popupProps: PopupPropsMultiSelection.modalBottomSheet(
+                      showSelectedItems: true,
+                      itemBuilder: _customPopupItemBuilderExample2,
+                      showSearchBox: true,
                     ),
-                    child: DropdownSearch<ListCustomerModel>(
-                      // asyncItems: (String? query) {
-                      //   return controller.getData(query);
-                      // },
-                      popupProps: PopupPropsMultiSelection.modalBottomSheet(
-                        showSelectedItems: true,
-                        itemBuilder: _customPopupItemBuilderExample2,
-                        showSearchBox: true,
-                      ),
-                      compareFn: (item, sItem) {
-                        return item.maKhachHang == sItem.maKhachHang;
-                      },
-                      onChanged: (ListCustomerModel? newValue) {
-                        setState(() {
-                          selectedKhachhang = newValue;
-                          print(selectedKhachhang!.maKhachHang);
-                        });
-                      },
-                      dropdownDecoratorProps: const DropDownDecoratorProps(
-                        dropdownSearchDecoration: InputDecoration(
-                          hintText: "Chọn khách hàng",
-                          filled: true,
-                          iconColor: Color(0xFFF3BD60),
-                          focusColor: Color(0xFFF3BD60),
-                          fillColor: Colors.white,
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xFFF3BD60), width: 1.0),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Color(0xFFF3BD60), width: 1.0),
-                          ),
+                    compareFn: (item, sItem) {
+                      return item.maKhachHang == sItem.maKhachHang;
+                    },
+                    onChanged: (ListCustomerModel? newValue) {
+                      setState(() {
+                        selectedKhachhang = newValue;
+                        // print(selectedKhachhang!.maKhachHang);
+                      });
+                    },
+                    dropdownDecoratorProps: const DropDownDecoratorProps(
+                      dropdownSearchDecoration: InputDecoration(
+                        hintText: "Chọn khách hàng",
+                        filled: true,
+                        iconColor: Color(0xFFF3BD60),
+                        focusColor: Color(0xFFF3BD60),
+                        fillColor: Colors.white,
+                        focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFFF3BD60), width: 1.0),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Color(0xFFF3BD60), width: 1.0),
                         ),
                       ),
                     ),
@@ -110,10 +108,10 @@ class _TextFormSearchState extends State<TextFormSearch> {
           focusColor: Colors.white,
           title: Text(
             item?.tenKhachhang ?? '',
-            style: TextStyle(color: Colors.blueGrey),
+            style: const TextStyle(color: Colors.blueGrey),
           ),
           subtitle: Text(item?.phone ?? ''),
-          leading: CircleAvatar(
+          leading: const CircleAvatar(
               // this does not work - throws 404 error
               // backgroundImage: NetworkImage(item.avatar ?? ''),
               ),

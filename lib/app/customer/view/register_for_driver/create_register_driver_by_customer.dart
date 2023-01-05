@@ -1,0 +1,593 @@
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controller.dart';
+import 'package:tbs_logistics_dangtai/app/customer/model/list_driver_by_customer_model.dart';
+import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
+import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
+import 'package:tbs_logistics_dangtai/config/widget/buttom_form_submit.dart';
+import 'package:tbs_logistics_dangtai/config/widget/custom_text_form_fiels.dart';
+import 'package:tbs_logistics_dangtai/config/widget/drop_button.dart';
+
+class RegisterCustomer extends StatefulWidget {
+  const RegisterCustomer({Key? key}) : super(key: key);
+
+  @override
+  State<RegisterCustomer> createState() => _RegisterCustomerState();
+}
+
+class _RegisterCustomerState extends State<RegisterCustomer> {
+  final String routes = "/REGISTER_CUSTOMER";
+  ListDriverByCustomerModel? selectedTaixe;
+  String? selectedTeamCar;
+  String? selectedCar;
+  String? selectedWarehome;
+  String? selectedNumberCont;
+  int numberSelectCont = 0;
+  ListDriverByCustomerModel? selectedKhachhang;
+  int? idTaixe;
+  String? selectedProduct;
+
+  TextEditingController dateinput = TextEditingController(text: "");
+  bool showDateTime = false;
+  bool showDate = false;
+  bool showTime = false;
+  DateTime dateTime = DateTime.now();
+  DateTime selectedDate = DateTime.now();
+  TimeOfDay selectedTime = TimeOfDay.now();
+
+  Future<DateTime> _selectDate(BuildContext context) async {
+    final selected = await showDatePicker(
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            dialogBackgroundColor: Colors.white,
+            colorScheme: const ColorScheme.light(
+              primary: Colors.orangeAccent,
+              onPrimary: Colors.white,
+              onSurface: Colors.blueAccent,
+            ),
+          ),
+          child: child!,
+        );
+      },
+      context: context,
+      initialDate: selectedDate,
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (selected != null && selected != selectedDate) {
+      setState(() {
+        selectedDate = selected;
+      });
+    }
+    return selectedDate;
+  }
+
+  Future<TimeOfDay> _selectTime(BuildContext context) async {
+    final selected = await showTimePicker(
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: Colors.orangeAccent,
+              onPrimary: Colors.white,
+              onSurface: Colors.blueAccent,
+              onBackground: Colors.orangeAccent,
+              onSurfaceVariant: Colors.black,
+            ),
+          ),
+          child: child!,
+        );
+      },
+      context: context,
+      initialTime: selectedTime,
+    );
+    if (selected != null && selected != selectedTime) {
+      setState(() {
+        selectedTime = selected;
+      });
+    }
+    return selectedTime;
+  }
+
+  Future _selectDateTime(BuildContext context) async {
+    final date = await _selectDate(context);
+    // ignore: unnecessary_null_comparison
+    if (date == null) return;
+
+    // ignore: use_build_context_synchronously
+    final time = await _selectTime(context);
+
+    // ignore: unnecessary_null_comparison
+    if (time == null) return;
+    setState(() {
+      dateTime = DateTime(
+        date.year,
+        date.month,
+        date.day,
+        time.hour,
+        time.minute,
+      );
+      // ignore: unnecessary_string_interpolations
+      dateinput.text = "${getDateTime()}";
+      // print(dateinput.text);
+    });
+  }
+
+  String getDate() {
+    // ignore: unnecessary_null_comparison
+    if (selectedDate == null) {
+      return 'select date';
+    } else {
+      return DateFormat('MMM d, yyyy').format(selectedDate);
+    }
+  }
+
+  String getDateTime() {
+    // ignore: unnecessary_null_comparison
+    if (dateTime == null) {
+      return 'select date timer';
+    } else {
+      return DateFormat('yyyy-MM-dd HH:mm').format(dateTime);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return GetBuilder<CustomerController>(
+      init: CustomerController(),
+      builder: (controller) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: CustomColor.backgroundAppbar,
+          title: const Text(
+            "TBS Logistics",
+            style: CustomTextStyle.tilteAppbar,
+          ),
+          centerTitle: true,
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(
+              Icons.arrow_back_ios_new_outlined,
+              size: 24,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        body: Container(
+          height: size.height,
+          decoration: const BoxDecoration(
+            gradient: CustomColor.gradient,
+          ),
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Row(
+                        children: const [
+                          Text(
+                            "Thời gian dự kiến",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              color: Colors.blueGrey,
+                              fontSize: 16,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1,
+                          // color: Color(0xFFF3BD60),
+                          color: Colors.white,
+                        ),
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      padding: const EdgeInsets.only(top: 10, left: 10),
+                      height: 60,
+                      width: size.width - 10,
+                      margin:
+                          EdgeInsets.symmetric(vertical: size.height * 0.02),
+                      child: TextFormField(
+                        onTap: () {
+                          _selectDateTime(context);
+                        },
+                        controller: dateinput,
+                        decoration: const InputDecoration(
+                          hintText: "Nhập thời gian dự kiến",
+                          border: InputBorder.none,
+                          icon: Icon(
+                            Icons.calendar_month,
+                            size: 26,
+                          ),
+                          isDense: true,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 100,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: Row(
+                          children: const [
+                            Text(
+                              "Tài xế *",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                color: Colors.blueGrey,
+                                fontSize: 16,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Theme(
+                              data: ThemeData(
+                                inputDecorationTheme:
+                                    const InputDecorationTheme(
+                                        border: InputBorder.none),
+                              ),
+                              child: DropdownSearch<ListDriverByCustomerModel>(
+                                asyncItems: (String? query) {
+                                  return controller.getData(query);
+                                },
+                                popupProps:
+                                    PopupPropsMultiSelection.modalBottomSheet(
+                                  showSelectedItems: true,
+                                  itemBuilder: _customPopupItemBuilderExample2,
+                                  showSearchBox: true,
+                                ),
+                                compareFn: (item, sItem) {
+                                  return item.maTaixe == sItem.maTaixe;
+                                },
+                                onChanged:
+                                    (ListDriverByCustomerModel? newValue) {
+                                  setState(() {
+                                    selectedTaixe = newValue;
+                                    idTaixe =
+                                        int.parse(newValue!.maTaixe.toString());
+                                    // print("idtaixe: $idTaixe");
+                                  });
+                                },
+                                dropdownDecoratorProps:
+                                    const DropDownDecoratorProps(
+                                  dropdownSearchDecoration: InputDecoration(
+                                    hintText: "Chọn tài xế",
+                                    filled: true,
+                                    iconColor: Color(0xFFF3BD60),
+                                    focusColor: Color(0xFFF3BD60),
+                                    fillColor: Colors.white,
+                                    focusedBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFFF3BD60), width: 1.0),
+                                    ),
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFFF3BD60), width: 1.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                CustomDropdownButton(
+                  items: idKho
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item["value"],
+                            child: Text(
+                              item["name"],
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    //Do something when changing the item if you want.
+                    selectedWarehome = value;
+                  },
+                  onSaved: (value) {
+                    selectedWarehome = value.toString();
+                  },
+                  text: 'Kho',
+                ),
+                CustomFormFiels(
+                  title: "Số xe",
+                  controller: controller.numberCar,
+                  hintText: "Nhập số xe",
+                  icon: Icons.abc,
+                ),
+                CustomDropdownButton(
+                  items: idProduct
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item["value"],
+                            child: Text(
+                              item["name"],
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    //Do something when changing the item if you want.
+                    setState(() {
+                      selectedProduct = value;
+                      // print(selectedProduct);
+                    });
+                  },
+                  onSaved: (value) {
+                    setState(() {
+                      selectedProduct = value.toString();
+                    });
+                  },
+                  text: 'Loại hàng *',
+                ),
+                CustomDropdownButton(
+                  items: genderItems
+                      .map((item) => DropdownMenuItem<String>(
+                            value: item["value"],
+                            child: Text(
+                              item["name"],
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                      .toList(),
+                  onChanged: (value) {
+                    //Do something when changing the item if you want.
+                    setState(() {
+                      selectedCar = value;
+                    });
+                    // print(selectedCar);
+                  },
+                  onSaved: (value) {
+                    setState(() {
+                      selectedCar = value.toString();
+                    });
+                  },
+                  text: 'Loại xe',
+                ),
+                selectedCar == "tai"
+                    ? CustomFormFiels(
+                        title: "Số seal",
+                        controller: controller.numberCont1Seal1,
+                        hintText: "Nhập số seal",
+                        icon: Icons.abc,
+                      )
+                    : CustomDropdownButton(
+                        items: numberCont
+                            .map((item) => DropdownMenuItem<String>(
+                                  value: item["value"],
+                                  child: Text(
+                                    item["name"],
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ))
+                            .toList(),
+                        onChanged: (value) {
+                          //Do something when changing the item if you want.
+                          setState(() {
+                            selectedNumberCont = value;
+                            numberSelectCont =
+                                // ignore: unnecessary_brace_in_string_interps
+                                int.parse("${selectedNumberCont}");
+                          });
+                          // print(selectedCar);
+                        },
+                        onSaved: (value) {
+                          setState(() {
+                            selectedNumberCont = value.toString();
+                          });
+                        },
+                        text: 'Chọn tổng số cont',
+                      ),
+                numberSelectCont >= 1 ? _contFirt(controller) : Container(),
+                numberSelectCont >= 2 ? _contFirt(controller) : Container(),
+                ButtonFormSubmit(
+                    onPressed: () {
+                      // print(dateinput.text);
+                      controller.postRegisterCustomer(
+                        numberCar: controller.numberCar.text,
+                        numberCont1: controller.numberCont1.text,
+                        numberCont1Seal1: controller.numberCont1Seal1.text,
+                        numberCont1Seal2: controller.numberCont1Seal2.text,
+                        numberCont2: controller.numberCont2.text,
+                        numberCont2Seal1: controller.numberCont2Seal1.text,
+                        numberCont2Seal2: controller.numberCont2Seal2.text,
+                        numberKhoi: int.parse(controller.numberKhoi.text),
+                        numberKhoi1: int.parse(controller.numberKhoi1.text),
+                        numberKien: int.parse(controller.numberKien.text),
+                        numberKien1: int.parse(controller.numberKien1.text),
+                        numberBook: controller.numberBook.text,
+                        numberBook1: controller.numberBook1.text,
+                        idCar: selectedCar,
+                        idTaixe: idTaixe,
+                        idKho: selectedWarehome,
+                        time: dateinput.text,
+                        idProduct: selectedProduct,
+                      );
+                    },
+                    text: "Đăng ký")
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _contFirt(CustomerController controller) {
+    return Column(
+      children: [
+        const Divider(),
+        CustomFormFiels(
+          title: "Số cont 1",
+          controller: controller.numberCont1,
+          hintText: "Nhập số cont",
+          icon: Icons.abc,
+        ),
+        CustomFormFiels(
+          title: "Số seal 1",
+          controller: controller.numberCont1Seal1,
+          hintText: "Nhập số seal",
+          icon: Icons.abc,
+        ),
+        CustomFormFiels(
+          title: "Số seal 2",
+          controller: controller.numberCont1Seal2,
+          hintText: "Nhập số seal",
+          icon: Icons.abc,
+        ),
+        CustomFormFiels(
+          title: "Số book",
+          controller: controller.numberBook,
+          hintText: "Nhập số book",
+          icon: Icons.abc,
+        ),
+        CustomFormFiels(
+          title: "Số kiện",
+          controller: controller.numberKien,
+          hintText: "Nhập số kiện",
+          icon: Icons.abc,
+        ),
+        CustomFormFiels(
+          title: "Số khối",
+          controller: controller.numberKhoi,
+          hintText: "Nhập số khối",
+          icon: Icons.abc,
+        ),
+      ],
+    );
+  }
+
+  Widget contSecond(CustomerController controller) {
+    return Column(
+      children: [
+        const Divider(),
+        CustomFormFiels(
+          title: "Số cont 2",
+          controller: controller.numberCont2,
+          hintText: "Nhập số cont",
+          icon: Icons.abc,
+        ),
+        CustomFormFiels(
+          title: "Số seal 1",
+          controller: controller.numberCont2Seal1,
+          hintText: "Nhập số seal",
+          icon: Icons.abc,
+        ),
+        CustomFormFiels(
+          title: "Số seal 2",
+          controller: controller.numberCont2Seal2,
+          hintText: "Nhập số seal",
+          icon: Icons.abc,
+        ),
+        CustomFormFiels(
+          title: "Số book",
+          controller: controller.numberBook1,
+          hintText: "Nhập số book",
+          icon: Icons.abc,
+        ),
+        CustomFormFiels(
+          title: "Số kiện",
+          controller: controller.numberKien1,
+          hintText: "Nhập số kiện",
+          icon: Icons.abc,
+        ),
+        CustomFormFiels(
+          title: "Số khối",
+          controller: controller.numberKhoi1,
+          hintText: "Nhập số khối",
+          icon: Icons.abc,
+        ),
+      ],
+    );
+  }
+
+  Widget _customPopupItemBuilderExample2(
+    BuildContext context,
+    ListDriverByCustomerModel? item,
+    bool isSelected,
+  ) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: Card(
+        // color: Colors.green,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(
+            color: Color(0xFFF3BD60),
+          ),
+
+          borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
+        ),
+        child: ListTile(
+          style: ListTileStyle.drawer,
+          focusColor: Colors.white,
+          title: Text(
+            item?.tenTaixe ?? '',
+            style: const TextStyle(color: Colors.blueGrey),
+          ),
+          subtitle: Text(item?.phone ?? ''),
+          leading: const CircleAvatar(
+              // this does not work - throws 404 error
+              // backgroundImage: NetworkImage(item.avatar ?? ''),
+              ),
+        ),
+      ),
+    );
+  }
+
+  final List<Map<String, dynamic>> idProduct = [
+    {'value': "HN", "name": "Nhập hàng"},
+    {'value': "HX", "name": "Xuất hàng"},
+  ];
+
+  final List<Map<String, dynamic>> genderItems = [
+    {"value": "tai", "name": "Xe tải"},
+    {"value": "con", "name": "Xe container"},
+  ];
+
+  final List<Map<String, dynamic>> numberCont = [
+    {'value': "0", "name": "Xe không có cont"},
+    {'value': "1", "name": "Xe có 1 cont"},
+    {'value': "2", "name": "Xe có 2 cont"},
+  ];
+
+  final List<Map<String, dynamic>> idKho = [
+    {"value": "K1", "name": "Kho 1"},
+    {"value": "K2", "name": "Kho 2"},
+    {"value": "K3", "name": "Kho 3"},
+    {"value": "K4", "name": "Kho 4"},
+    {"value": "K5", "name": "Kho 5"},
+  ];
+}

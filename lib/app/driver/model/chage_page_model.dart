@@ -1,5 +1,3 @@
-import 'package:tbs_logistics_dangtai/config/model/list_driver_model.dart';
-
 class ChangePageRegister {
   String? idKhachhang;
   String? idTeamCar;
