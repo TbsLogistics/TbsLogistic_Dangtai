@@ -14,6 +14,7 @@ class SplashController extends GetxController {
     var token = await SharePerApi().getToken();
     var role = await SharePerApi().getRole();
     var bophan = await SharePerApi().getIdBophan();
+    print(bophan);
     // print(role);
     if (token != null) {
       if (role == "TX") {

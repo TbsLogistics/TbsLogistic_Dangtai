@@ -9,6 +9,12 @@ import 'package:tbs_logistics_dangtai/config/model/login_model.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
 class LoginController extends GetxController {
+  RxBool obcureText = true.obs;
+  void updateObcureText() {
+    obcureText.value = !obcureText.value;
+    update();
+  }
+
   Future<void> getLogin(
     String? username,
     String? password,
@@ -93,6 +99,7 @@ class LoginController extends GetxController {
               AppConstants.KEY_ID_MABOPHAN,
               "${tokens.data!.nhanvien!.maBoPhan}",
             );
+            print("${tokens.data!.nhanvien!.maBoPhan}");
             if (tokens.data!.nhanvien!.maBoPhan == "BV") {
               getDialog();
               Future.delayed(const Duration(seconds: 1), () {

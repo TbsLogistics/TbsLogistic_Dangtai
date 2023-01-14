@@ -17,11 +17,15 @@ class AppConstants {
   static const String KEY_ID_MABOPHAN = "id_bophan";
   static const String KEY_ID_MANV = "id_NV";
 
-  //Url
+  // Url
   // static const String urlBase = "http://103.149.28.137:200";
   // static const String urlBase = "http://192.168.3.59:200";
   // static const String urlBase = "http://192.168.0.89:200";
   // static const String urlBase = "http://192.168.0.100:200";
   // static const String urlBase = "http://192.168.0.42:200";
-  static const String urlBase = "http://192.168.0.14:200";
+  static const String urlBase = "http://192.168.0.15:200";
+
+  // Url Client
+  //Tài xế
+  static const String createPhieuvao = "createphieuvaocong";
 }

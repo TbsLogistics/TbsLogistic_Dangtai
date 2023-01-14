@@ -24,7 +24,7 @@ class _DriverScreenState extends State<DriverScreen> {
         scrollDirection: Axis.vertical,
         child: Container(
           width: size.width,
-          // height: size.height,
+          height: size.height,
           decoration: const BoxDecoration(gradient: CustomColor.gradient),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: Column(
@@ -81,58 +81,40 @@ class _DriverScreenState extends State<DriverScreen> {
                 ),
               ),
               SizedBox(height: size.width * 0.1),
-              Column(
-                children: [
-                  FutureBuilder(
-                      future: controller.getInfor(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          var items = snapshot.data;
-                          // print("items : ${items!['status']}");
-                          return items!['status'] == false
-                              ? GestureDetector(
-                                  onTap: () {
-                                    Get.to(() => const StatusDriverScreen());
-                                  },
-                                  child: Container(
-                                    height: 100,
-                                    decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.6),
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(
-                                        width: 1,
-                                        color: Colors.orangeAccent
-                                            .withOpacity(0.6),
-                                      ),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Icon(Icons.create_outlined,
-                                            size: 30),
-                                        SizedBox(
-                                          width: size.width * 0.05,
-                                        ),
-                                        const Text(
-                                          "Tình trạng đơn hàng",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                )
-                              : Container();
-                        }
-                        return Container();
-                      }),
-                  SizedBox(height: size.width * 0.1),
-                ],
+              GestureDetector(
+                onTap: () {
+                  Get.to(() => const StatusDriverScreen());
+                },
+                child: Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.6),
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.orangeAccent.withOpacity(0.6),
+                    ),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.create_outlined, size: 30),
+                      SizedBox(
+                        width: size.width * 0.05,
+                      ),
+                      const Text(
+                        "Trạng thái tài xế",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
               ),
+              SizedBox(height: size.width * 0.1),
               GestureDetector(
                 onTap: () {
                   Get.to(() => const StatusDriver());

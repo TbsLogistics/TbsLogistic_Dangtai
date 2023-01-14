@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/view/list_finished_working/list_finished_working.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/list_team_of_tallyman/list_team_of_tallyman.dart';
+import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
 class TallymanScreen extends StatelessWidget {
   const TallymanScreen({super.key});
@@ -35,7 +37,6 @@ class TallymanScreen extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 Get.to(() => const ListTeamOfTallyman());
-                // showSearch(context: context, delegate: SearchTallymanWorking());
               },
               child: Container(
                 height: 100,
@@ -56,6 +57,74 @@ class TallymanScreen extends StatelessWidget {
                     ),
                     const Text(
                       "Danh sách đội làm hàng",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: size.width * 0.1),
+            GestureDetector(
+              onTap: () {
+                Get.toNamed(Routes.TALLYMAN_WAREHOME_SCREEN);
+              },
+              child: Container(
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.6),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.orangeAccent.withOpacity(0.6),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.create_outlined, size: 30),
+                    SizedBox(
+                      width: size.width * 0.05,
+                    ),
+                    const Text(
+                      "Danh sách kho",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(height: size.width * 0.1),
+            GestureDetector(
+              onTap: () {
+                Get.to(() => const ListFinishedWorking());
+              },
+              child: Container(
+                height: 100,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.6),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.orangeAccent.withOpacity(0.6),
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Icon(Icons.create_outlined, size: 30),
+                    SizedBox(
+                      width: size.width * 0.05,
+                    ),
+                    const Text(
+                      "Danh sách đã làm hàng",
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,

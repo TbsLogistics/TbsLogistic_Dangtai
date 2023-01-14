@@ -15,6 +15,7 @@ import 'package:tbs_logistics_dangtai/app/driver/driver_page.dart';
 import 'package:tbs_logistics_dangtai/app/driver/view/create_register_out_view/register_out_details_screen.dart';
 import 'package:tbs_logistics_dangtai/app/driver/view/create_register_out_view/register_out_screen.dart';
 import 'package:tbs_logistics_dangtai/app/driver/view/create_register_view/details_form_register_driver.dart';
+import 'package:tbs_logistics_dangtai/app/driver/view/status_tiker_view/status_ticker_details_view.dart';
 import 'package:tbs_logistics_dangtai/app/login/controller/login_bindings.dart';
 
 import 'package:tbs_logistics_dangtai/app/driver/view/qr_code_screen.dart';
@@ -23,9 +24,13 @@ import 'package:tbs_logistics_dangtai/app/sercurity/sercurity_page.dart';
 import 'package:tbs_logistics_dangtai/app/splash/controller/splash_binding.dart';
 import 'package:tbs_logistics_dangtai/app/splash/view/splash_screen.dart';
 
-import 'package:tbs_logistics_dangtai/app/tallyman/tallyman_page_main.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/tallyman_page.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/view/list_finished_working/list_finished_details_working.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/view/list_finished_working/list_finished_working.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/list_team_of_tallyman/list_team_details_of_tallyman.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/list_team_of_tallyman/list_team_of_tallyman.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/tallyman_details_warehome_screen.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/tallyman_ware_home.dart';
 
 import '../../app/driver/view/create_register_view/create_register_screen.dart';
 
@@ -67,6 +72,10 @@ abstract class AppPages {
     GetPage(
         name: Routes.REGISTER_OUT_DETAILS_SCREEN,
         page: () => const RegisterOutDetailsScreen()),
+    GetPage(
+      name: Routes.STATUS_TICKER_DETAIL_SCREEN,
+      page: () => const StatusTikerDetailScreen(),
+    ),
     //Khách hàng
     GetPage(
       name: Routes.LIST_DRIVER_BY_CUSTOMER,
@@ -112,7 +121,7 @@ abstract class AppPages {
     //Tallyman
     GetPage(
       name: Routes.TALLYMAN_PAGE,
-      page: () => const TallymanPageMain(),
+      page: () => const TallymanPage(),
     ),
     GetPage(
       name: Routes.LIST_TEAM_DETAILS_OF_TALLYMAN,
@@ -122,7 +131,22 @@ abstract class AppPages {
       name: Routes.LIST_TEAM_OF_TALLYMAN,
       page: () => const ListTeamOfTallyman(),
     ),
-
+    GetPage(
+      name: Routes.TALLYMAN_WAREHOME_SCREEN,
+      page: () => const TallymanWareHomeScreen(),
+    ),
+    GetPage(
+      name: Routes.TALLYMAN_DETAILS_WAREHOME_SCREEN,
+      page: () => TallymanDetailsWarehomeScreen(),
+    ),
+    GetPage(
+      name: Routes.LIST_FINISHED_WORKING,
+      page: () => const ListFinishedWorking(),
+    ),
+    GetPage(
+      name: Routes.LIST_FINISHED_DETAILS_WORKING,
+      page: () => ListFinishedDetailsWorking(),
+    ),
     // GetPage(
     //   name: Routes.TALLYMAN_SEARCH_WORKING,
     //   page: () =>  showSearch(context: context, delegate: SearchTallymanWorking()),

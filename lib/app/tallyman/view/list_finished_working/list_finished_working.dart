@@ -7,15 +7,15 @@ import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
-class ListTeamOfTallyman extends StatefulWidget {
-  const ListTeamOfTallyman({super.key});
+class ListFinishedWorking extends StatefulWidget {
+  const ListFinishedWorking({super.key});
 
   @override
-  State<ListTeamOfTallyman> createState() => _ListTeamOfTallymanState();
+  State<ListFinishedWorking> createState() => _ListFinishedWorkingState();
 }
 
-class _ListTeamOfTallymanState extends State<ListTeamOfTallyman> {
-  final String routes = "/LIST_TEAM_OF_TALLYMAN";
+class _ListFinishedWorkingState extends State<ListFinishedWorking> {
+  final String routes = "/LIST_FINISHED_WORKING";
   @override
   Widget build(BuildContext context) {
     var day = DateFormat("dd-MM-yyyy");
@@ -49,13 +49,13 @@ class _ListTeamOfTallymanState extends State<ListTeamOfTallyman> {
           ),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: Obx(() {
-            print(controller.listEmployAwait.value.chuaLam);
-            return controller.listEmployAwait.value.chuaLam!.length == 0
+            print(controller.listEmployAwait.value.daLam);
+            return controller.listEmployAwait.value.daLam!.length == 0
                 ? const Center(
                     child: Text("Không có đội làm hàng"),
                   )
                 : ListView.builder(
-                    itemCount: controller.listEmployAwait.value.chuaLam!.length,
+                    itemCount: controller.listEmployAwait.value.daLam!.length,
                     itemBuilder: (context, index) {
                       return buildTitle(size, index, day, hour, controller);
                       // return Container();
@@ -71,17 +71,12 @@ class _ListTeamOfTallymanState extends State<ListTeamOfTallyman> {
       TallymanController controller) {
     return InkWell(
       onTap: () {
-        print(controller.listEmployAwait.value.chuaLam![index].thoiGianBatDau);
-        controller.postListEmployee(
-          maDoiLamHang:
-              '${controller.listEmployAwait.value.chuaLam![index].maDoiLamHang}',
-          maPhieuLamHang: int.parse(
-            controller.listEmployAwait.value.chuaLam![index].id.toString(),
-          ),
-          routes: Routes.LIST_TEAM_DETAILS_OF_TALLYMAN,
-          time: controller.listEmployAwait.value.chuaLam![index].thoiGianBatDau
-              .toString(),
-        );
+        print(controller.listEmployAwait.value.daLam![index].id.toString());
+        controller.postDetailTicker(
+            maPhieuLamHang: int.parse(
+              controller.listEmployAwait.value.daLam![index].id.toString(),
+            ),
+            routes: Routes.LIST_FINISHED_DETAILS_WORKING);
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),
@@ -129,7 +124,7 @@ class _ListTeamOfTallymanState extends State<ListTeamOfTallyman> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            "${controller.listEmployAwait.value.chuaLam![index].soxe}",
+                            "${controller.listEmployAwait.value.daLam![index].soxe}",
                             style: const TextStyle(
                               fontSize: 16,
                             ),
@@ -143,14 +138,14 @@ class _ListTeamOfTallymanState extends State<ListTeamOfTallyman> {
                         children: [
                           Text(
                             day.format(DateTime.parse(
-                              controller.listEmployAwait.value.chuaLam![index]
+                              controller.listEmployAwait.value.daLam![index]
                                   .thoiGianDuKienBatDau
                                   .toString(),
                             )),
                           ),
                           const SizedBox(width: 10),
                           Text(hour.format(DateTime.parse(
-                            controller.listEmployAwait.value.chuaLam![index]
+                            controller.listEmployAwait.value.daLam![index]
                                 .thoiGianDuKienBatDau
                                 .toString(),
                           ))),
@@ -164,12 +159,12 @@ class _ListTeamOfTallymanState extends State<ListTeamOfTallyman> {
             Expanded(
               flex: 3,
               child: Container(
-                child: controller.listEmployAwait.value.chuaLam![index]
+                child: controller.listEmployAwait.value.daLam![index]
                             .thoiGianBatDau !=
                         null
                     ? Text(hour.format(DateTime.parse(
-                        controller.listEmployAwait.value.chuaLam![index]
-                            .thoiGianBatDau
+                        controller
+                            .listEmployAwait.value.daLam![index].thoiGianBatDau
                             .toString(),
                       )))
                     : const Text(

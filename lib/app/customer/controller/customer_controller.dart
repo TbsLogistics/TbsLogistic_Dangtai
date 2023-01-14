@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:tbs_logistics_dangtai/app/customer/model/customer_model.dart';
 import 'package:tbs_logistics_dangtai/app/customer/model/list_driver_by_customer_model.dart';
 import 'package:tbs_logistics_dangtai/app/customer/model/register_customer_model.dart';
 import 'package:tbs_logistics_dangtai/app/sercurity/model/id_taixe_model.dart';
@@ -12,6 +14,37 @@ import 'package:tbs_logistics_dangtai/config/share_preferences/share_prefer.dart
 
 class CustomerController extends GetxController {
   var dio = Dio();
+
+  @override
+  void onInit() {
+    getUser();
+    super.onInit();
+  }
+
+  RxBool switchValue = true.obs;
+  RxBool switchLanguage = true.obs;
+  RxBool hideShowMode = false.obs;
+
+  void switchHideShow() {
+    hideShowMode.value = !hideShowMode.value;
+    update();
+  }
+
+  void switchLight() {
+    switchValue.value;
+    update();
+  }
+
+  void switchLanguag() {
+    switchLanguage.value;
+    update();
+  }
+
+  // @override
+  // void onInit() {
+  //   getUser();
+  //   super.onInit();
+  // }
 
   TextEditingController numberCar = TextEditingController();
   TextEditingController numberCont1 = TextEditingController();
@@ -266,10 +299,11 @@ class CustomerController extends GetxController {
     } catch (e) {
       rethrow;
     }
-  }
+  } // lấy thông tin user
 
-  // lấy thông tin user
-  Future<Map<String, dynamic>> getUser() async {
+  final myMap = CustomerModel().obs;
+
+  Future<CustomerModel> getUser() async {
     var tokens = await SharePerApi().getToken();
     Map<String, dynamic> headers = {
       HttpHeaders.authorizationHeader: "Bearer $tokens"
@@ -280,20 +314,17 @@ class CustomerController extends GetxController {
     try {
       response = await dio.get(url, options: Options(headers: headers));
       if (response.statusCode == 200) {
-        var data = response.data;
+        var data = CustomerModel.fromJson(response.data);
+        myMap.value = data;
+        print("Mymap ${myMap.value}");
+
         // print(data);
-        return data;
+        return data as CustomerModel;
       } else {
         return response.data;
       }
     } catch (e) {
       rethrow;
     }
-  }
-
-  @override
-  void onClose() {
-    getUser();
-    super.onClose();
   }
 }

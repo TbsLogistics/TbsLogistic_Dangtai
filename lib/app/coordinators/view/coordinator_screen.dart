@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tbs_logistics_dangtai/app/coordinators/view/coordinator_list_car_dook.dart';
-import 'package:tbs_logistics_dangtai/app/coordinators/view/coordinator_list_car_in.dart';
 import 'package:tbs_logistics_dangtai/app/coordinators/view/coordinator_warehome_screen.dart';
 
 class CoordinatorScreen extends StatelessWidget {
@@ -34,74 +32,6 @@ class CoordinatorScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: size.width * 0.1),
-            GestureDetector(
-              onTap: () {
-                Get.to(() => const CoordinatorListCarIn());
-              },
-              child: Container(
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.6),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.orangeAccent.withOpacity(0.6),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.create_outlined, size: 30),
-                    SizedBox(
-                      width: size.width * 0.05,
-                    ),
-                    const Text(
-                      "Danh sách xe đã vào cổng",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: size.height * 0.05),
-            GestureDetector(
-              onTap: () {
-                Get.to(() => const CoordinatorListCarDook());
-              },
-              child: Container(
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.6),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.orangeAccent.withOpacity(0.6),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.create_outlined, size: 30),
-                    SizedBox(
-                      width: size.width * 0.05,
-                    ),
-                    const Text(
-                      "Danh sách xe đã đang làm",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: size.height * 0.05),
             GestureDetector(
               onTap: () {
                 Get.to(() => const WareHomeSreen());

@@ -1,50 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:tbs_logistics_dangtai/app/customer/model/register_customer_model.dart';
-import 'package:tbs_logistics_dangtai/app/driver/model/register_driver_model.dart';
+import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
+import 'package:tbs_logistics_dangtai/app/driver/model/list_tiker_for_driver.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
-import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
-import 'package:tbs_logistics_dangtai/config/widget/custom_text_fiels.dart';
 
-class DetailsFormRegisterDriver extends StatefulWidget {
-  const DetailsFormRegisterDriver({super.key});
-
-  @override
-  State<DetailsFormRegisterDriver> createState() =>
-      _DetailsFormRegisterDriverState();
-}
-
-class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
-  final String routes = "/DETAILS_FORM_REGISTER_DRIVER";
+class StatusTikerDetailScreen extends GetView<DriverController> {
+  const StatusTikerDetailScreen({super.key});
+  final String routes = "/STATUS_TICKER_DETAIL_SCREEN";
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var items = Get.arguments as RegisterForDriverModel;
+    var items = Get.arguments as ListTicketForDriver;
     var day = DateFormat("dd-MM-yyyy");
     var hour = DateFormat("hh:mm a");
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: CustomColor.backgroundAppbar,
         title: const Text(
-          "Chi tiết phiếu đã đăng ký",
+          "Chi tiết phiếu",
           style: CustomTextStyle.tilteAppbar,
         ),
         centerTitle: true,
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.toNamed(Routes.DRIVER_PAGE);
-            },
-            icon: const Icon(
-              Icons.home,
-              size: 25,
-              color: Colors.white,
-            ),
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
           ),
-        ],
+        ),
+        backgroundColor: CustomColor.backgroundAppbar,
       ),
       body: SingleChildScrollView(
           child: Container(
@@ -64,7 +50,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
     );
   }
 
-  Widget _buildProduct(RegisterForDriverModel items, Size size) {
+  Widget _buildProduct(ListTicketForDriver items, Size size) {
     return Container(
       height: size.width * 0.1,
       decoration: BoxDecoration(
@@ -91,7 +77,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
             flex: 3,
             child: Center(
               child: Text(
-                items.maloaiHang == "HN" ? "Hàng nhập" : "Hàng xuất",
+                items.loaihang!.maloaiHang == "HN" ? "Hàng nhập" : "Hàng xuất",
                 style: const TextStyle(
                   fontSize: 16,
                 ),
@@ -103,8 +89,8 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
     );
   }
 
-  Widget _buildDayTime(RegisterForDriverModel items, Size size, DateFormat day,
-      DateFormat hour) {
+  Widget _buildDayTime(
+      ListTicketForDriver items, Size size, DateFormat day, DateFormat hour) {
     return Container(
       height: size.width * 0.15,
       decoration: BoxDecoration(
@@ -134,7 +120,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                   flex: 3,
                   child: Center(
                     child: Text(
-                      day.format(DateTime.parse(items.giodukien!)),
+                      day.format(DateTime.parse(items.phieuvao!.giodukien!)),
                       style: const TextStyle(
                         fontSize: 16,
                       ),
@@ -167,7 +153,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                   flex: 3,
                   child: Center(
                     child: Text(
-                      hour.format(DateTime.parse(items.giodukien!)),
+                      hour.format(DateTime.parse(items.phieuvao!.giodukien!)),
                       style: const TextStyle(
                         fontSize: 16,
                       ),
@@ -182,7 +168,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
     );
   }
 
-  Widget _buildNumberCont(RegisterForDriverModel items, Size size) {
+  Widget _buildNumberCont(ListTicketForDriver items, Size size) {
     return Container(
       height: size.width * 0.7,
       decoration: BoxDecoration(
@@ -209,7 +195,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         "Số công 1",
                         style: CustomTextStyle.titlePrimary,
                       ),
-                      Text("${items.socont1}"),
+                      Text("${items.phieuvao!.socont1}"),
                     ],
                   ),
                 ),
@@ -231,7 +217,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.cont1seal1}"),
+                            Text("${items.phieuvao!.cont1seal1}"),
                           ],
                         ),
                       ],
@@ -256,7 +242,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.cont1seal2}"),
+                            Text("${items.phieuvao!.cont1seal2}"),
                           ],
                         ),
                       ],
@@ -281,7 +267,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.soKien}"),
+                            Text("${items.phieuvao!.soKien}"),
                           ],
                         ),
                       ],
@@ -306,7 +292,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.soBook}"),
+                            Text("${items.phieuvao!.soBook}"),
                           ],
                         ),
                       ],
@@ -331,7 +317,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.sokhoi}"),
+                            Text("${items.phieuvao!.sokhoi}"),
                           ],
                         ),
                       ],
@@ -361,7 +347,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         "Số công 2",
                         style: CustomTextStyle.titlePrimary,
                       ),
-                      Text("${items.socont2}"),
+                      Text("${items.phieuvao!.socont2}"),
                     ],
                   ),
                 ),
@@ -383,7 +369,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.cont2seal1}"),
+                            Text("${items.phieuvao!.cont2seal1}"),
                           ],
                         ),
                       ],
@@ -408,7 +394,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.cont2seal2}"),
+                            Text("${items.phieuvao!.cont2seal2}"),
                           ],
                         ),
                       ],
@@ -433,7 +419,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.sokien1}"),
+                            Text("${items.phieuvao!.sokien1}"),
                           ],
                         ),
                       ],
@@ -458,7 +444,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.soBook1}"),
+                            Text("${items.phieuvao!.soBook1}"),
                           ],
                         ),
                       ],
@@ -483,7 +469,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.sokhoi1}"),
+                            Text("${items.phieuvao!.sokhoi1}"),
                           ],
                         ),
                       ],
@@ -498,7 +484,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
     );
   }
 
-  Widget _buildNumberCar(RegisterForDriverModel items, Size size) {
+  Widget _buildNumberCar(ListTicketForDriver items, Size size) {
     return Container(
       height: size.width * 0.15,
       decoration: BoxDecoration(
@@ -528,7 +514,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                   flex: 3,
                   child: Center(
                     child: Text(
-                      "${items.loaixe}",
+                      "${items.loaixeRe!.tenLoaiXe}",
                       style: const TextStyle(
                         fontSize: 16,
                       ),
@@ -561,7 +547,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                   flex: 3,
                   child: Center(
                     child: Text(
-                      "${items.soxe}",
+                      "${items.phieuvao!.soxe}",
                       style: const TextStyle(
                         fontSize: 16,
                       ),

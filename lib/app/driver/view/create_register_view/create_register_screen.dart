@@ -289,6 +289,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
                   numberSelectCont >= 2 ? _contSecond(controller) : Container(),
                   ButtonFormSubmit(
                       onPressed: () {
+                        print(dateinput.text);
                         controller.postRegisterDriver(
                           time: dateinput.text,
                           idWarehome: selectedWarehome,
@@ -298,13 +299,15 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
                           numberCont2: controller.numberCont2.text,
                           numberCont1Seal1: controller.numberCont1Seal1.text,
                           numberCont1Seal2: controller.numberCont1Seal2.text,
-                          numberKhoi: int.parse(controller.numberKhoi.text),
-                          numberKien: int.parse(controller.numberKien.text),
+                          numberKhoi: double.parse(controller.numberKhoi.text),
+                          numberKien: double.parse(controller.numberKien.text),
                           numberBook: controller.numberBook.text,
                           numberCont2Seal1: controller.numberCont2Seal1.text,
                           numberCont2Seal2: controller.numberCont2Seal2.text,
-                          numberKhoi1: int.parse(controller.numberKhoi1.text),
-                          numberKien1: int.parse(controller.numberKien1.text),
+                          numberKhoi1:
+                              double.parse(controller.numberKhoi1.text),
+                          numberKien1:
+                              double.parse(controller.numberKien1.text),
                           numberBook1: controller.numberBook1.text,
                           idProduct: selectedProduct,
                         );
@@ -379,43 +382,37 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
         const Divider(),
         CustomFormFiels(
           title: "Số cont 1",
-          controller: controller.numberCar,
+          controller: controller.numberCont1,
           hintText: "Nhập số cont",
           icon: Icons.abc,
         ),
         CustomFormFiels(
           title: "Số seal 1",
-          controller: controller.numberCar,
+          controller: controller.numberCont1Seal1,
           hintText: "Nhập số seal",
           icon: Icons.abc,
         ),
         CustomFormFiels(
           title: "Số seal 2",
-          controller: controller.numberCar,
-          hintText: "Nhập số seal",
-          icon: Icons.abc,
-        ),
-        CustomFormFiels(
-          title: "Số seal 3",
-          controller: controller.numberCar,
+          controller: controller.numberCont1Seal2,
           hintText: "Nhập số seal",
           icon: Icons.abc,
         ),
         CustomFormFiels(
           title: "Số book",
-          controller: controller.numberCar,
+          controller: controller.numberBook,
           hintText: "Nhập số book",
           icon: Icons.abc,
         ),
         CustomFormFiels(
           title: "Số kiện",
-          controller: controller.numberCar,
+          controller: controller.numberKien,
           hintText: "Nhập số kiện",
           icon: Icons.abc,
         ),
         CustomFormFiels(
           title: "Số khối",
-          controller: controller.numberCar,
+          controller: controller.numberKhoi,
           hintText: "Nhập số khối",
           icon: Icons.abc,
         ),
@@ -429,43 +426,37 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
         const Divider(),
         CustomFormFiels(
           title: "Số cont 2",
-          controller: controller.numberCar,
+          controller: controller.numberCont2,
           hintText: "Nhập số cont",
           icon: Icons.abc,
         ),
         CustomFormFiels(
           title: "Số seal 1",
-          controller: controller.numberCar,
+          controller: controller.numberCont2Seal1,
           hintText: "Nhập số seal",
           icon: Icons.abc,
         ),
         CustomFormFiels(
           title: "Số seal 2",
-          controller: controller.numberCar,
-          hintText: "Nhập số seal",
-          icon: Icons.abc,
-        ),
-        CustomFormFiels(
-          title: "Số seal 3",
-          controller: controller.numberCar,
+          controller: controller.numberCont2Seal2,
           hintText: "Nhập số seal",
           icon: Icons.abc,
         ),
         CustomFormFiels(
           title: "Số book",
-          controller: controller.numberCar,
+          controller: controller.numberBook1,
           hintText: "Nhập số book",
           icon: Icons.abc,
         ),
         CustomFormFiels(
           title: "Số kiện",
-          controller: controller.numberCar,
+          controller: controller.numberKien1,
           hintText: "Nhập số kiện",
           icon: Icons.abc,
         ),
         CustomFormFiels(
           title: "Số khối",
-          controller: controller.numberCar,
+          controller: controller.numberKhoi1,
           hintText: "Nhập số khối",
           icon: Icons.abc,
         ),

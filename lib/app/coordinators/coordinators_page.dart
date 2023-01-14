@@ -46,68 +46,68 @@ class _CoordinatorPageState extends State<CoordinatorPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          FutureBuilder(
-            future: controller.getUser(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                var items = snapshot.data;
+          // FutureBuilder(
+          //   future: controller.getUser(),
+          //   builder: (context, snapshot) {
+          //     if (snapshot.hasData) {
+          //       var items = snapshot.data;
 
-                return SizedBox(
-                  height: size.height * 0.3,
-                  child: Column(
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.only(left: 10),
-                        height: size.height * 0.1,
-                        width: size.width,
-                        alignment: Alignment.centerLeft,
-                        child: Column(
-                          children: [
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "Họ và tên : ${items!["tenNV"]}",
-                                style: const TextStyle(
-                                  color: Colors.blueGrey,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "Số điện thoại : ${items["soDienThoai"]}",
-                                style: const TextStyle(
-                                  color: Colors.blueGrey,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(height: 5),
-                            Container(
-                              alignment: Alignment.centerLeft,
-                              child: Text(
-                                "Chức vụ : ${items["usernameAccount"]}",
-                                style: const TextStyle(
-                                  color: Colors.blueGrey,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              }
-              return Container();
-            },
-          ),
+          //       return SizedBox(
+          //         height: size.height * 0.3,
+          //         child: Column(
+          //           children: [
+          //             Container(
+          //               padding: const EdgeInsets.only(left: 10),
+          //               height: size.height * 0.1,
+          //               width: size.width,
+          //               alignment: Alignment.centerLeft,
+          //               child: Column(
+          //                 children: [
+          //                   Container(
+          //                     alignment: Alignment.centerLeft,
+          //                     child: Text(
+          //                       "Họ và tên : ${items!["tenNV"]}",
+          //                       style: const TextStyle(
+          //                         color: Colors.blueGrey,
+          //                         fontSize: 16,
+          //                       ),
+          //                     ),
+          //                   ),
+          //                   const SizedBox(height: 5),
+          //                   Container(
+          //                     alignment: Alignment.centerLeft,
+          //                     child: Text(
+          //                       "Số điện thoại : ${items["soDienThoai"]}",
+          //                       style: const TextStyle(
+          //                         color: Colors.blueGrey,
+          //                         fontSize: 16,
+          //                       ),
+          //                     ),
+          //                   ),
+          //                   const SizedBox(height: 5),
+          //                   Container(
+          //                     alignment: Alignment.centerLeft,
+          //                     child: Text(
+          //                       "Chức vụ : ${items["usernameAccount"]}",
+          //                       style: const TextStyle(
+          //                         color: Colors.blueGrey,
+          //                         fontSize: 16,
+          //                       ),
+          //                     ),
+          //                   ),
+          //                 ],
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       );
+          //     }
+          //     return Container();
+          //   },
+          // ),
           ListTile(
-            onTap: () {
-              SharePerApi().postLogout();
+            onTap: () async {
+              await SharePerApi().postLogout();
             },
             leading: const Icon(Icons.logout_rounded),
             title: const Text(

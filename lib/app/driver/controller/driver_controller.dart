@@ -8,10 +8,39 @@ import 'package:tbs_logistics_dangtai/app/driver/model/register_out_model.dart';
 import 'package:tbs_logistics_dangtai/app/driver/model/status_driver_model.dart';
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/model/details_user_model.dart';
+import 'package:tbs_logistics_dangtai/config/model/driver_model.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 import 'package:tbs_logistics_dangtai/config/share_preferences/share_prefer.dart';
 
 class DriverController extends GetxController {
+  RxBool switchValue = true.obs;
+  RxBool switchLanguage = true.obs;
+  RxBool hideShowMode = false.obs;
+  final getStatusDriver = StatusDriverModel().obs;
+
+  @override
+  void onInit() {
+    getInfor();
+    getStatus();
+    getStatusDriver.value;
+    super.onInit();
+  }
+
+  void switchHideShow() {
+    hideShowMode.value = !hideShowMode.value;
+    update();
+  }
+
+  void switchLight() {
+    switchValue.value;
+    update();
+  }
+
+  void switchLanguag() {
+    switchLanguage.value;
+    update();
+  }
+
   //tikerin
   TextEditingController numberCar = TextEditingController();
   TextEditingController numberCont1 = TextEditingController();
@@ -47,13 +76,13 @@ class DriverController extends GetxController {
     required String? numberCont2,
     required String? numberCont1Seal1,
     required String? numberCont1Seal2,
-    required int? numberKien,
-    required int? numberKhoi,
+    required double? numberKien,
+    required double? numberKhoi,
     required String? numberBook,
     required String? numberCont2Seal1,
     required String? numberCont2Seal2,
-    required int? numberKien1,
-    required int? numberKhoi1,
+    required double? numberKien1,
+    required double? numberKhoi1,
     required String? numberBook1,
     required String? idProduct,
   }) async {
@@ -95,32 +124,53 @@ class DriverController extends GetxController {
         data: jsonData,
       );
       if (response.statusCode == 200) {
-        Get.toNamed(
-          Routes.DETAILS_FORM_REGISTER_DRIVER,
-          arguments: RegisterForDriverModel(
-            giodukien: time,
-            kho: idWarehome,
-            loaixe: idCar,
-            soxe: numberCar,
-            socont1: numberCont1,
-            socont2: numberCont2,
-            cont1seal1: numberCont1Seal1,
-            cont1seal2: numberCont1Seal2,
-            soKien: numberKien,
-            sokhoi: numberKhoi,
-            soBook: numberBook,
-            trangthaihang: false,
-            trangthaikhoa: false,
-            cont2seal1: numberCont2Seal1,
-            cont2seal2: numberCont2Seal2,
-            sokien1: numberKien1,
-            sokhoi1: numberKhoi1,
-            soBook1: numberBook1,
-            trangthaihang1: false,
-            trangthaikhoa1: false,
-            maloaiHang: idProduct,
-          ),
-        );
+        var data = response.data;
+        if (data["status"] == 204) {
+          Get.snackbar(
+            "Thông báo",
+            "${data["detail"]}",
+            titleText: const Text(
+              "Thông báo",
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            messageText: Text(
+              "${data["detail"]}",
+              textAlign: TextAlign.center,
+            ),
+            snackPosition: SnackPosition.BOTTOM,
+          );
+        } else {
+          Get.toNamed(
+            Routes.DETAILS_FORM_REGISTER_DRIVER,
+            arguments: RegisterForDriverModel(
+              giodukien: time,
+              kho: idWarehome,
+              loaixe: idCar,
+              soxe: numberCar,
+              socont1: numberCont1,
+              socont2: numberCont2,
+              cont1seal1: numberCont1Seal1,
+              cont1seal2: numberCont1Seal2,
+              soKien: numberKien,
+              sokhoi: numberKhoi,
+              soBook: numberBook,
+              trangthaihang: false,
+              trangthaikhoa: false,
+              cont2seal1: numberCont2Seal1,
+              cont2seal2: numberCont2Seal2,
+              sokien1: numberKien1,
+              sokhoi1: numberKhoi1,
+              soBook1: numberBook1,
+              trangthaihang1: false,
+              trangthaikhoa1: false,
+              maloaiHang: idProduct,
+            ),
+          );
+        }
       }
     } catch (e) {
       // print(e);
@@ -180,7 +230,7 @@ class DriverController extends GetxController {
     }
   }
 
-  Future<List<StatusDriverModel>> getStatus() async {
+  Future<StatusDriverModel> getStatus() async {
     var dio = Dio();
     Response response;
     var tokens = await SharePerApi().getToken();
@@ -198,18 +248,22 @@ class DriverController extends GetxController {
         ),
       );
       if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
-        List<dynamic> data = response.data;
+        var data = StatusDriverModel.fromJson(response.data);
         // print(data);
-        return data.map((e) => StatusDriverModel.fromJson(e)).toList();
+        getStatusDriver.value = data;
+        update();
+        return data;
       }
-      return [];
+      return response.data;
     } catch (e) {
       rethrow;
     }
   }
 
+  final user = DriverModel().obs;
+
   //lấy thông tin user
-  Future<Map<String, dynamic>> getInfor() async {
+  Future<DriverModel> getInfor() async {
     var dio = Dio();
     Response response;
     var tokens = await SharePerApi().getToken();
@@ -222,8 +276,9 @@ class DriverController extends GetxController {
     try {
       response = await dio.get(url, options: Options(headers: headers));
       if (response.statusCode == 200) {
-        var data = response.data;
+        var data = DriverModel.fromJson(response.data);
         // print(data);
+        user.value = data;
         return data;
       } else {
         return response.data;
