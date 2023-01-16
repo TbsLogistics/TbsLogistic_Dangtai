@@ -7,14 +7,9 @@ import 'package:tbs_logistics_dangtai/app/driver/view/status_screen.dart';
 import 'package:tbs_logistics_dangtai/app/driver/view/status_tiker_view/status_tiker_view.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 
-class DriverScreen extends StatefulWidget {
+class DriverScreen extends GetView<DriverController> {
   const DriverScreen({super.key});
 
-  @override
-  State<DriverScreen> createState() => _DriverScreenState();
-}
-
-class _DriverScreenState extends State<DriverScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -83,7 +78,7 @@ class _DriverScreenState extends State<DriverScreen> {
               SizedBox(height: size.width * 0.1),
               GestureDetector(
                 onTap: () {
-                  Get.to(() => const StatusDriverScreen());
+                  Get.to(() => StatusDriverScreen());
                 },
                 child: Container(
                   height: 100,

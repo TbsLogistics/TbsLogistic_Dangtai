@@ -63,14 +63,6 @@ class TallymanWareHomeScreen extends GetView<TallymanController> {
                                   );
                                 },
                                 title: Text("${items[index].tenKho}"),
-                                trailing: IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.home,
-                                    size: 25,
-                                    color: Colors.black,
-                                  ),
-                                ),
                               ),
                             );
                           });

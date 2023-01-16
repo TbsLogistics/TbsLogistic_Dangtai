@@ -7,17 +7,13 @@ import 'package:tbs_logistics_dangtai/config/widget/buttom_form_submit.dart';
 import 'package:tbs_logistics_dangtai/config/widget/custom_text_form_fiels.dart';
 import 'package:tbs_logistics_dangtai/config/widget/drop_button.dart';
 
-class RegisterOutScreen extends StatefulWidget {
-  const RegisterOutScreen({super.key});
-
-  @override
-  State<RegisterOutScreen> createState() => _RegisterOutScreenState();
-}
-
-class _RegisterOutScreenState extends State<RegisterOutScreen> {
+// ignore: must_be_immutable
+class RegisterOutScreen extends GetView<DriverController> {
   final String routes = "/REGISTER_OUT_SCREEN";
-  String? selectedNumberCont;
-  int numberSelectCont = 0;
+  // String? selectedNumberCont;
+  // int numberSelectCont = 0;
+
+  RegisterOutScreen({super.key});
   @override
   Widget build(BuildContext context) {
     var items = Get.arguments;
@@ -127,24 +123,21 @@ class _RegisterOutScreenState extends State<RegisterOutScreen> {
                     ))
                 .toList(),
             onChanged: (value) {
-              //Do something when changing the item if you want.
-              setState(() {
-                selectedNumberCont = value;
-                // ignore: unnecessary_brace_in_string_interps
-                numberSelectCont = int.parse("${selectedNumberCont}");
-              });
+              controller.changelNumberCont(value);
             },
             onSaved: (value) {
-              setState(() {
-                selectedNumberCont = value.toString();
-              });
+              controller.saveNumberCont(value);
             },
             text: 'Chọn tổng số cont',
           ),
           const Divider(),
-          numberSelectCont >= 1 ? _contFirt(controller) : Container(),
+          controller.numberSelectCont >= 1
+              ? _contFirt(controller)
+              : Container(),
           const SizedBox(height: 10),
-          numberSelectCont >= 2 ? _contSecond(controller) : Container(),
+          controller.numberSelectCont >= 2
+              ? _contSecond(controller)
+              : Container(),
           const SizedBox(height: 10),
           ButtonFormSubmit(
             onPressed: () {

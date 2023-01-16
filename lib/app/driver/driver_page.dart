@@ -2,25 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
 import 'package:tbs_logistics_dangtai/app/driver/view/driver_screen.dart';
-import 'package:tbs_logistics_dangtai/app/driver/view/qr_code_screen.dart';
 import 'package:tbs_logistics_dangtai/app/driver/view/settings_page.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
-class DriverPage extends StatefulWidget {
+class DriverPage extends GetView<DriverController> {
   const DriverPage({super.key});
 
   @override
-  State<DriverPage> createState() => _DriverPageState();
-}
-
-class _DriverPageState extends State<DriverPage> {
-  final String routes = "/DRIVER_PAGE";
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
-  @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return GetBuilder<DriverController>(
       init: DriverController(),
       builder: (controller) => Scaffold(

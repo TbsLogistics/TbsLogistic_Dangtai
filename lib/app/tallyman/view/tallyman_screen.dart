@@ -104,7 +104,8 @@ class TallymanScreen extends StatelessWidget {
             SizedBox(height: size.width * 0.1),
             GestureDetector(
               onTap: () {
-                Get.to(() => const ListFinishedWorking());
+                // Get.to(() => const ListFinishedWorking());
+                Get.toNamed(Routes.LIST_FINISHED_WORKING);
               },
               child: Container(
                 height: 100,

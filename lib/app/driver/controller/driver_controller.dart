@@ -16,14 +16,33 @@ class DriverController extends GetxController {
   RxBool switchValue = true.obs;
   RxBool switchLanguage = true.obs;
   RxBool hideShowMode = false.obs;
+  RxBool showForm = false.obs;
   final getStatusDriver = StatusDriverModel().obs;
+  String? selectedNumberCont;
+  int numberSelectCont = 0;
 
   @override
   void onInit() {
     getInfor();
     getStatus();
-    getStatusDriver.value;
+    getListTiker();
     super.onInit();
+  }
+
+  void changelNumberCont(String? value) {
+    selectedNumberCont = value.toString();
+    numberSelectCont = int.parse("${selectedNumberCont}");
+    update();
+  }
+
+  void saveNumberCont(String? value) {
+    selectedNumberCont = value.toString();
+    update();
+  }
+
+  void showFormStatus() {
+    showForm.value = !showForm.value;
+    update();
   }
 
   void switchHideShow() {
@@ -332,7 +351,7 @@ class DriverController extends GetxController {
       maphieuvao: Maphieuvao(maphieuvao: maphieuvao),
     );
     var jsonData = data.toJson();
-    const url = "${AppConstants.urlBase}/taixetaophieura";
+    const url = "${AppConstants.urlBase}/taophieura";
     try {
       response = await dio.post(
         url,
@@ -356,7 +375,7 @@ class DriverController extends GetxController {
           );
           // print(data["message"]);
         } else {
-          Get.toNamed(Routes.DRIVER_PAGE);
+          Get.toNamed(Routes.REGISTER_OUT_DETAILS_SCREEN);
         }
       }
     } catch (e) {

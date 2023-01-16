@@ -24,6 +24,12 @@ class CustomerController extends GetxController {
   RxBool switchValue = true.obs;
   RxBool switchLanguage = true.obs;
   RxBool hideShowMode = false.obs;
+  RxBool showForm = false.obs;
+
+  void showFormStatus() {
+    showForm.value = !showForm.value;
+    update();
+  }
 
   void switchHideShow() {
     hideShowMode.value = !hideShowMode.value;

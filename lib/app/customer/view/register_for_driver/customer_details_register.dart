@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:tbs_logistics_dangtai/app/customer/model/list_driver_by_customer_model.dart';
+import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controller.dart';
 import 'package:tbs_logistics_dangtai/app/customer/model/register_customer_model.dart';
-
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 import 'package:tbs_logistics_dangtai/config/widget/custom_text_fiels.dart';
 
-class DetailsRegisterCustomer extends StatelessWidget {
+class DetailsRegisterCustomer extends GetView<CustomerController> {
   const DetailsRegisterCustomer({super.key});
   final String routes = "/DETAILS_REGISTER_CUSTOMER";
 

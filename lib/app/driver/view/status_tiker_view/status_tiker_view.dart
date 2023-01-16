@@ -8,14 +8,9 @@ import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 import 'package:tbs_logistics_dangtai/config/widget/custom_list_title.dart';
 
-class StatusDriver extends StatefulWidget {
+class StatusDriver extends GetView<DriverController> {
   const StatusDriver({super.key});
 
-  @override
-  State<StatusDriver> createState() => _StatusDriverState();
-}
-
-class _StatusDriverState extends State<StatusDriver> {
   @override
   Widget build(BuildContext context) {
     var day = DateFormat("dd/MM/yyyy");

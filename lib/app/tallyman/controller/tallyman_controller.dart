@@ -33,9 +33,6 @@ class TallymanController extends GetxController {
   void onInit() {
     getUser();
     getEmployAwait();
-    listEmployAwait.value;
-    listEmploy.value;
-    listOfEmploy.value;
 
     super.onInit();
   }
@@ -55,72 +52,6 @@ class TallymanController extends GetxController {
     update();
   }
 
-  Future<List<ListTrackingModel>> searchTracking(String? query) async {
-    var token = await SharePerApi().getToken();
-    Map<String, dynamic> headers = {
-      HttpHeaders.authorizationHeader: "Bearer $token"
-    };
-    List<ListTrackingModel> results = [];
-
-    const url = "${AppConstants.urlBase}/LayDanhSachXeDaPhanDock";
-
-    try {
-      response = await dio.get(url, options: Options(headers: headers));
-      if (response.statusCode == 200) {
-        List<dynamic> tracking = response.data;
-
-        results = tracking.map((e) => ListTrackingModel.fromJson(e)).toList();
-        if (query != null) {
-          results = results
-              .where(
-                (element) => element.taixeRe!.tenTaixe!.toLowerCase().contains(
-                      (query.toLowerCase()),
-                    ),
-              )
-              .toList();
-        }
-      } else {
-        return response.data;
-      }
-    } catch (e) {
-      rethrow;
-    }
-    return results;
-  }
-
-  Future<List<ListTrackingModel>> searchTracking1(String? query) async {
-    var token = await SharePerApi().getToken();
-    Map<String, dynamic> headers = {
-      HttpHeaders.authorizationHeader: "Bearer $token"
-    };
-    List<ListTrackingModel> results = [];
-
-    const url = "${AppConstants.urlBase}/LayDanhSachXeDangLamHang";
-
-    try {
-      response = await dio.get(url, options: Options(headers: headers));
-      if (response.statusCode == 200) {
-        List<dynamic> tracking = response.data;
-
-        results = tracking.map((e) => ListTrackingModel.fromJson(e)).toList();
-        if (query != null) {
-          results = results
-              .where(
-                (element) => element.taixeRe!.tenTaixe!.toLowerCase().contains(
-                      (query.toLowerCase()),
-                    ),
-              )
-              .toList();
-        }
-      } else {
-        return response.data;
-      }
-    } catch (e) {
-      rethrow;
-    }
-    return results;
-  }
-
   final tallyman = TallymanModel().obs;
 
   //lấy thông tin user
@@ -133,12 +64,16 @@ class TallymanController extends GetxController {
     var url = "${AppConstants.urlBase}/getdetailByUsername";
 
     try {
-      response = await dio.get(url, options: Options(headers: headers));
+      response = await dio.get(
+        url,
+        options: Options(headers: headers),
+      );
       if (response.statusCode == 200) {
         var data = TallymanModel.fromJson(response.data);
         tallyman.value = data;
         update();
         // print(data);
+        // ignore: unnecessary_cast
         return data as TallymanModel;
       } else {
         return response.data;
@@ -161,12 +96,13 @@ class TallymanController extends GetxController {
     try {
       response = await dio.get(url, options: Options(headers: headers));
       if (response.statusCode == 200) {
-        var data = response.data;
+        var data = ListEmployAwaitModel.fromJson(response.data);
+        print("data $data");
         ListEmployAwaitModel results =
             ListEmployAwaitModel.fromJson(response.data);
-        listEmployAwait.value = results;
+        listEmployAwait.value = data;
         update();
-        return results;
+        return data;
       } else {
         return response.data;
       }

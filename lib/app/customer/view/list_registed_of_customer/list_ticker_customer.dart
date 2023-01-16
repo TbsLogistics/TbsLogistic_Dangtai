@@ -8,15 +8,10 @@ import 'package:tbs_logistics_dangtai/config/model/list_traking_model.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 import 'package:tbs_logistics_dangtai/config/widget/sercurity/custom_list_title_registed.dart';
 
-class ListTickerCustomer extends StatefulWidget {
-  const ListTickerCustomer({super.key});
-
-  @override
-  State<ListTickerCustomer> createState() => _ListTickerCustomerState();
-}
-
-class _ListTickerCustomerState extends State<ListTickerCustomer> {
+class ListTickerCustomer extends GetView<CustomerController> {
   final String routes = "/LIST_TICKER_CUSTOMER";
+
+  const ListTickerCustomer({super.key});
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CustomerController>(

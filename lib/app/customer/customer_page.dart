@@ -4,6 +4,7 @@ import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controlle
 import 'package:tbs_logistics_dangtai/app/customer/view/customer_screen.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
+import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 import 'view/settings/settings_customer_page.dart';
 
 class CustomerPage extends StatefulWidget {
@@ -15,7 +16,6 @@ class CustomerPage extends StatefulWidget {
 
 class _CustomerPageState extends State<CustomerPage> {
   final String routes = "/CUSTOMER_PAGE";
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -23,7 +23,7 @@ class _CustomerPageState extends State<CustomerPage> {
       init: CustomerController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          // automaticallyImplyLeading: false,
+          automaticallyImplyLeading: false,
           title: const Text(
             "TBS Logistics",
             style: CustomTextStyle.tilteAppbar,
@@ -33,8 +33,7 @@ class _CustomerPageState extends State<CustomerPage> {
           actions: [
             IconButton(
               onPressed: () {
-                print("object");
-                Get.to(() => CustomerSettings());
+                Get.toNamed(Routes.CUSTOMER_SETTINGS);
               },
               icon: const Icon(
                 Icons.settings,

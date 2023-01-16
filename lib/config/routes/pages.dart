@@ -11,6 +11,7 @@ import 'package:tbs_logistics_dangtai/app/customer/view/list_registed_of_custome
 import 'package:tbs_logistics_dangtai/app/customer/view/list_registed_of_customer/list_ticker_customer.dart';
 import 'package:tbs_logistics_dangtai/app/customer/view/register_for_driver/create_register_driver_by_customer.dart';
 import 'package:tbs_logistics_dangtai/app/customer/view/register_for_driver/customer_details_register.dart';
+import 'package:tbs_logistics_dangtai/app/customer/view/settings/settings_customer_page.dart';
 import 'package:tbs_logistics_dangtai/app/driver/driver_page.dart';
 import 'package:tbs_logistics_dangtai/app/driver/view/create_register_out_view/register_out_details_screen.dart';
 import 'package:tbs_logistics_dangtai/app/driver/view/create_register_out_view/register_out_screen.dart';
@@ -33,6 +34,7 @@ import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/tallyman_detai
 import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/tallyman_ware_home.dart';
 
 import '../../app/driver/view/create_register_view/create_register_screen.dart';
+import '../../app/tallyman/view/settings/tallyman_settings_page.dart';
 
 part './routes.dart';
 
@@ -42,7 +44,7 @@ abstract class AppPages {
     GetPage(
       name: Routes.LOGIN_PAGE,
       // page: () => const LoginPage(),
-      page: () => LoginPageMain(),
+      page: () => LoginPage(),
 
       bindings: [LoginBindings()],
     ),
@@ -67,7 +69,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: Routes.REGISTER_OUT_SCREEN,
-      page: () => const RegisterOutScreen(),
+      page: () => RegisterOutScreen(),
     ),
     GetPage(
         name: Routes.REGISTER_OUT_DETAILS_SCREEN,
@@ -109,6 +111,10 @@ abstract class AppPages {
       name: Routes.DETAILS_LIST_TICKER_OF_CUSTOMER,
       page: () => const DetailsListTickerOfCustomer(),
     ),
+    GetPage(
+      name: Routes.CUSTOMER_SETTINGS,
+      page: () => const CustomerSettings(),
+    ),
     //Điều phối
     GetPage(
       name: Routes.COORDINATOR_PAGE,
@@ -146,6 +152,10 @@ abstract class AppPages {
     GetPage(
       name: Routes.LIST_FINISHED_DETAILS_WORKING,
       page: () => ListFinishedDetailsWorking(),
+    ),
+    GetPage(
+      name: Routes.TALLYMAN_SETTINGS,
+      page: () => const TallymanSettings(),
     ),
     // GetPage(
     //   name: Routes.TALLYMAN_SEARCH_WORKING,

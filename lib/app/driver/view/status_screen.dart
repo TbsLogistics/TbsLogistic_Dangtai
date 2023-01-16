@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
-import 'package:tbs_logistics_dangtai/app/driver/model/status_driver_model.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
@@ -9,15 +8,11 @@ import 'package:timeline_list/timeline.dart';
 import 'package:timeline_list/timeline_model.dart';
 import 'package:intl/intl.dart';
 
-class StatusDriverScreen extends StatefulWidget {
-  const StatusDriverScreen({super.key});
-
-  @override
-  State<StatusDriverScreen> createState() => _StatusDriverScreenState();
-}
-
-class _StatusDriverScreenState extends State<StatusDriverScreen> {
+// ignore: must_be_immutable
+class StatusDriverScreen extends GetView<DriverController> {
   bool showFormStatus = false;
+
+  StatusDriverScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +63,7 @@ class _StatusDriverScreenState extends State<StatusDriverScreen> {
                         SizedBox(
                           height: size.width * 0.05,
                         ),
-                        showFormStatus
+                        controller.showForm.value
                             ? _buildFormStatus(controller, size)
                             : Container(),
                         SizedBox(
@@ -378,10 +373,7 @@ class _StatusDriverScreenState extends State<StatusDriverScreen> {
     return controller.getStatusDriver.value.trackingtime != null
         ? InkWell(
             onTap: () {
-              setState(() {
-                showFormStatus = !showFormStatus;
-                // print(showFormStatus);
-              });
+              controller.showFormStatus();
             },
             child: Container(
               height: 40,

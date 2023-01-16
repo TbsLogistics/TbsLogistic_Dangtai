@@ -4,8 +4,9 @@ import 'package:tbs_logistics_dangtai/app/login/controller/login_controller.dart
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/validate.dart';
 
-class LoginPageMain extends GetView<LoginController> {
-  LoginPageMain({super.key});
+// ignore: must_be_immutable
+class LoginPage extends GetView<LoginController> {
+  LoginPage({super.key});
   final String routes = "/LOGIN_PAGE";
   TextEditingController accountController = TextEditingController();
   TextEditingController passwordController = TextEditingController();

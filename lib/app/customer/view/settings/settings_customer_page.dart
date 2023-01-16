@@ -3,15 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controller.dart';
-import 'package:tbs_logistics_dangtai/app/customer/model/customer_model.dart';
+
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
+// ignore: must_be_immutable
 class CustomerSettings extends GetView<CustomerController> {
-  CustomerSettings({super.key});
-  bool _switchValue = true;
+  const CustomerSettings({super.key});
+
+  final String routes = "/CUSTOMER_SETTINGS";
 
   @override
   Widget build(BuildContext context) {
@@ -178,7 +180,6 @@ class CustomerSettings extends GetView<CustomerController> {
                         onChanged: (value) {
                           controller.switchValue.value = value;
                           controller.switchLight();
-                          print(value);
                         },
                       ),
                     ),

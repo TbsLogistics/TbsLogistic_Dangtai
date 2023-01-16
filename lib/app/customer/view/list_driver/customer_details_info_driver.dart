@@ -8,18 +8,10 @@ import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:timeline_list/timeline.dart';
 import 'package:timeline_list/timeline_model.dart';
 
-class CustomerDetailsInfoDriver extends StatefulWidget {
-  const CustomerDetailsInfoDriver({super.key});
-
-  @override
-  State<CustomerDetailsInfoDriver> createState() =>
-      _CustomerDetailsInfoDriverState();
-}
-
-class _CustomerDetailsInfoDriverState extends State<CustomerDetailsInfoDriver> {
+class CustomerDetailsInfoDriver extends GetView<CustomerController> {
   final String routes = "/CUSTOMER_DETAILS_INFO_DRIVER";
 
-  bool showFormStatus = false;
+  const CustomerDetailsInfoDriver({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +51,13 @@ class _CustomerDetailsInfoDriverState extends State<CustomerDetailsInfoDriver> {
                 SizedBox(
                   height: size.width * 0.05,
                 ),
-                _buildStatus(size, items),
+                _buildStatus(size, items, controller),
                 SizedBox(
                   height: size.width * 0.05,
                 ),
-                showFormStatus ? _buildFormStatus(items, size) : Container(),
+                controller.showForm.value
+                    ? _buildFormStatus(items, size)
+                    : Container(),
                 SizedBox(
                   height: size.width * 0.05,
                 ),
@@ -328,14 +322,11 @@ class _CustomerDetailsInfoDriverState extends State<CustomerDetailsInfoDriver> {
     );
   }
 
-  Widget _buildStatus(Size size, dynamic item) {
+  Widget _buildStatus(Size size, dynamic item, CustomerController controller) {
     var length = item["trackingtime"].length;
     return InkWell(
       onTap: () {
-        setState(() {
-          showFormStatus = !showFormStatus;
-          // print(showFormStatus);
-        });
+        controller.showFormStatus();
       },
       child: Container(
         height: 40,

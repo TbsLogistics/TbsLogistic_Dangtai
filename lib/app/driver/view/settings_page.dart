@@ -2,18 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controller.dart';
-import 'package:tbs_logistics_dangtai/app/customer/model/customer_model.dart';
 import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
-import 'package:tbs_logistics_dangtai/app/driver/view/qr_code_screen.dart';
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
 class DriverSettings extends GetView<DriverController> {
-  DriverSettings({super.key});
-  bool _switchValue = true;
+  const DriverSettings({super.key});
+
   final String routes = "/DRIVER_SETTINGS";
 
   @override

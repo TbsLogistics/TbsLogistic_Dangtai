@@ -5,6 +5,7 @@ import 'package:tbs_logistics_dangtai/app/tallyman/controller/tallyman_controlle
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 
+// ignore: must_be_immutable
 class TallymanDetailsWarehomeScreen extends GetView<TallymanController> {
   TallymanDetailsWarehomeScreen({super.key});
 
@@ -314,12 +315,13 @@ class TallymanDetailsWarehomeScreen extends GetView<TallymanController> {
                 width: 25,
                 height: 25,
                 decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1,
-                      color: Colors.white,
-                    ),
-                    color: color,
-                    borderRadius: BorderRadius.circular(100)),
+                  border: Border.all(
+                    width: 1,
+                    color: Colors.white,
+                  ),
+                  color: color,
+                  borderRadius: BorderRadius.circular(100),
+                ),
               ),
             ],
           ),

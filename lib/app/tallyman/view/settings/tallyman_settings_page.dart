@@ -11,6 +11,7 @@ import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
 class TallymanSettings extends GetView<TallymanController> {
   const TallymanSettings({super.key});
+  final String routes = "/TALLYMAN_SETTINGS";
 
   @override
   Widget build(BuildContext context) {

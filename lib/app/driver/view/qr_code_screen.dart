@@ -13,34 +13,35 @@ class QrCodeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GetBuilder<DriverController>(
-        init: DriverController(),
-        builder: (controller) => Scaffold(
-              appBar: AppBar(
-                leading: IconButton(
-                  onPressed: () {
-                    Get.back();
-                  },
-                  icon: const Icon(Icons.arrow_back_ios_new),
-                ),
-                backgroundColor: CustomColor.backgroundAppbar,
-                title: const Text(
-                  "QR Code",
-                  style: CustomTextStyle.tilteAppbar,
-                ),
-                centerTitle: true,
+      init: DriverController(),
+      builder: (controller) => Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(Icons.arrow_back_ios_new),
+          ),
+          backgroundColor: CustomColor.backgroundAppbar,
+          title: const Text(
+            "QR Code",
+            style: CustomTextStyle.tilteAppbar,
+          ),
+          centerTitle: true,
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: QrImage(
+                data: "${controller.user.value.maTaixe}",
+                version: QrVersions.auto,
+                size: size.width * 0.6,
               ),
-              body: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Center(
-                    child: QrImage(
-                      data: "${controller.user.value.maTaixe}",
-                      version: QrVersions.auto,
-                      size: size.width * 0.6,
-                    ),
-                  ),
-                ],
-              ),
-            ));
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
