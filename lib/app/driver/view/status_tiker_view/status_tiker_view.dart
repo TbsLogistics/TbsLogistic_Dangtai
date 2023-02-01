@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
 import 'package:tbs_logistics_dangtai/app/driver/model/list_tiker_for_driver.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 import 'package:tbs_logistics_dangtai/config/widget/custom_list_title.dart';
 
@@ -18,14 +17,19 @@ class StatusDriver extends GetView<DriverController> {
       init: DriverController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "Danh sách phiếu đã đăng ký",
-            style: CustomTextStyle.tilteAppbar,
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
           centerTitle: true,
-          backgroundColor: CustomColor.backgroundAppbar,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_new),
+            icon: Icon(
+              Icons.arrow_back_ios_new,
+              color: Theme.of(context).primaryColorLight,
+            ),
             onPressed: () {
               Get.back();
             },

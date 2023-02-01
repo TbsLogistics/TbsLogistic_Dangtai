@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
 import 'package:tbs_logistics_dangtai/app/driver/view/driver_screen.dart';
-import 'package:tbs_logistics_dangtai/app/driver/view/settings_page.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
+import 'package:tbs_logistics_dangtai/app/driver/view/settings/settings_page.dart';
+
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
 class DriverPage extends GetView<DriverController> {
@@ -17,12 +16,14 @@ class DriverPage extends GetView<DriverController> {
       builder: (controller) => Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text(
+          title: Text(
             "TBS Logistic",
-            style: CustomTextStyle.tilteAppbar,
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
           centerTitle: true,
-          backgroundColor: CustomColor.backgroundAppbar,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           actions: [
             IconButton(
               onPressed: () {
@@ -30,20 +31,20 @@ class DriverPage extends GetView<DriverController> {
                   Routes.QR_CODE_SCREEN,
                 );
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.qr_code_rounded,
-                color: Colors.white,
+                color: Theme.of(context).primaryColorLight,
                 size: 25,
               ),
             ),
             const SizedBox(width: 5),
             IconButton(
               onPressed: () {
-                Get.to(() => DriverSettings());
+                Get.to(() => const DriverSettings());
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.settings,
-                color: Colors.white,
+                color: Theme.of(context).primaryColorLight,
                 size: 25,
               ),
             ),

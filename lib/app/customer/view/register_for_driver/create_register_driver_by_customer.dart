@@ -141,28 +141,30 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
       init: CustomerController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          backgroundColor: CustomColor.backgroundAppbar,
-          title: const Text(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          title: Text(
             "TBS Logistics",
-            style: CustomTextStyle.tilteAppbar,
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
               Get.back();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_ios_new_outlined,
               size: 24,
-              color: Colors.white,
+              color: Theme.of(context).primaryColorLight,
             ),
           ),
         ),
         body: Container(
           height: size.height,
-          decoration: const BoxDecoration(
-            gradient: CustomColor.gradient,
-          ),
+          // decoration: const BoxDecoration(
+          //   gradient: CustomColor.gradient,
+          // ),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: SingleChildScrollView(
             child: Column(
@@ -174,12 +176,12 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                     Container(
                       padding: const EdgeInsets.only(left: 5),
                       child: Row(
-                        children: const [
+                        children: [
                           Text(
                             "Thời gian dự kiến",
                             textAlign: TextAlign.left,
                             style: TextStyle(
-                              color: Colors.blueGrey,
+                              color: Theme.of(context).primaryColorLight,
                               fontSize: 16,
                             ),
                           )
@@ -191,9 +193,9 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                         border: Border.all(
                           width: 1,
                           // color: Color(0xFFF3BD60),
-                          color: Colors.white,
+                          color: Colors.orangeAccent,
                         ),
-                        color: Colors.white,
+                        // color: Colors.white,
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                       padding: const EdgeInsets.only(top: 10, left: 10),
@@ -206,12 +208,16 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                           _selectDateTime(context);
                         },
                         controller: dateinput,
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           hintText: "Nhập thời gian dự kiến",
+                          hintStyle: TextStyle(
+                            color: Theme.of(context).primaryColorLight,
+                          ),
                           border: InputBorder.none,
                           icon: Icon(
                             Icons.calendar_month,
                             size: 26,
+                            color: Theme.of(context).primaryColorLight,
                           ),
                           isDense: true,
                         ),
@@ -226,12 +232,12 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                       Container(
                         padding: const EdgeInsets.only(left: 5),
                         child: Row(
-                          children: const [
+                          children: [
                             Text(
                               "Tài xế *",
                               textAlign: TextAlign.left,
                               style: TextStyle(
-                                color: Colors.blueGrey,
+                                color: Theme.of(context).primaryColorLight,
                                 fontSize: 16,
                               ),
                             )
@@ -270,19 +276,22 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                                     // print("idtaixe: $idTaixe");
                                   });
                                 },
-                                dropdownDecoratorProps:
-                                    const DropDownDecoratorProps(
+                                dropdownDecoratorProps: DropDownDecoratorProps(
                                   dropdownSearchDecoration: InputDecoration(
                                     hintText: "Chọn tài xế",
+                                    hintStyle: TextStyle(
+                                      color:
+                                          Theme.of(context).primaryColorLight,
+                                    ),
                                     filled: true,
-                                    iconColor: Color(0xFFF3BD60),
-                                    focusColor: Color(0xFFF3BD60),
-                                    fillColor: Colors.white,
-                                    focusedBorder: OutlineInputBorder(
+                                    iconColor: const Color(0xFFF3BD60),
+                                    focusColor: const Color(0xFFF3BD60),
+                                    // fillColor: Colors.white,
+                                    focusedBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Color(0xFFF3BD60), width: 1.0),
                                     ),
-                                    enabledBorder: OutlineInputBorder(
+                                    enabledBorder: const OutlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Color(0xFFF3BD60), width: 1.0),
                                     ),
@@ -322,6 +331,7 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                   controller: controller.numberCar,
                   hintText: "Nhập số xe",
                   icon: Icons.abc,
+                  color: Theme.of(context).primaryColorLight,
                 ),
                 CustomDropdownButton(
                   items: idProduct
@@ -381,6 +391,7 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                         controller: controller.numberCont1Seal1,
                         hintText: "Nhập số seal",
                         icon: Icons.abc,
+                        color: Theme.of(context).primaryColorLight,
                       )
                     : CustomDropdownButton(
                         items: numberCont
@@ -455,36 +466,42 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
           controller: controller.numberCont1,
           hintText: "Nhập số cont",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số seal 1",
           controller: controller.numberCont1Seal1,
           hintText: "Nhập số seal",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số seal 2",
           controller: controller.numberCont1Seal2,
           hintText: "Nhập số seal",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số book",
           controller: controller.numberBook,
           hintText: "Nhập số book",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số kiện",
           controller: controller.numberKien,
           hintText: "Nhập số kiện",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số khối",
           controller: controller.numberKhoi,
           hintText: "Nhập số khối",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
       ],
     );
@@ -499,36 +516,42 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
           controller: controller.numberCont2,
           hintText: "Nhập số cont",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số seal 1",
           controller: controller.numberCont2Seal1,
           hintText: "Nhập số seal",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số seal 2",
           controller: controller.numberCont2Seal2,
           hintText: "Nhập số seal",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số book",
           controller: controller.numberBook1,
           hintText: "Nhập số book",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số kiện",
           controller: controller.numberKien1,
           hintText: "Nhập số kiện",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số khối",
           controller: controller.numberKhoi1,
           hintText: "Nhập số khối",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
       ],
     );

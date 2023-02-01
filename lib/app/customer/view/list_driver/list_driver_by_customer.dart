@@ -28,17 +28,22 @@ class _ListDriverByCustomerState extends State<ListDriverByCustomer> {
       init: CustomerController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          backgroundColor: CustomColor.backgroundAppbar,
-          title: const Text(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          title: Text(
             "Danh sách tài xế",
-            style: CustomTextStyle.tilteAppbar,
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
               Get.back();
             },
-            icon: const Icon(Icons.arrow_back_ios_new),
+            icon: Icon(
+              Icons.arrow_back_ios_new,
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
         ),
         body: Container(

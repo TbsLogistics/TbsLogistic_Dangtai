@@ -21,14 +21,19 @@ class StatusDriverScreen extends GetView<DriverController> {
       init: DriverController(),
       builder: (controller) => Scaffold(
           appBar: AppBar(
-            backgroundColor: CustomColor.backgroundAppbar,
-            title: const Text(
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            title: Text(
               "Chi tiết trạng thái",
-              style: CustomTextStyle.tilteAppbar,
+              style: TextStyle(
+                color: Theme.of(context).primaryColorLight,
+              ),
             ),
             centerTitle: true,
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_new),
+              icon: Icon(
+                Icons.arrow_back_ios_new,
+                color: Theme.of(context).primaryColorLight,
+              ),
               onPressed: () {
                 Get.back();
               },
@@ -51,15 +56,15 @@ class StatusDriverScreen extends GetView<DriverController> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        _buildNameKH(controller, size),
+                        _buildNameKH(controller, size, context),
                         SizedBox(
                           height: size.width * 0.05,
                         ),
-                        _buildNameCar(controller, size),
+                        _buildNameCar(controller, size, context),
                         SizedBox(
                           height: size.width * 0.05,
                         ),
-                        _buildStatus(size, controller),
+                        _buildStatus(size, controller, context),
                         SizedBox(
                           height: size.width * 0.05,
                         ),
@@ -369,7 +374,8 @@ class StatusDriverScreen extends GetView<DriverController> {
         : Container();
   }
 
-  Widget _buildStatus(Size size, DriverController controller) {
+  Widget _buildStatus(
+      Size size, DriverController controller, BuildContext context) {
     return controller.getStatusDriver.value.trackingtime != null
         ? InkWell(
             onTap: () {
@@ -395,7 +401,7 @@ class StatusDriverScreen extends GetView<DriverController> {
                         Text(
                           "Trạng thái :",
                           style: TextStyle(
-                            color: Colors.black.withOpacity(0.8),
+                            color: Theme.of(context).primaryColorLight,
                             fontWeight: FontWeight.bold,
                             fontSize: 16,
                           ),
@@ -434,7 +440,8 @@ class StatusDriverScreen extends GetView<DriverController> {
         : Container();
   }
 
-  Widget _buildNameKH(DriverController controller, Size size) {
+  Widget _buildNameKH(
+      DriverController controller, Size size, BuildContext context) {
     return controller.getStatusDriver.value.taixeRe != null
         ? Container(
             height: 60,
@@ -451,12 +458,14 @@ class StatusDriverScreen extends GetView<DriverController> {
                 Expanded(
                   child: Column(
                     children: [
-                      const Expanded(
+                      Expanded(
                         flex: 2,
                         child: Center(
                           child: Text(
                             "Tên khách hàng",
-                            style: CustomTextStyle.titlePrimary,
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColorLight,
+                            ),
                           ),
                         ),
                       ),
@@ -484,12 +493,14 @@ class StatusDriverScreen extends GetView<DriverController> {
                 Expanded(
                   child: Column(
                     children: [
-                      const Expanded(
+                      Expanded(
                         flex: 2,
                         child: Center(
                           child: Text(
                             "Số điện thoại",
-                            style: CustomTextStyle.titlePrimary,
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColorLight,
+                            ),
                           ),
                         ),
                       ),
@@ -513,7 +524,8 @@ class StatusDriverScreen extends GetView<DriverController> {
         : Container();
   }
 
-  Widget _buildNameCar(DriverController controller, Size size) {
+  Widget _buildNameCar(
+      DriverController controller, Size size, BuildContext context) {
     return controller.getStatusDriver.value.loaixeRe != null
         ? Container(
             height: 60,
@@ -530,12 +542,14 @@ class StatusDriverScreen extends GetView<DriverController> {
                 Expanded(
                   child: Column(
                     children: [
-                      const Expanded(
+                      Expanded(
                         flex: 2,
                         child: Center(
                           child: Text(
                             "Loại xe",
-                            style: CustomTextStyle.titlePrimary,
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColorLight,
+                            ),
                           ),
                         ),
                       ),
@@ -563,12 +577,14 @@ class StatusDriverScreen extends GetView<DriverController> {
                 Expanded(
                   child: Column(
                     children: [
-                      const Expanded(
+                      Expanded(
                         flex: 2,
                         child: Center(
                           child: Text(
                             "Số xe",
-                            style: CustomTextStyle.titlePrimary,
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColorLight,
+                            ),
                           ),
                         ),
                       ),

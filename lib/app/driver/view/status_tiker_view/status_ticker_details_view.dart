@@ -17,40 +17,44 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
     var hour = DateFormat("hh:mm a");
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Chi tiết phiếu",
-          style: CustomTextStyle.tilteAppbar,
+          style: TextStyle(
+            color: Theme.of(context).primaryColorLight,
+          ),
         ),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back_ios_new,
+            color: Theme.of(context).primaryColorLight,
           ),
         ),
-        backgroundColor: CustomColor.backgroundAppbar,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       ),
       body: SingleChildScrollView(
           child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         child: Column(
           children: [
-            _buildDayTime(items, size, day, hour),
+            _buildDayTime(items, size, day, hour, context),
             const SizedBox(height: 10),
-            _buildNumberCar(items, size),
+            _buildNumberCar(items, size, context),
             const SizedBox(height: 10),
-            _buildProduct(items, size),
+            _buildProduct(items, size, context),
             const SizedBox(height: 10),
-            _buildNumberCont(items, size),
+            _buildNumberCont(items, size, context),
           ],
         ),
       )),
     );
   }
 
-  Widget _buildProduct(ListTicketForDriver items, Size size) {
+  Widget _buildProduct(
+      ListTicketForDriver items, Size size, BuildContext context) {
     return Container(
       height: size.width * 0.1,
       decoration: BoxDecoration(
@@ -59,17 +63,17 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
           color: Colors.orangeAccent,
         ),
         borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
+        // color: Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const Expanded(
+          Expanded(
             flex: 1,
             child: Center(
               child: Text(
                 "Loại hàng",
-                style: CustomTextStyle.titlePrimary,
+                style: TextStyle(color: Theme.of(context).primaryColorLight),
               ),
             ),
           ),
@@ -89,8 +93,8 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
     );
   }
 
-  Widget _buildDayTime(
-      ListTicketForDriver items, Size size, DateFormat day, DateFormat hour) {
+  Widget _buildDayTime(ListTicketForDriver items, Size size, DateFormat day,
+      DateFormat hour, BuildContext context) {
     return Container(
       height: size.width * 0.15,
       decoration: BoxDecoration(
@@ -99,7 +103,7 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
           color: Colors.orangeAccent,
         ),
         borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
+        // color: Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -107,12 +111,13 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
                       "Ngày dự kiến",
-                      style: CustomTextStyle.titlePrimary,
+                      style:
+                          TextStyle(color: Theme.of(context).primaryColorLight),
                     ),
                   ),
                 ),
@@ -140,12 +145,13 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
                       "Giờ dự kiến",
-                      style: CustomTextStyle.titlePrimary,
+                      style:
+                          TextStyle(color: Theme.of(context).primaryColorLight),
                     ),
                   ),
                 ),
@@ -168,7 +174,8 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
     );
   }
 
-  Widget _buildNumberCont(ListTicketForDriver items, Size size) {
+  Widget _buildNumberCont(
+      ListTicketForDriver items, Size size, BuildContext context) {
     return Container(
       height: size.width * 0.7,
       decoration: BoxDecoration(
@@ -177,7 +184,7 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
           color: Colors.orangeAccent,
         ),
         borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
+        // color: Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -191,10 +198,12 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         "Số công 1",
-                        style: CustomTextStyle.titlePrimary,
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColorLight),
                       ),
+                      const SizedBox(height: 10),
                       Text("${items.phieuvao!.socont1}"),
                     ],
                   ),
@@ -206,10 +215,11 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số seal 1",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
                             ),
                           ],
                         ),
@@ -231,10 +241,11 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số seal 2",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
                             ),
                           ],
                         ),
@@ -256,10 +267,11 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số Kiện",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
                             ),
                           ],
                         ),
@@ -281,10 +293,11 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số Book",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
                             ),
                           ],
                         ),
@@ -306,10 +319,11 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số Khối",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
                             ),
                           ],
                         ),
@@ -343,9 +357,13 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         "Số công 2",
-                        style: CustomTextStyle.titlePrimary,
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColorLight),
+                      ),
+                      const SizedBox(
+                        height: 10,
                       ),
                       Text("${items.phieuvao!.socont2}"),
                     ],
@@ -358,10 +376,11 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số seal 1",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
                             ),
                           ],
                         ),
@@ -383,10 +402,11 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số seal 2",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
                             ),
                           ],
                         ),
@@ -408,10 +428,11 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số Kiện",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
                             ),
                           ],
                         ),
@@ -433,10 +454,11 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số Book",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
                             ),
                           ],
                         ),
@@ -458,10 +480,11 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số Khối",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight),
                             ),
                           ],
                         ),
@@ -484,7 +507,8 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
     );
   }
 
-  Widget _buildNumberCar(ListTicketForDriver items, Size size) {
+  Widget _buildNumberCar(
+      ListTicketForDriver items, Size size, BuildContext context) {
     return Container(
       height: size.width * 0.15,
       decoration: BoxDecoration(
@@ -493,7 +517,7 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
           color: Colors.orangeAccent,
         ),
         borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
+        // color: Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -501,12 +525,13 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
                       "Loại xe",
-                      style: CustomTextStyle.titlePrimary,
+                      style:
+                          TextStyle(color: Theme.of(context).primaryColorLight),
                     ),
                   ),
                 ),
@@ -534,12 +559,13 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
                       "Số xe",
-                      style: CustomTextStyle.titlePrimary,
+                      style:
+                          TextStyle(color: Theme.of(context).primaryColorLight),
                     ),
                   ),
                 ),

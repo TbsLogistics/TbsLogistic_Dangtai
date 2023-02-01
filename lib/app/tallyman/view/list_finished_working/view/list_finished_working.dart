@@ -1,80 +1,84 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/controller/tallyman_controller.dart';
-
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/model/list_employ_await.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/view/list_finished_working/controller/list_finished_working_controller.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
-class ListFinishedWorking extends StatefulWidget {
-  const ListFinishedWorking({super.key});
-
-  @override
-  State<ListFinishedWorking> createState() => _ListFinishedWorkingState();
-}
-
-class _ListFinishedWorkingState extends State<ListFinishedWorking> {
+class ListFinishedWorking extends GetView<ListFinishedWorkingController> {
   final String routes = "/LIST_FINISHED_WORKING";
+
+  const ListFinishedWorking({super.key});
   @override
   Widget build(BuildContext context) {
     var day = DateFormat("dd-MM-yyyy");
     var hour = DateFormat("hh:mm a");
     Size size = MediaQuery.of(context).size;
 
-    return GetBuilder<TallymanController>(
-      init: TallymanController(),
+    return GetBuilder<ListFinishedWorkingController>(
+      init: ListFinishedWorkingController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
           leading: IconButton(
             onPressed: () {
               Get.toNamed(Routes.TALLYMAN_PAGE);
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_ios_new,
               size: 25,
-              color: Colors.white,
+              color: Theme.of(context).primaryColorLight,
             ),
           ),
-          title: const Text(
-            "Danh sách đội làm hàng",
-            style: CustomTextStyle.tilteAppbar,
+          title: Text(
+            "Danh sách đội đã làm hàng",
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
           centerTitle: true,
-          backgroundColor: CustomColor.backgroundAppbar,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         ),
         body: Container(
-          decoration: const BoxDecoration(
-            gradient: CustomColor.gradient,
-          ),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-          child: Obx(() {
-            print(controller.listEmployAwait.value.daLam);
-            return controller.listEmployAwait.value.daLam!.length == 0
-                ? const Center(
-                    child: Text("Không có đội làm hàng"),
-                  )
-                : ListView.builder(
-                    itemCount: controller.listEmployAwait.value.daLam!.length,
+          child: FutureBuilder<ListEmployAwaitModel>(
+              future: controller.getEmployAwait(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  var items = snapshot.data as ListEmployAwaitModel;
+                  return ListView.builder(
+                    itemCount: items.daLam!.length,
                     itemBuilder: (context, index) {
-                      return buildTitle(size, index, day, hour, controller);
+                      return buildTitle(
+                          size, index, day, hour, controller, items, context);
                       // return Container();
                     },
                   );
-          }),
+                }
+                return const Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.orangeAccent,
+                  ),
+                );
+              }),
         ),
       ),
     );
   }
 
-  Widget buildTitle(Size size, int index, DateFormat day, DateFormat hour,
-      TallymanController controller) {
+  Widget buildTitle(
+      Size size,
+      int index,
+      DateFormat day,
+      DateFormat hour,
+      ListFinishedWorkingController controller,
+      ListEmployAwaitModel items,
+      BuildContext context) {
     return InkWell(
       onTap: () {
-        print(controller.listEmployAwait.value.daLam![index].id.toString());
+        print(items.daLam![index].id.toString());
         controller.postDetailTicker(
             maPhieuLamHang: int.parse(
-              controller.listEmployAwait.value.daLam![index].id.toString(),
+              items.daLam![index].id.toString(),
             ),
             routes: Routes.LIST_FINISHED_DETAILS_WORKING);
       },
@@ -84,27 +88,30 @@ class _ListFinishedWorkingState extends State<ListFinishedWorking> {
         width: size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.white,
+          // color: Colors.white,
           border: Border.all(width: 1, color: Colors.orangeAccent),
         ),
         child: Row(
           children: [
             Container(
               decoration: BoxDecoration(
-                color: Colors.amber,
+                // color: Colors.amber,
+                border: Border.all(
+                  color: Colors.orangeAccent,
+                ),
                 borderRadius: BorderRadius.circular(100),
               ),
               margin: const EdgeInsets.symmetric(horizontal: 5),
-              height: 40,
-              width: 40,
+              height: 30,
+              width: 30,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Center(
                     child: Text(
                       "${index + 1}",
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorLight,
                         fontSize: 20,
                       ),
                     ),
@@ -124,9 +131,10 @@ class _ListFinishedWorkingState extends State<ListFinishedWorking> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            "${controller.listEmployAwait.value.daLam![index].soxe}",
-                            style: const TextStyle(
+                            "${items.daLam![index].soxe}",
+                            style: TextStyle(
                               fontSize: 16,
+                              color: Theme.of(context).primaryColorLight,
                             ),
                           ),
                         ],
@@ -138,17 +146,25 @@ class _ListFinishedWorkingState extends State<ListFinishedWorking> {
                         children: [
                           Text(
                             day.format(DateTime.parse(
-                              controller.listEmployAwait.value.daLam![index]
-                                  .thoiGianDuKienBatDau
+                              items.daLam![index].thoiGianDuKienBatDau
                                   .toString(),
                             )),
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColorLight,
+                            ),
                           ),
                           const SizedBox(width: 10),
-                          Text(hour.format(DateTime.parse(
-                            controller.listEmployAwait.value.daLam![index]
-                                .thoiGianDuKienBatDau
-                                .toString(),
-                          ))),
+                          Text(
+                            hour.format(
+                              DateTime.parse(
+                                items.daLam![index].thoiGianDuKienBatDau
+                                    .toString(),
+                              ),
+                            ),
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColorLight,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -159,14 +175,17 @@ class _ListFinishedWorkingState extends State<ListFinishedWorking> {
             Expanded(
               flex: 3,
               child: Container(
-                child: controller.listEmployAwait.value.daLam![index]
-                            .thoiGianBatDau !=
-                        null
-                    ? Text(hour.format(DateTime.parse(
-                        controller
-                            .listEmployAwait.value.daLam![index].thoiGianBatDau
-                            .toString(),
-                      )))
+                child: items.daLam![index].thoiGianBatDau != null
+                    ? Text(
+                        hour.format(
+                          DateTime.parse(
+                            items.daLam![index].thoiGianKetThuc.toString(),
+                          ),
+                        ),
+                        style: const TextStyle(
+                          color: Colors.green,
+                        ),
+                      )
                     : const Text(
                         "Chưa làm hàng",
                         style: TextStyle(

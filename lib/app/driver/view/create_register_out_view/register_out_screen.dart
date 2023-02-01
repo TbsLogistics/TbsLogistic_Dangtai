@@ -43,14 +43,15 @@ class RegisterOutScreen extends GetView<DriverController> {
         ),
         body: SingleChildScrollView(
           child: loaixe == "con"
-              ? _buildContainer(controller, maPhieu)
-              : _buildTai(controller, maPhieu),
+              ? _buildContainer(controller, maPhieu, context)
+              : _buildTai(controller, maPhieu, context),
         ),
       ),
     );
   }
 
-  Widget _buildTai(DriverController controller, int item) {
+  Widget _buildTai(
+      DriverController controller, int item, BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: Column(
@@ -61,24 +62,28 @@ class RegisterOutScreen extends GetView<DriverController> {
             controller: controller.numberCont1Seal1,
             hintText: "Nhập số seal",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           CustomFormFiels(
             title: "Số book",
             controller: controller.numberBook,
             hintText: "Nhập số book",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           CustomFormFiels(
             title: "Số kiện",
             controller: controller.numberKien,
             hintText: "Nhập số kiện",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           CustomFormFiels(
             title: "Số khối",
             controller: controller.numberKhoi,
             hintText: "Nhập số khối",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           ButtonFormSubmit(
             onPressed: () {
@@ -105,7 +110,8 @@ class RegisterOutScreen extends GetView<DriverController> {
     );
   }
 
-  Widget _buildContainer(DriverController controller, int item) {
+  Widget _buildContainer(
+      DriverController controller, int item, BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: Column(
@@ -132,11 +138,11 @@ class RegisterOutScreen extends GetView<DriverController> {
           ),
           const Divider(),
           controller.numberSelectCont >= 1
-              ? _contFirt(controller)
+              ? _contFirt(controller, context)
               : Container(),
           const SizedBox(height: 10),
           controller.numberSelectCont >= 2
-              ? _contSecond(controller)
+              ? _contSecond(controller, context)
               : Container(),
           const SizedBox(height: 10),
           ButtonFormSubmit(
@@ -165,7 +171,7 @@ class RegisterOutScreen extends GetView<DriverController> {
     );
   }
 
-  Widget _contFirt(DriverController controller) {
+  Widget _contFirt(DriverController controller, BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.orangeAccent),
@@ -179,43 +185,49 @@ class RegisterOutScreen extends GetView<DriverController> {
             controller: controller.numberCont1,
             hintText: "Nhập số cont",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           CustomFormFiels(
             title: "Số seal 1",
             controller: controller.numberCont1Seal1,
             hintText: "Nhập số seal",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           CustomFormFiels(
             title: "Số seal 2",
             controller: controller.numberCont1Seal2,
             hintText: "Nhập số seal",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           CustomFormFiels(
             title: "Số book",
             controller: controller.numberBook,
             hintText: "Nhập số book",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           CustomFormFiels(
             title: "Số kiện",
             controller: controller.numberKien,
             hintText: "Nhập số kiện",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           CustomFormFiels(
             title: "Số khối",
             controller: controller.numberKhoi,
             hintText: "Nhập số khối",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
         ],
       ),
     );
   }
 
-  Widget _contSecond(DriverController controller) {
+  Widget _contSecond(DriverController controller, BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.orangeAccent),
@@ -229,36 +241,42 @@ class RegisterOutScreen extends GetView<DriverController> {
             controller: controller.numberCont2,
             hintText: "Nhập số cont",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           CustomFormFiels(
             title: "Số seal 1",
             controller: controller.numberCont2Seal1,
             hintText: "Nhập số seal",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           CustomFormFiels(
             title: "Số seal 2",
             controller: controller.numberCont2Seal2,
             hintText: "Nhập số seal",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           CustomFormFiels(
             title: "Số book",
             controller: controller.numberBook1,
             hintText: "Nhập số book",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           CustomFormFiels(
             title: "Số kiện",
             controller: controller.numberKien1,
             hintText: "Nhập số kiện",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
           CustomFormFiels(
             title: "Số khối",
             controller: controller.numberKhoi1,
             hintText: "Nhập số khối",
             icon: Icons.abc,
+            color: Theme.of(context).primaryColorLight,
           ),
         ],
       ),

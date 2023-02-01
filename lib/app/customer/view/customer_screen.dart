@@ -14,6 +14,8 @@ class _CustomerScreenState extends State<CustomerScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
+      // color: Theme.of(context).backgroundColor,
+      height: size.height,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: SingleChildScrollView(
         child: Column(
@@ -36,104 +38,107 @@ class _CustomerScreenState extends State<CustomerScreen> {
               ),
             ),
             SizedBox(height: size.width * 0.1),
-            GestureDetector(
-              onTap: () {
-                Get.toNamed(Routes.REGISTER_CUSTOMER);
-              },
-              child: Container(
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.6),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.orangeAccent.withOpacity(0.6),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.create_outlined, size: 30),
-                    SizedBox(
-                      width: size.width * 0.05,
+            Card(
+              child: GestureDetector(
+                onTap: () {
+                  Get.toNamed(Routes.REGISTER_CUSTOMER);
+                },
+                child: Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                    // color: Theme.of(context).backgroundColor,
+
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.orangeAccent.withOpacity(0.6),
                     ),
-                    const Text(
-                      "Đăng ký phiếu vào",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: size.width * 0.05,
                       ),
-                    )
-                  ],
+                      Text(
+                        "Đăng ký phiếu vào",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColorLight,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
             SizedBox(height: size.width * 0.1),
-            GestureDetector(
-              onTap: () {
-                Get.toNamed(Routes.LIST_DRIVER_BY_CUSTOMER);
-              },
-              child: Container(
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.6),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.orangeAccent.withOpacity(0.6),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.create_outlined, size: 30),
-                    SizedBox(
-                      width: size.width * 0.05,
+            Card(
+              child: GestureDetector(
+                onTap: () {
+                  Get.toNamed(Routes.LIST_DRIVER_BY_CUSTOMER);
+                },
+                child: Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                    // color: Theme.of(context).backgroundColor,
+
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.orangeAccent.withOpacity(0.6),
                     ),
-                    const Text(
-                      "Danh sách tài xế ",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: size.width * 0.05,
                       ),
-                    )
-                  ],
+                      Text(
+                        "Danh sách tài xế ",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColorLight,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
             SizedBox(height: size.width * 0.1),
-            InkWell(
-              onTap: () {
-                Get.toNamed(Routes.LIST_TICKER_CUSTOMER);
-              },
-              child: Container(
-                height: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white.withOpacity(0.6),
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                    width: 1,
-                    color: Colors.orangeAccent.withOpacity(0.6),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.create_outlined, size: 30),
-                    SizedBox(
-                      width: size.width * 0.05,
+            Card(
+              child: InkWell(
+                onTap: () {
+                  Get.toNamed(Routes.LIST_TICKER_CUSTOMER);
+                },
+                child: Container(
+                  height: 100,
+                  decoration: BoxDecoration(
+                    // color: Theme.of(context).backgroundColor,
+
+                    border: Border.all(
+                      width: 1,
+                      color: Colors.orangeAccent.withOpacity(0.6),
                     ),
-                    const Text(
-                      "Danh sách đã đăng ký",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        width: size.width * 0.05,
                       ),
-                    )
-                  ],
+                      Text(
+                        "Danh sách đã đăng ký",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColorLight,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

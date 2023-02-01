@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controller.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/model/list_traking_model.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 import 'package:tbs_logistics_dangtai/config/widget/sercurity/custom_list_title_registed.dart';
@@ -17,17 +14,23 @@ class ListTickerCustomer extends GetView<CustomerController> {
     return GetBuilder<CustomerController>(
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "Danh sách phiếu đã đăng ký",
-            style: CustomTextStyle.tilteAppbar,
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
           leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: const Icon(Icons.arrow_back_ios_new)),
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new,
+              color: Theme.of(context).primaryColorLight,
+            ),
+          ),
           centerTitle: true,
-          backgroundColor: CustomColor.backgroundAppbar,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         ),
         body: FutureBuilder(
             future: controller.getListRegistedCustomer(),

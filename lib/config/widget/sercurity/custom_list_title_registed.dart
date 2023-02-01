@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 
 class CustomListTitleRegisted extends StatelessWidget {
@@ -26,26 +27,31 @@ class CustomListTitleRegisted extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Card(
+          shape: const RoundedRectangleBorder(
+              // borderRadius: BorderRadius.circular(80),
+              side: BorderSide(color: CustomColor.backgroundAppbar)
+              //set border radius more than 50% of height and width to make circle
+              ),
           child: SizedBox(
-        width: size.width,
-        height: 70,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            _buildStt(),
-            // VerticalDivider(
-            //   indent: 15,
-            //   endIndent: 15,
-            // ),
-            _buildName(),
-            const VerticalDivider(
-              indent: 15,
-              endIndent: 15,
+            width: size.width,
+            height: 70,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                _buildStt(),
+                // VerticalDivider(
+                //   indent: 15,
+                //   endIndent: 15,
+                // ),
+                _buildName(context),
+                const VerticalDivider(
+                  indent: 15,
+                  endIndent: 15,
+                ),
+                _buildWareHome(context),
+              ],
             ),
-            _buildWareHome(),
-          ],
-        ),
-      )),
+          )),
     );
   }
 
@@ -75,7 +81,7 @@ class CustomListTitleRegisted extends StatelessWidget {
     );
   }
 
-  Widget _buildName() {
+  Widget _buildName(BuildContext context) {
     return Expanded(
       flex: 8,
       child: Column(
@@ -88,7 +94,9 @@ class CustomListTitleRegisted extends StatelessWidget {
                 Expanded(
                   child: Text(
                     name,
-                    style: CustomTextStyle.titlePrimary,
+                    style: TextStyle(
+                      color: Theme.of(context).primaryColorLight,
+                    ),
                   ),
                 ),
                 // Expanded(
@@ -113,7 +121,7 @@ class CustomListTitleRegisted extends StatelessWidget {
     );
   }
 
-  Widget _buildWareHome() {
+  Widget _buildWareHome(BuildContext context) {
     return Expanded(
       flex: 4,
       child: Column(
@@ -125,7 +133,7 @@ class CustomListTitleRegisted extends StatelessWidget {
               children: [
                 Text(
                   itemstype,
-                  style: CustomTextStyle.titlePrimary,
+                  style: TextStyle(color: Theme.of(context).primaryColorLight),
                 ),
               ],
             ),

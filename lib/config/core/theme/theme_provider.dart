@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
+import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 
 class ThemeProvider extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.dark;
@@ -16,11 +18,11 @@ class ThemeProvider extends ChangeNotifier {
 class MyThemes {
   static final darkTheme = ThemeData(
       indicatorColor: const Color(0xffF9D205),
-      scaffoldBackgroundColor: const Color(0xff212629),
-      backgroundColor: const Color(0xFFE5E5E5),
+      scaffoldBackgroundColor: const Color.fromARGB(255, 78, 78, 78),
+      backgroundColor: Colors.white.withOpacity(0.8),
       primaryColor: Colors.white,
       primaryColorDark: Colors.black,
-      primaryColorLight: const Color(0xffFFFBFB),
+      primaryColorLight: CustomColor.backgroundAppbar,
       cardColor: const Color.fromARGB(255, 78, 78, 78),
       colorScheme: const ColorScheme.dark(),
       iconTheme: const IconThemeData(
@@ -29,14 +31,19 @@ class MyThemes {
   //     color: iconMenu, opacity: 0.8)); //de ocpacity la 0 de test lag
   // );
   static final lightTheme = ThemeData(
-      indicatorColor: const Color(0xffF97F7F),
+      indicatorColor: Colors.white,
+      //background appbar
+      // scaffoldBackgroundColor: const Color.fromARGB(255, 248, 216, 161),
       scaffoldBackgroundColor: Colors.white,
-      backgroundColor: Colors.grey.shade400,
-      primaryColor: Colors.grey.shade600,
+      backgroundColor: Colors.white.withOpacity(0.6),
+      //color text
+      primaryColor: Colors.black,
       primaryColorDark: const Color(0xffEDF0F3),
-      primaryColorLight: const Color(0xffFFFFFF),
+      primaryColorLight: CustomColor.backgroundAppbar,
       cardColor: Colors.white,
-      colorScheme: const ColorScheme.light(),
+      colorScheme: const ColorScheme.light().copyWith(
+        background: Colors.orangeAccent.withOpacity(0.4),
+      ),
       iconTheme: const IconThemeData(
         color: Colors.amber,
       ));

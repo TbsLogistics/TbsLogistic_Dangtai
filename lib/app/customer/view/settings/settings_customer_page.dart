@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controller.dart';
-
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
 // ignore: must_be_immutable
@@ -23,40 +21,39 @@ class CustomerSettings extends GetView<CustomerController> {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text(
+            title: Text(
               "Cài đặt",
-              style: CustomTextStyle.tilteAppbar,
+              style: TextStyle(
+                color: Theme.of(context).primaryColorLight,
+              ),
             ),
             centerTitle: true,
-            backgroundColor: CustomColor.backgroundAppbar,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             leading: IconButton(
               onPressed: () {
                 Get.back();
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back_ios_new_outlined,
                 size: 25,
-                color: Colors.white,
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ),
           body: SingleChildScrollView(
             child: Container(
-              decoration: const BoxDecoration(
-                gradient: CustomColor.gradient,
-              ),
               height: size.height,
               width: size.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const ListTile(
+                  ListTile(
                     leading: Text(
                       "Profile",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
-                        color: Colors.black,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ),
@@ -64,6 +61,12 @@ class CustomerSettings extends GetView<CustomerController> {
                     () => Column(
                       children: [
                         Card(
+                          shape: const RoundedRectangleBorder(
+                              // borderRadius: BorderRadius.circular(80),
+                              side: BorderSide(
+                                  color: CustomColor.backgroundAppbar)
+                              //set border radius more than 50% of height and width to make circle
+                              ),
                           child: ListTile(
                             leading: const Icon(Icons.person),
                             title: const Text("Thông tin cá nhân"),
@@ -83,6 +86,12 @@ class CustomerSettings extends GetView<CustomerController> {
                         controller.hideShowMode.isFalse
                             ? Container()
                             : Card(
+                                shape: const RoundedRectangleBorder(
+                                    // borderRadius: BorderRadius.circular(80),
+                                    side: BorderSide(
+                                        color: CustomColor.backgroundAppbar)
+                                    //set border radius more than 50% of height and width to make circle
+                                    ),
                                 child: Column(
                                   children: [
                                     ListTile(
@@ -160,17 +169,22 @@ class CustomerSettings extends GetView<CustomerController> {
                       ],
                     ),
                   ),
-                  const ListTile(
+                  ListTile(
                     leading: Text(
                       "Chức năng",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
-                        color: Colors.black,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ),
                   Card(
+                    shape: const RoundedRectangleBorder(
+                        // borderRadius: BorderRadius.circular(80),
+                        side: BorderSide(color: CustomColor.backgroundAppbar)
+                        //set border radius more than 50% of height and width to make circle
+                        ),
                     child: ListTile(
                       leading: const Icon(Icons.light_mode),
                       title: const Text("Change mode light"),
@@ -178,13 +192,19 @@ class CustomerSettings extends GetView<CustomerController> {
                         activeColor: Colors.amber,
                         value: controller.switchValue.value,
                         onChanged: (value) {
+                          print("value $value");
                           controller.switchValue.value = value;
-                          controller.switchLight();
+                          controller.switchLight(value);
                         },
                       ),
                     ),
                   ),
                   Card(
+                    shape: const RoundedRectangleBorder(
+                        // borderRadius: BorderRadius.circular(80),
+                        side: BorderSide(color: CustomColor.backgroundAppbar)
+                        //set border radius more than 50% of height and width to make circle
+                        ),
                     child: ListTile(
                       leading: const Icon(Icons.language),
                       title: const Text("Change language"),
@@ -198,6 +218,7 @@ class CustomerSettings extends GetView<CustomerController> {
                       ),
                     ),
                   ),
+                  const SizedBox(height: 20),
                   const Divider(
                     height: 1,
                     indent: 10,
@@ -205,20 +226,28 @@ class CustomerSettings extends GetView<CustomerController> {
                     color: Colors.orangeAccent,
                     thickness: 1,
                   ),
-                  ListTile(
-                    onTap: () {
-                      postLogout();
-                    },
-                    leading: const Icon(
-                      Icons.logout,
-                      color: Colors.redAccent,
-                    ),
-                    title: const Text(
-                      "Đăng xuất",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
+                  const SizedBox(height: 20),
+                  Card(
+                    shape: const RoundedRectangleBorder(
+                        // borderRadius: BorderRadius.circular(80),
+                        side: BorderSide(color: CustomColor.backgroundAppbar)
+                        //set border radius more than 50% of height and width to make circle
+                        ),
+                    child: ListTile(
+                      onTap: () {
+                        postLogout();
+                      },
+                      leading: const Icon(
+                        Icons.logout,
                         color: Colors.redAccent,
+                      ),
+                      title: const Text(
+                        "Đăng xuất",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                          color: Colors.redAccent,
+                        ),
                       ),
                     ),
                   ),

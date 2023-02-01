@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controller.dart';
 import 'package:tbs_logistics_dangtai/app/customer/view/customer_screen.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
-import 'view/settings/settings_customer_page.dart';
 
 class CustomerPage extends StatefulWidget {
   const CustomerPage({Key? key}) : super(key: key);
@@ -24,20 +21,22 @@ class _CustomerPageState extends State<CustomerPage> {
       builder: (controller) => Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text(
+          title: Text(
             "TBS Logistics",
-            style: CustomTextStyle.tilteAppbar,
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
           centerTitle: true,
-          backgroundColor: CustomColor.backgroundAppbar,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           actions: [
             IconButton(
               onPressed: () {
                 Get.toNamed(Routes.CUSTOMER_SETTINGS);
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.settings,
-                color: Colors.white,
+                color: Theme.of(context).primaryColorLight,
                 size: 25,
               ),
             ),

@@ -20,12 +20,17 @@ class QrCodeScreen extends StatelessWidget {
             onPressed: () {
               Get.back();
             },
-            icon: const Icon(Icons.arrow_back_ios_new),
+            icon: Icon(
+              Icons.arrow_back_ios_new,
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
-          backgroundColor: CustomColor.backgroundAppbar,
-          title: const Text(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          title: Text(
             "QR Code",
-            style: CustomTextStyle.tilteAppbar,
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
           centerTitle: true,
         ),
@@ -34,6 +39,7 @@ class QrCodeScreen extends StatelessWidget {
           children: [
             Center(
               child: QrImage(
+                // backgroundColor: Theme.of(context).primaryColor,
                 data: "${controller.user.value.maTaixe}",
                 version: QrVersions.auto,
                 size: size.width * 0.6,

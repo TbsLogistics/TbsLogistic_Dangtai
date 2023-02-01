@@ -33,14 +33,17 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
               Text(
                 widget.text,
                 textAlign: TextAlign.left,
-                style: const TextStyle(color: Colors.blueGrey, fontSize: 16),
+                style: TextStyle(
+                  color: Theme.of(context).primaryColorLight,
+                  fontSize: 16,
+                ),
               ),
             ],
           ),
         ),
         Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            // color: Colors.white,
             borderRadius: BorderRadius.circular(5.0),
             border: Border.all(
               width: 1,
@@ -51,8 +54,11 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
           width: size.width - 10,
           margin: EdgeInsets.symmetric(vertical: size.height * 0.02),
           child: DropdownButtonFormField2(
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
+            ),
             selectedItemHighlightColor: Colors.orangeAccent.withOpacity(0.4),
-            barrierColor: Colors.orangeAccent.withOpacity(0.4),
+            // barrierColor: Colors.orangeAccent.withOpacity(0.4),
             focusColor: Colors.orangeAccent.withOpacity(0.4),
             decoration: InputDecoration(
               isDense: true,
@@ -66,7 +72,10 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
             isExpanded: true,
             hint: Text(
               'Chọn ${widget.text}',
-              style: const TextStyle(fontSize: 16, color: Colors.blueGrey),
+              style: TextStyle(
+                fontSize: 16,
+                color: Theme.of(context).primaryColorLight,
+              ),
             ),
             icon: const Icon(
               Icons.arrow_drop_down,
@@ -77,12 +86,6 @@ class _CustomDropdownButtonState extends State<CustomDropdownButton> {
             buttonPadding: const EdgeInsets.only(right: 10),
             dropdownDecoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              gradient: const LinearGradient(
-                colors: [Colors.orangeAccent, Colors.white],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: [0.4, 0.7],
-              ),
             ),
             items: widget.items,
             validator: (value) {

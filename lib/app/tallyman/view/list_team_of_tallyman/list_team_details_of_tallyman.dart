@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/controller/tallyman_controller.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/list_employ_working.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/view/list_finished_working/controller/list_finished_working_controller.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/view/list_team_of_tallyman/controller/list_team_of_tallyman_controller.dart';
 
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 
 // ignore: must_be_immutable
-class ListTeamDetailsOfTallyman extends GetView<TallymanController> {
+class ListTeamDetailsOfTallyman extends GetView<ListTeamOfTallymanController> {
   ListTeamDetailsOfTallyman({super.key});
   final String routes = "/LIST_TEAM_DETAILS_OF_TALLYMAN";
   bool isChangeColorLeft = false;
@@ -27,37 +28,66 @@ class ListTeamDetailsOfTallyman extends GetView<TallymanController> {
 
       return Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "Danh sách thành viên",
-            style: CustomTextStyle.tilteAppbar,
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
           centerTitle: true,
-          backgroundColor: CustomColor.backgroundAppbar,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           leading: IconButton(
             onPressed: () {
               Get.back();
             },
             icon: const Icon(Icons.arrow_back_ios_new),
+            color: Theme.of(context).primaryColorLight,
           ),
         ),
         body: Stack(
           children: [
             Container(
-              decoration: const BoxDecoration(
-                gradient: CustomColor.gradient,
-              ),
+              // decoration: const BoxDecoration(
+              //   gradient: CustomColor.gradient,
+              // ),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
               width: size.width,
               child: ListView.builder(
                 itemBuilder: (context, index) {
                   return Card(
+                    shape: RoundedRectangleBorder(
+                        // borderRadius: BorderRadius.circular(80),
+                        side: BorderSide(
+                            color: Theme.of(context).primaryColorLight)
+                        //set border radius more than 50% of height and width to make circle
+                        ),
                     child: ListTile(
                       leading: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [Text("$index")],
                       ),
-                      title: Text("${items[index].tenNV}"),
-                      subtitle: Text("${items[index].maNv}"),
-                      trailing: Text("${items[index].tenChucDanh}"),
+                      title: Text(
+                        "${items[index].tenNV}",
+                        style: const TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                      subtitle: Text(
+                        "${items[index].maNv}",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      trailing: Text(
+                        "${items[index].tenChucDanh}",
+                        style: const TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
                     ),
                   );
                 },
@@ -72,8 +102,6 @@ class ListTeamDetailsOfTallyman extends GetView<TallymanController> {
                 height: 60,
                 child: Row(
                   children: [
-                    // ignore: unrelated_type_equality_checks
-
                     Expanded(
                       child: Container(
                         height: 60,
@@ -97,8 +125,6 @@ class ListTeamDetailsOfTallyman extends GetView<TallymanController> {
                         ),
                       ),
                     ),
-                    // ignore: unrelated_type_equality_checks
-
                     Expanded(
                       child: Container(
                         height: 60,

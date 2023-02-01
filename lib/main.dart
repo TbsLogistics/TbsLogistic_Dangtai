@@ -14,8 +14,9 @@ void main() async {
   HttpOverrides.global = MyHttpOverrides();
   await GetStorage.init('MyStorage');
   final box = GetStorage('MyStorage');
-  String? mode = box.read(AppConstants.THEME_KEY);
+  bool? mode = box.read(AppConstants.THEME_KEY);
   bool isLightMode = (mode != null && mode == "light");
+  print(isLightMode);
   var locale = const Locale('vi', 'VN');
   Get.updateLocale(locale);
   runApp(
@@ -25,7 +26,7 @@ void main() async {
       locale: locale,
       themeMode: isLightMode ? ThemeMode.light : ThemeMode.dark,
       theme: MyThemes.lightTheme,
-      darkTheme: MyThemes.lightTheme,
+      darkTheme: MyThemes.darkTheme,
       defaultTransition: Transition.fade,
       initialBinding: SplashBinding(),
       initialRoute: Routes.SPLASH,

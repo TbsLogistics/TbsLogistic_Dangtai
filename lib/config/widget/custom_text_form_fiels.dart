@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 
 class CustomFormFiels extends StatelessWidget {
-  const CustomFormFiels(
-      {super.key,
-      required this.title,
-      required this.controller,
-      required this.hintText,
-      required this.icon,
-      this.validator});
+  const CustomFormFiels({
+    super.key,
+    required this.title,
+    required this.controller,
+    required this.hintText,
+    required this.icon,
+    this.validator,
+    required this.color,
+  });
   final String title;
   final TextEditingController controller;
   final String? hintText;
   final IconData icon;
   final String Function(String?)? validator;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +29,8 @@ class CustomFormFiels extends StatelessWidget {
               Text(
                 title,
                 textAlign: TextAlign.left,
-                style: const TextStyle(
-                  color: Colors.blueGrey,
+                style: TextStyle(
+                  color: color,
                   fontSize: 16,
                 ),
               )
@@ -39,9 +42,9 @@ class CustomFormFiels extends StatelessWidget {
             border: Border.all(
               width: 1,
               // color: Color(0xFFF3BD60),
-              color: Colors.white,
+              color: Theme.of(context).primaryColorLight,
             ),
-            color: Colors.white,
+            // color: Colors.white,
             borderRadius: BorderRadius.circular(5.0),
           ),
           padding: const EdgeInsets.only(top: 10, left: 10),
@@ -53,10 +56,14 @@ class CustomFormFiels extends StatelessWidget {
             controller: controller,
             decoration: InputDecoration(
               hintText: hintText,
+              hintStyle: TextStyle(
+                color: Theme.of(context).primaryColorLight,
+              ),
               border: InputBorder.none,
               icon: Icon(
                 icon,
                 size: 26,
+                color: Theme.of(context).primaryColorLight,
               ),
               isDense: true,
             ),

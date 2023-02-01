@@ -142,27 +142,24 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
       init: DriverController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          backgroundColor: CustomColor.backgroundAppbar,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios_new,
-              size: 25,
-              color: Colors.white,
-            ),
+            icon: Icon(Icons.arrow_back_ios_new,
+                size: 25, color: Theme.of(context).primaryColorLight),
             onPressed: () {
               Get.back();
             },
           ),
-          title: const Text(
+          title: Text(
             'Đăng ký phiếu vào',
-            style: CustomTextStyle.tilteAppbar,
+            style: TextStyle(color: Theme.of(context).primaryColorLight),
           ),
           centerTitle: true,
         ),
         body: SingleChildScrollView(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            decoration: const BoxDecoration(gradient: CustomColor.gradient),
+            // decoration: const BoxDecoration(gradient: CustomColor.gradient),
             child: Form(
               key: formKey,
               child: Column(
@@ -174,6 +171,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
                     controller: controller.numberCar,
                     hintText: "Nhập số xe",
                     icon: Icons.abc,
+                    color: Theme.of(context).primaryColorLight,
                   ),
                   CustomDropdownButton(
                     items: idKho
@@ -256,6 +254,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
                           controller: controller.numberCont1Seal1,
                           hintText: "Nhập số seal",
                           icon: Icons.abc,
+                          color: Theme.of(context).primaryColorLight,
                         )
                       : CustomDropdownButton(
                           items: numberCont
@@ -329,12 +328,12 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
         Container(
           padding: const EdgeInsets.only(left: 5),
           child: Row(
-            children: const [
+            children: [
               Text(
                 "Thời gian dự kiến",
                 textAlign: TextAlign.left,
                 style: TextStyle(
-                  color: Colors.blueGrey,
+                  color: Theme.of(context).primaryColorLight,
                   fontSize: 16,
                 ),
               )
@@ -346,9 +345,9 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
             border: Border.all(
               width: 1,
               // color: Color(0xFFF3BD60),
-              color: Colors.white,
+              color: Colors.orangeAccent,
             ),
-            color: Colors.white,
+            // color: Colors.white,
             borderRadius: BorderRadius.circular(5.0),
           ),
           padding: const EdgeInsets.only(top: 10, left: 10),
@@ -361,12 +360,16 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
               showDateTime = true;
             },
             controller: dateinput,
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               hintText: "Nhập thời gian dự kiến",
+              hintStyle: TextStyle(
+                color: Theme.of(context).primaryColorLight,
+              ),
               border: InputBorder.none,
               icon: Icon(
                 Icons.calendar_month,
                 size: 26,
+                color: Theme.of(context).primaryColorLight,
               ),
               isDense: true,
             ),
@@ -385,36 +388,42 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
           controller: controller.numberCont1,
           hintText: "Nhập số cont",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số seal 1",
           controller: controller.numberCont1Seal1,
           hintText: "Nhập số seal",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số seal 2",
           controller: controller.numberCont1Seal2,
           hintText: "Nhập số seal",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số book",
           controller: controller.numberBook,
           hintText: "Nhập số book",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số kiện",
           controller: controller.numberKien,
           hintText: "Nhập số kiện",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số khối",
           controller: controller.numberKhoi,
           hintText: "Nhập số khối",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
       ],
     );
@@ -429,36 +438,42 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
           controller: controller.numberCont2,
           hintText: "Nhập số cont",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số seal 1",
           controller: controller.numberCont2Seal1,
           hintText: "Nhập số seal",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số seal 2",
           controller: controller.numberCont2Seal2,
           hintText: "Nhập số seal",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số book",
           controller: controller.numberBook1,
           hintText: "Nhập số book",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số kiện",
           controller: controller.numberKien1,
           hintText: "Nhập số kiện",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
         CustomFormFiels(
           title: "Số khối",
           controller: controller.numberKhoi1,
           hintText: "Nhập số khối",
           icon: Icons.abc,
+          color: Theme.of(context).primaryColorLight,
         ),
       ],
     );

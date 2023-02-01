@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tbs_logistics_dangtai/app/coordinators/model/ware_home_model.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/controller/tallyman_controller.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/controller/warehome_controller.dart';
 
 // ignore: must_be_immutable
-class TallymanDetailsWarehomeScreen extends GetView<TallymanController> {
+class TallymanDetailsWarehomeScreen extends GetView<WareHomeController> {
   TallymanDetailsWarehomeScreen({super.key});
 
   final String routes = "/TALLYMAN_DETAILS_WAREHOME_SCREEN";
@@ -26,17 +24,22 @@ class TallymanDetailsWarehomeScreen extends GetView<TallymanController> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Tình trạng line",
-          style: CustomTextStyle.tilteAppbar,
+          style: TextStyle(
+            color: Theme.of(context).primaryColorLight,
+          ),
         ),
-        backgroundColor: CustomColor.backgroundAppbar,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
             Get.back();
           },
-          icon: const Icon(Icons.arrow_back_ios_new),
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: Theme.of(context).primaryColorLight,
+          ),
         ),
       ),
       body: Container(

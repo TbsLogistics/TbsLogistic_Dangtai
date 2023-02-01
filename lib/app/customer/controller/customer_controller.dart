@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:get_storage/get_storage.dart';
 import 'package:tbs_logistics_dangtai/app/customer/model/customer_model.dart';
 import 'package:tbs_logistics_dangtai/app/customer/model/list_driver_by_customer_model.dart';
 import 'package:tbs_logistics_dangtai/app/customer/model/register_customer_model.dart';
@@ -36,8 +37,13 @@ class CustomerController extends GetxController {
     update();
   }
 
-  void switchLight() {
+  void switchLight(bool value) {
+    // String themeCode = value ? "dark" : "light";
+    // print("Themcode: $themeCode");
+    GetStorage("MyStorage").write(AppConstants.THEME_KEY, value);
+    Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
     switchValue.value;
+    print("switchValue ${switchValue.value}");
     update();
   }
 
@@ -45,12 +51,6 @@ class CustomerController extends GetxController {
     switchLanguage.value;
     update();
   }
-
-  // @override
-  // void onInit() {
-  //   getUser();
-  //   super.onInit();
-  // }
 
   TextEditingController numberCar = TextEditingController();
   TextEditingController numberCont1 = TextEditingController();

@@ -26,14 +26,15 @@ import 'package:tbs_logistics_dangtai/app/splash/controller/splash_binding.dart'
 import 'package:tbs_logistics_dangtai/app/splash/view/splash_screen.dart';
 
 import 'package:tbs_logistics_dangtai/app/tallyman/tallyman_page.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/view/list_finished_working/list_finished_details_working.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/view/list_finished_working/list_finished_working.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/view/list_finished_working/view/list_finished_working.dart';
+
 import 'package:tbs_logistics_dangtai/app/tallyman/view/list_team_of_tallyman/list_team_details_of_tallyman.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/list_team_of_tallyman/list_team_of_tallyman.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/tallyman_details_warehome_screen.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/tallyman_ware_home.dart';
 
 import '../../app/driver/view/create_register_view/create_register_screen.dart';
+import '../../app/tallyman/view/list_finished_working/view/list_finished_details_working.dart';
 import '../../app/tallyman/view/settings/tallyman_settings_page.dart';
 
 part './routes.dart';

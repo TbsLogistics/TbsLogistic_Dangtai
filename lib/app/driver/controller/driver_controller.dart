@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:get_storage/get_storage.dart';
 import 'package:tbs_logistics_dangtai/app/driver/model/list_tiker_for_driver.dart';
 import 'package:tbs_logistics_dangtai/app/driver/model/register_driver_model.dart';
 import 'package:tbs_logistics_dangtai/app/driver/model/register_out_model.dart';
@@ -15,7 +16,7 @@ import 'package:tbs_logistics_dangtai/config/share_preferences/share_prefer.dart
 class DriverController extends GetxController {
   RxBool switchValue = true.obs;
   RxBool switchLanguage = true.obs;
-  RxBool hideShowMode = false.obs;
+  RxBool hideShowMode = true.obs;
   RxBool showForm = false.obs;
   final getStatusDriver = StatusDriverModel().obs;
   String? selectedNumberCont;
@@ -50,7 +51,9 @@ class DriverController extends GetxController {
     update();
   }
 
-  void switchLight() {
+  void switchLight(bool value) {
+    GetStorage("MyStorage").write(AppConstants.THEME_KEY, value);
+    Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
     switchValue.value;
     update();
   }

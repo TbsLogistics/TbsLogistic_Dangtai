@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tbs_logistics_dangtai/app/coordinators/model/ware_home_model.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/controller/tallyman_controller.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/controller/warehome_controller.dart';
+
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
 class TallymanWareHomeScreen extends GetView<TallymanController> {
@@ -14,31 +14,30 @@ class TallymanWareHomeScreen extends GetView<TallymanController> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return GetBuilder<TallymanController>(
-      init: TallymanController(),
+    return GetBuilder<WareHomeController>(
+      init: WareHomeController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "Danh sách kho",
-            style: CustomTextStyle.tilteAppbar,
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
-          backgroundColor: CustomColor.backgroundAppbar,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
               Get.back();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_ios_new,
               size: 25,
-              color: Colors.white,
+              color: Theme.of(context).primaryColorLight,
             ),
           ),
         ),
         body: Container(
-          decoration: const BoxDecoration(
-            gradient: CustomColor.gradient,
-          ),
           width: size.width,
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: Column(
@@ -55,6 +54,11 @@ class TallymanWareHomeScreen extends GetView<TallymanController> {
                           itemCount: items.length,
                           itemBuilder: (context, index) {
                             return Card(
+                              shape: const RoundedRectangleBorder(
+                                side: BorderSide(
+                                  color: Colors.orangeAccent,
+                                ),
+                              ),
                               child: ListTile(
                                 onTap: () {
                                   Get.toNamed(
@@ -62,7 +66,12 @@ class TallymanWareHomeScreen extends GetView<TallymanController> {
                                     arguments: items[index],
                                   );
                                 },
-                                title: Text("${items[index].tenKho}"),
+                                title: Text(
+                                  "${items[index].tenKho}",
+                                  style: TextStyle(
+                                    color: Theme.of(context).primaryColorLight,
+                                  ),
+                                ),
                               ),
                             );
                           });

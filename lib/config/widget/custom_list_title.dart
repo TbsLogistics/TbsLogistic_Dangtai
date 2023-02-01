@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../core/data/color.dart';
+
 class CustomListTitle extends StatefulWidget {
   const CustomListTitle({
     super.key,
@@ -26,18 +28,12 @@ class _CustomListTitleState extends State<CustomListTitle> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Card(
-      child: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              Colors.orangeAccent.withOpacity(0.4),
-              Colors.white.withOpacity(0.6),
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: const [0.4, 0.8],
+      shape: const RoundedRectangleBorder(
+          // borderRadius: BorderRadius.circular(80),
+          side: BorderSide(color: CustomColor.backgroundAppbar)
+          //set border radius more than 50% of height and width to make circle
           ),
-        ),
+      child: Container(
         width: size.width,
         height: 60,
         padding: const EdgeInsets.all(5),
@@ -55,21 +51,34 @@ class _CustomListTitleState extends State<CustomListTitle> {
                       child: Text(widget.Stt),
                     ),
                   ),
-                  const SizedBox(width: 5),
+                  const SizedBox(width: 20),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Center(
-                          child: Text(widget.nameDriver,
-                              style: const TextStyle(
-                                  color: Colors.blueGrey, fontSize: 14)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.nameDriver,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
                         ),
-                        Center(
-                          child: Text(widget.numberPhone,
-                              style: const TextStyle(
-                                  color: Colors.blueGrey, fontSize: 14)),
-                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              widget.numberPhone,
+                              style: TextStyle(
+                                  color: Theme.of(context).primaryColor,
+                                  fontSize: 14),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
@@ -79,9 +88,13 @@ class _CustomListTitleState extends State<CustomListTitle> {
             Expanded(
               flex: 1,
               child: Center(
-                child: Text(widget.customer,
-                    style:
-                        const TextStyle(color: Colors.blueGrey, fontSize: 14)),
+                child: Text(
+                  widget.customer,
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColorLight,
+                    fontSize: 14,
+                  ),
+                ),
               ),
             ),
             Expanded(

@@ -21,40 +21,39 @@ class DriverSettings extends GetView<DriverController> {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text(
+            title: Text(
               "Cài đặt",
-              style: CustomTextStyle.tilteAppbar,
+              style: TextStyle(
+                color: Theme.of(context).primaryColorLight,
+              ),
             ),
             centerTitle: true,
-            backgroundColor: CustomColor.backgroundAppbar,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             leading: IconButton(
               onPressed: () {
                 Get.back();
               },
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back_ios_new_outlined,
                 size: 25,
-                color: Colors.white,
+                color: Theme.of(context).primaryColorLight,
               ),
             ),
           ),
           body: SingleChildScrollView(
             child: Container(
-              decoration: const BoxDecoration(
-                gradient: CustomColor.gradient,
-              ),
               height: size.height,
               width: size.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const ListTile(
+                  ListTile(
                     leading: Text(
                       "Profile",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
-                        color: Colors.black,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ),
@@ -62,6 +61,11 @@ class DriverSettings extends GetView<DriverController> {
                     () => Column(
                       children: [
                         Card(
+                          shape: const RoundedRectangleBorder(
+                            side: BorderSide(
+                              color: Colors.orangeAccent,
+                            ),
+                          ),
                           child: ListTile(
                             leading: const Icon(Icons.person),
                             title: const Text("Thông tin cá nhân"),
@@ -81,6 +85,12 @@ class DriverSettings extends GetView<DriverController> {
                         controller.hideShowMode.isFalse
                             ? Container()
                             : Card(
+                                shape: const RoundedRectangleBorder(
+                                    // borderRadius: BorderRadius.circular(80),
+                                    side: BorderSide(
+                                        color: CustomColor.backgroundAppbar)
+                                    //set border radius more than 50% of height and width to make circle
+                                    ),
                                 child: Column(
                                   children: [
                                     ListTile(
@@ -100,8 +110,8 @@ class DriverSettings extends GetView<DriverController> {
                                       ),
                                       title: Text(
                                         "${controller.user.value.tenTaixe}",
-                                        style: const TextStyle(
-                                          color: Colors.black,
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
                                           fontSize: 14,
                                         ),
                                       ),
@@ -123,8 +133,8 @@ class DriverSettings extends GetView<DriverController> {
                                       ),
                                       title: Text(
                                         "${controller.user.value.phone}",
-                                        style: const TextStyle(
-                                          color: Colors.black,
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
                                           fontSize: 14,
                                         ),
                                       ),
@@ -146,8 +156,8 @@ class DriverSettings extends GetView<DriverController> {
                                       ),
                                       title: Text(
                                         "${controller.user.value.email}",
-                                        style: const TextStyle(
-                                          color: Colors.black,
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
                                           fontSize: 14,
                                         ),
                                       ),
@@ -158,17 +168,22 @@ class DriverSettings extends GetView<DriverController> {
                       ],
                     ),
                   ),
-                  const ListTile(
+                  ListTile(
                     leading: Text(
                       "Chức năng",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
-                        color: Colors.black,
+                        color: Theme.of(context).primaryColor,
                       ),
                     ),
                   ),
                   Card(
+                    shape: const RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Colors.orangeAccent,
+                      ),
+                    ),
                     child: ListTile(
                       leading: const Icon(Icons.light_mode),
                       title: const Text("Change mode light"),
@@ -177,13 +192,18 @@ class DriverSettings extends GetView<DriverController> {
                         value: controller.switchValue.value,
                         onChanged: (value) {
                           controller.switchValue.value = value;
-                          controller.switchLight();
+                          controller.switchLight(value);
                           print(value);
                         },
                       ),
                     ),
                   ),
                   Card(
+                    shape: const RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Colors.orangeAccent,
+                      ),
+                    ),
                     child: ListTile(
                       leading: const Icon(Icons.language),
                       title: const Text("Change language"),

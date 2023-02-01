@@ -5,7 +5,6 @@ import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.da
 import 'package:tbs_logistics_dangtai/app/driver/view/create_register_view/create_register_screen.dart';
 import 'package:tbs_logistics_dangtai/app/driver/view/status_screen.dart';
 import 'package:tbs_logistics_dangtai/app/driver/view/status_tiker_view/status_tiker_view.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 
 class DriverScreen extends GetView<DriverController> {
   const DriverScreen({super.key});
@@ -20,7 +19,7 @@ class DriverScreen extends GetView<DriverController> {
         child: Container(
           width: size.width,
           height: size.height,
-          decoration: const BoxDecoration(gradient: CustomColor.gradient),
+          // decoration: const BoxDecoration(gradient: CustomColor.gradient),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: Column(
             children: [
@@ -49,7 +48,7 @@ class DriverScreen extends GetView<DriverController> {
                 child: Container(
                   height: 100,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.6),
+                    // color: Colors.white.withOpacity(0.6),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                       width: 1,
@@ -63,10 +62,10 @@ class DriverScreen extends GetView<DriverController> {
                       SizedBox(
                         width: size.width * 0.05,
                       ),
-                      const Text(
+                      Text(
                         "Đăng ký phiếu vào",
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Theme.of(context).primaryColorLight,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -83,7 +82,7 @@ class DriverScreen extends GetView<DriverController> {
                 child: Container(
                   height: 100,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.6),
+                    // color: Colors.white.withOpacity(0.6),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                       width: 1,
@@ -97,10 +96,10 @@ class DriverScreen extends GetView<DriverController> {
                       SizedBox(
                         width: size.width * 0.05,
                       ),
-                      const Text(
+                      Text(
                         "Trạng thái tài xế",
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Theme.of(context).primaryColorLight,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -117,7 +116,7 @@ class DriverScreen extends GetView<DriverController> {
                 child: Container(
                   height: 100,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.6),
+                    // color: Colors.white.withOpacity(0.6),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
                       width: 1,
@@ -131,10 +130,10 @@ class DriverScreen extends GetView<DriverController> {
                       SizedBox(
                         width: size.width * 0.05,
                       ),
-                      const Text(
+                      Text(
                         "Danh sách các phiếu đã đăng ký",
                         style: TextStyle(
-                          color: Colors.black,
+                          color: Theme.of(context).primaryColorLight,
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
