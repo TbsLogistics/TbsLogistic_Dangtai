@@ -199,25 +199,25 @@ class CustomerSettings extends GetView<CustomerController> {
                       ),
                     ),
                   ),
-                  Card(
-                    shape: const RoundedRectangleBorder(
-                        // borderRadius: BorderRadius.circular(80),
-                        side: BorderSide(color: CustomColor.backgroundAppbar)
-                        //set border radius more than 50% of height and width to make circle
-                        ),
-                    child: ListTile(
-                      leading: const Icon(Icons.language),
-                      title: const Text("Change language"),
-                      trailing: CupertinoSwitch(
-                        activeColor: Colors.amber,
-                        value: controller.switchLanguage.value,
-                        onChanged: (value) {
-                          controller.switchLanguage.value = value;
-                          controller.switchLanguag();
-                        },
-                      ),
-                    ),
-                  ),
+                  // Card(
+                  //   shape: const RoundedRectangleBorder(
+                  //       // borderRadius: BorderRadius.circular(80),
+                  //       side: BorderSide(color: CustomColor.backgroundAppbar)
+                  //       //set border radius more than 50% of height and width to make circle
+                  //       ),
+                  //   child: ListTile(
+                  //     leading: const Icon(Icons.language),
+                  //     title: const Text("Change language"),
+                  //     trailing: CupertinoSwitch(
+                  //       activeColor: Colors.amber,
+                  //       value: controller.switchLanguage.value,
+                  //       onChanged: (value) {
+                  //         controller.switchLanguage.value = value;
+                  //         controller.switchLanguag();
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
                   const SizedBox(height: 20),
                   const Divider(
                     height: 1,

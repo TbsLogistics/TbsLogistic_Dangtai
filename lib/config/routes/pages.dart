@@ -140,11 +140,11 @@ abstract class AppPages {
     ),
     GetPage(
       name: Routes.TALLYMAN_WAREHOME_SCREEN,
-      page: () => const TallymanWareHomeScreen(),
+      page: () => WareHomePage(),
     ),
     GetPage(
       name: Routes.TALLYMAN_DETAILS_WAREHOME_SCREEN,
-      page: () => TallymanDetailsWarehomeScreen(),
+      page: () => WareHomePage(),
     ),
     GetPage(
       name: Routes.LIST_FINISHED_WORKING,

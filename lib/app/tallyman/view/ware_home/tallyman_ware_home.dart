@@ -9,7 +9,7 @@ import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 class TallymanWareHomeScreen extends GetView<TallymanController> {
   const TallymanWareHomeScreen({super.key});
 
-  final String routes = "/TALLYMAN_WAREHOME_SCREEN";
+  // final String routes = "/TALLYMAN_WAREHOME_SCREEN";
 
   @override
   Widget build(BuildContext context) {

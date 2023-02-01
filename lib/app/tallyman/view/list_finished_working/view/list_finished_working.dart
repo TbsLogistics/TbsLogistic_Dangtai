@@ -173,18 +173,42 @@ class ListFinishedWorking extends GetView<ListFinishedWorkingController> {
               ),
             ),
             Expanded(
-              flex: 3,
+              flex: 4,
               child: Container(
                 child: items.daLam![index].thoiGianBatDau != null
-                    ? Text(
-                        hour.format(
-                          DateTime.parse(
-                            items.daLam![index].thoiGianKetThuc.toString(),
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Thời gian kết thúc",
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 15,
+                            ),
                           ),
-                        ),
-                        style: const TextStyle(
-                          color: Colors.green,
-                        ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          items.daLam![index].thoiGianKetThuc != null
+                              ? Text(
+                                  hour.format(
+                                    DateTime.parse(
+                                      items.daLam![index].thoiGianKetThuc
+                                          .toString(),
+                                    ),
+                                  ),
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                )
+                              : const Text(
+                                  "Xe đang hoạt động",
+                                  style: TextStyle(
+                                    color: Colors.green,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                        ],
                       )
                     : const Text(
                         "Chưa làm hàng",

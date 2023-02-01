@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart' hide Response;
 import 'package:tbs_logistics_dangtai/app/coordinators/model/ware_home_model.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/id_dock.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/model/list_dock_by_warehome_model.dart';
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 import 'package:tbs_logistics_dangtai/config/share_preferences/share_prefer.dart';
@@ -23,6 +26,29 @@ class WareHomeController extends GetxController {
       if (response.statusCode == 200) {
         List<dynamic> data = response.data;
         return data.map((e) => WareHomeModel.fromJson(e)).toList();
+      }
+      return [];
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<ListDockByWareHomeModel>> getLisDock() async {
+    // ignore: unused_local_variable
+    var tokens = await SharePerApi().getToken();
+    const url = "${AppConstants.urlBase}/danhsachdockbykho";
+    Response response;
+    Map<String, dynamic> headers = {
+      HttpHeaders.authorizationHeader: "Bearer $tokens"
+    };
+    try {
+      response = await dio.get(url,
+          options: Options(
+            headers: headers,
+          ));
+      if (response.statusCode == 200) {
+        List<dynamic> data = response.data;
+        return data.map((e) => ListDockByWareHomeModel.fromJson(e)).toList();
       }
       return [];
     } catch (e) {

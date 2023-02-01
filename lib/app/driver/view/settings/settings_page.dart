@@ -198,25 +198,25 @@ class DriverSettings extends GetView<DriverController> {
                       ),
                     ),
                   ),
-                  Card(
-                    shape: const RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Colors.orangeAccent,
-                      ),
-                    ),
-                    child: ListTile(
-                      leading: const Icon(Icons.language),
-                      title: const Text("Change language"),
-                      trailing: CupertinoSwitch(
-                        activeColor: Colors.amber,
-                        value: controller.switchLanguage.value,
-                        onChanged: (value) {
-                          controller.switchLanguage.value = value;
-                          controller.switchLanguag();
-                        },
-                      ),
-                    ),
-                  ),
+                  // Card(
+                  //   shape: const RoundedRectangleBorder(
+                  //     side: BorderSide(
+                  //       color: Colors.orangeAccent,
+                  //     ),
+                  //   ),
+                  //   child: ListTile(
+                  //     leading: const Icon(Icons.language),
+                  //     title: const Text("Change language"),
+                  //     trailing: CupertinoSwitch(
+                  //       activeColor: Colors.amber,
+                  //       value: controller.switchLanguage.value,
+                  //       onChanged: (value) {
+                  //         controller.switchLanguage.value = value;
+                  //         controller.switchLanguag();
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
                   const Divider(
                     height: 1,
                     indent: 10,
