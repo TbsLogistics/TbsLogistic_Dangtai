@@ -21,17 +21,22 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
         init: TallymanController(),
         builder: (controller) => Scaffold(
               appBar: AppBar(
-                title: const Text(
+                title: Text(
                   'Chi tiết đơn hàng',
-                  style: CustomTextStyle.tilteAppbar,
+                  style: TextStyle(
+                    color: Theme.of(context).primaryColorLight,
+                  ),
                 ),
-                backgroundColor: CustomColor.backgroundAppbar,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 centerTitle: true,
                 leading: IconButton(
                   onPressed: () {
                     Get.back();
                   },
-                  icon: const Icon(Icons.arrow_back_ios_new),
+                  icon: Icon(
+                    Icons.arrow_back_ios_new,
+                    color: Theme.of(context).primaryColorLight,
+                  ),
                 ),
               ),
               body: SingleChildScrollView(
@@ -45,12 +50,7 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                       Container(
                         height: size.width * 0.1,
                         decoration: BoxDecoration(
-                          // border: Border.all(
-                          //   width: 1,
-                          //   // color: Colors.orangeAccent,
-                          // ),
                           borderRadius: BorderRadius.circular(15),
-                          color: Colors.white,
                         ),
                         child: Row(
                           children: [
@@ -66,7 +66,11 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                                     width: 10,
                                   ),
                                   Text(
-                                      "${items.trackingtime![lengthTracking - 1].statustracking!.name}")
+                                    "${items.trackingtime![lengthTracking - 1].statustracking!.name}",
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                    ),
+                                  )
                                 ],
                               ),
                             )
@@ -76,17 +80,17 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                       const SizedBox(
                         height: 15,
                       ),
-                      _buildNameDriver(items, size),
+                      _buildNameDriver(items, size, context),
                       const SizedBox(
                         height: 15,
                       ),
-                      _buildNumberCar(items, size),
+                      _buildNumberCar(items, size, context),
                       const SizedBox(
                         height: 15,
                       ),
 
                       //number cont
-                      _buildNumberCont(items, size),
+                      _buildNumberCont(items, size, context),
                       const SizedBox(
                         height: 15,
                       ),
@@ -97,7 +101,8 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
             ));
   }
 
-  Widget _buildNameDriver(ListTrackingModel items, Size size) {
+  Widget _buildNameDriver(
+      ListTrackingModel items, Size size, BuildContext context) {
     return Container(
       height: size.width * 0.2,
       decoration: BoxDecoration(
@@ -106,7 +111,7 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
           color: Colors.orangeAccent,
         ),
         borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
+        // color: Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -114,12 +119,15 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
                       "Tên tài xế",
-                      style: CustomTextStyle.titlePrimary,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorLight,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
@@ -147,12 +155,15 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
                       "Số điện thoại",
-                      style: CustomTextStyle.titlePrimary,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorLight,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
@@ -175,7 +186,8 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
     );
   }
 
-  Widget _buildNumberCar(ListTrackingModel items, Size size) {
+  Widget _buildNumberCar(
+      ListTrackingModel items, Size size, BuildContext context) {
     return Container(
       height: size.width * 0.2,
       decoration: BoxDecoration(
@@ -184,7 +196,7 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
           color: Colors.orangeAccent,
         ),
         borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
+        // color: Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -192,12 +204,15 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
                       "Loại xe",
-                      style: CustomTextStyle.titlePrimary,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorLight,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
@@ -225,12 +240,15 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
                       "Số xe",
-                      style: CustomTextStyle.titlePrimary,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorLight,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
@@ -253,7 +271,8 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
     );
   }
 
-  Widget _buildNumberCont(ListTrackingModel items, Size size) {
+  Widget _buildNumberCont(
+      ListTrackingModel items, Size size, BuildContext context) {
     return Container(
       height: size.width * 0.7,
       decoration: BoxDecoration(
@@ -262,7 +281,7 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
           color: Colors.orangeAccent,
         ),
         borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
+        // color: Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -276,9 +295,12 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         "Số công 1",
-                        style: CustomTextStyle.titlePrimary,
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColorLight,
+                          fontSize: 16,
+                        ),
                       ),
                       Text("${items.phieuvao!.socont1}"),
                     ],
@@ -291,10 +313,13 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số seal 1",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontSize: 16,
+                              ),
                             ),
                           ],
                         ),
@@ -316,10 +341,13 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số seal 2",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontSize: 16,
+                              ),
                             ),
                           ],
                         ),
@@ -341,10 +369,13 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số Kiện",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontSize: 16,
+                              ),
                             ),
                           ],
                         ),
@@ -366,10 +397,13 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số Book",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontSize: 16,
+                              ),
                             ),
                           ],
                         ),
@@ -391,10 +425,13 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số Khối",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontSize: 16,
+                              ),
                             ),
                           ],
                         ),
@@ -428,9 +465,12 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         "Số công 2",
-                        style: CustomTextStyle.titlePrimary,
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColorLight,
+                          fontSize: 16,
+                        ),
                       ),
                       Text("${items.phieuvao!.socont1}"),
                     ],
@@ -443,10 +483,13 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số seal 1",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontSize: 16,
+                              ),
                             ),
                           ],
                         ),
@@ -468,10 +511,13 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số seal 2",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontSize: 16,
+                              ),
                             ),
                           ],
                         ),
@@ -493,10 +539,13 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số Kiện",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontSize: 16,
+                              ),
                             ),
                           ],
                         ),
@@ -518,10 +567,13 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số Book",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontSize: 16,
+                              ),
                             ),
                           ],
                         ),
@@ -543,10 +595,13 @@ class DetailsListTickerOfCustomer extends GetView<CustomerController> {
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
-                          children: const [
+                          children: [
                             Text(
                               "Số Khối",
-                              style: CustomTextStyle.titlePrimary,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontSize: 16,
+                              ),
                             ),
                           ],
                         ),

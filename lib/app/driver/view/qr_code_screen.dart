@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 
 class QrCodeScreen extends StatelessWidget {
   const QrCodeScreen({super.key});
@@ -34,18 +32,21 @@ class QrCodeScreen extends StatelessWidget {
           ),
           centerTitle: true,
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: QrImage(
-                // backgroundColor: Theme.of(context).primaryColor,
-                data: "${controller.user.value.maTaixe}",
-                version: QrVersions.auto,
-                size: size.width * 0.6,
+        body: Container(
+          color: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: QrImage(
+                  backgroundColor: Colors.white,
+                  data: "${controller.user.value.maTaixe}",
+                  version: QrVersions.auto,
+                  size: size.width * 0.6,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

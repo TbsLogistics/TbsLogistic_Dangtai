@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controller.dart';
 import 'package:tbs_logistics_dangtai/app/customer/model/list_driver_by_customer_model.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/widget/custom_list_title.dart';
 
 class ListDriverByCustomer extends StatefulWidget {
@@ -65,6 +64,7 @@ class _ListDriverByCustomerState extends State<ListDriverByCustomer> {
                                   // print(items[index].maTaixe);
                                   controller.postInforDriver(
                                       idTaixe: items[index].maTaixe);
+                                  print(items[index].maTaixe);
                                 },
                                 child: CustomListTitle(
                                   Stt: "${index + 1}",

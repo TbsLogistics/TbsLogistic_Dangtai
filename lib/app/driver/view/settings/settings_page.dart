@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
 class DriverSettings extends GetView<DriverController> {
@@ -41,7 +40,7 @@ class DriverSettings extends GetView<DriverController> {
             ),
           ),
           body: SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
               height: size.height,
               width: size.width,
               child: Column(
@@ -193,7 +192,7 @@ class DriverSettings extends GetView<DriverController> {
                         onChanged: (value) {
                           controller.switchValue.value = value;
                           controller.switchLight(value);
-                          print(value);
+                          // print(value);
                         },
                       ),
                     ),

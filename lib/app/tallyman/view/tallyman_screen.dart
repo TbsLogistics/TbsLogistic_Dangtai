@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:tbs_logistics_dangtai/app/tallyman/view/list_team_of_tallyman/list_team_of_tallyman.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
 class TallymanScreen extends StatelessWidget {

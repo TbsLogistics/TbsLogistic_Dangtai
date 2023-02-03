@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/list_employ_working.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/view/list_finished_working/controller/list_finished_working_controller.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/list_team_of_tallyman/controller/list_team_of_tallyman_controller.dart';
 
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
@@ -14,9 +13,6 @@ class ListTeamDetailsOfTallyman extends GetView<ListTeamOfTallymanController> {
   final String routes = "/LIST_TEAM_DETAILS_OF_TALLYMAN";
   bool isChangeColorLeft = false;
   bool isChangeColorRight = false;
-  var items;
-  var maPhieuLamHang;
-  var length;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -76,7 +72,7 @@ class ListTeamDetailsOfTallyman extends GetView<ListTeamOfTallymanController> {
                       ),
                       subtitle: Text(
                         "${items[index].maNv}",
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -98,7 +94,7 @@ class ListTeamDetailsOfTallyman extends GetView<ListTeamOfTallymanController> {
               right: 0,
               left: 0,
               bottom: 0,
-              child: Container(
+              child: SizedBox(
                 height: 60,
                 child: Row(
                   children: [
@@ -137,7 +133,7 @@ class ListTeamDetailsOfTallyman extends GetView<ListTeamOfTallymanController> {
                             } else {
                               Get.defaultDialog(
                                 title: "Thông báo",
-                                content: Text("Chưa bắt đầu làm hàng"),
+                                content: const Text("Chưa bắt đầu làm hàng"),
                                 confirm: TextButton(
                                   onPressed: () {
                                     Get.back();

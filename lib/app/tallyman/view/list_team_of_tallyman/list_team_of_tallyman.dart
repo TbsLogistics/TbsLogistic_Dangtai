@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/controller/tallyman_controller.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/list_employ_await.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/list_finished_working/controller/list_finished_working_controller.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/list_team_of_tallyman/controller/list_team_of_tallyman_controller.dart';
 
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
 class ListTeamOfTallyman extends StatefulWidget {
@@ -56,13 +53,23 @@ class _ListTeamOfTallymanState extends State<ListTeamOfTallyman> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   var items = snapshot.data as ListEmployAwaitModel;
-                  return ListView.builder(
-                    itemCount: items.chuaLam!.length,
-                    itemBuilder: (context, index) {
-                      return buildTitle(
-                          size, index, day, hour, controller, items);
-                    },
-                  );
+                  return items.chuaLam!.isEmpty
+                      ? const Center(
+                          child: Text(
+                            "Chưa có đội làm hàng !",
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.green,
+                            ),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: items.chuaLam!.length,
+                          itemBuilder: (context, index) {
+                            return buildTitle(
+                                size, index, day, hour, controller, items);
+                          },
+                        );
                 }
                 return const Center(
                   child: CircularProgressIndicator(
@@ -169,7 +176,7 @@ class _ListTeamOfTallymanState extends State<ListTeamOfTallyman> {
                                     .toString(),
                               ),
                             ),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -187,14 +194,14 @@ class _ListTeamOfTallymanState extends State<ListTeamOfTallyman> {
                     ? Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text(
+                          const Text(
                             "Thời gian bắt đầu",
                             style: TextStyle(
                               color: Colors.green,
                               fontSize: 15,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Text(
@@ -203,7 +210,7 @@ class _ListTeamOfTallymanState extends State<ListTeamOfTallyman> {
                                 items.chuaLam![index].thoiGianBatDau.toString(),
                               ),
                             ),
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontWeight: FontWeight.bold,
                             ),
                           )

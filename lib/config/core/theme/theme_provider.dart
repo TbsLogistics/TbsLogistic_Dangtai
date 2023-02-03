@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
+
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 
 class ThemeProvider extends ChangeNotifier {

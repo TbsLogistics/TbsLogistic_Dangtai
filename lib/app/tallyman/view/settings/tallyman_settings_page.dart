@@ -39,7 +39,7 @@ class TallymanSettings extends GetView<TallymanSettingsController> {
                 ),
               ),
               body: SingleChildScrollView(
-                child: Container(
+                child: SizedBox(
                   height: size.height,
                   width: size.width,
                   child: Column(

@@ -20,20 +20,22 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
     return GetBuilder<CustomerController>(
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "Chi tiết thông tin tài xế",
-            style: CustomTextStyle.tilteAppbar,
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
+            ),
           ),
-          backgroundColor: CustomColor.backgroundAppbar,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           centerTitle: true,
           leading: IconButton(
             onPressed: () {
               Get.back();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_ios_new,
               size: 25,
-              color: Colors.white,
+              color: Theme.of(context).primaryColorLight,
             ),
           ),
         ),
@@ -43,15 +45,15 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                _buildNameKH(items, size),
+                _buildNameKH(items, size, context),
                 SizedBox(
                   height: size.width * 0.05,
                 ),
-                _buildNameCar(items, size),
+                _buildNameCar(items, size, context),
                 SizedBox(
                   height: size.width * 0.05,
                 ),
-                _buildStatus(size, items, controller),
+                _buildStatus(size, items, controller, context),
                 SizedBox(
                   height: size.width * 0.05,
                 ),
@@ -72,9 +74,9 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
   Widget _buildFormStatus(dynamic item, Size size) {
     var length = item["trackingtime"].length;
 
-    var day = DateFormat("yyyy-MM-dd");
+    var day = DateFormat("dd-MM-yyyy");
     // ignore: unused_local_variable
-    var hour = DateFormat("hh-mm");
+    var hour = DateFormat("hh:mm a");
     return SizedBox(
       height: size.width,
       child: Timeline(
@@ -107,7 +109,7 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
                         ),
                         Expanded(
                           child: Center(
-                            child: Text("Giờ : ${day.format(
+                            child: Text("Giờ : ${hour.format(
                               DateTime.parse(
                                 item["trackingtime"][0]["thoigian"].toString(),
                               ),
@@ -154,7 +156,7 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
                         ),
                         Expanded(
                           child: Center(
-                            child: Text("Giờ : ${day.format(
+                            child: Text("Giờ : ${hour.format(
                               DateTime.parse(
                                 item["trackingtime"][1]["thoigian"].toString(),
                               ),
@@ -201,7 +203,7 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
                         ),
                         Expanded(
                           child: Center(
-                            child: Text("Giờ : ${day.format(
+                            child: Text("Giờ : ${hour.format(
                               DateTime.parse(
                                 item["trackingtime"][2]["thoigian"].toString(),
                               ),
@@ -248,7 +250,7 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
                         ),
                         Expanded(
                           child: Center(
-                            child: Text("Giờ : ${day.format(
+                            child: Text("Giờ : ${hour.format(
                               DateTime.parse(
                                 item["trackingtime"][3]["thoigian"].toString(),
                               ),
@@ -295,7 +297,7 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
                         ),
                         Expanded(
                           child: Center(
-                            child: Text("Giờ : ${day.format(
+                            child: Text("Giờ : ${hour.format(
                               DateTime.parse(
                                 item["trackingtime"][4]["thoigian"].toString(),
                               ),
@@ -322,7 +324,8 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
     );
   }
 
-  Widget _buildStatus(Size size, dynamic item, CustomerController controller) {
+  Widget _buildStatus(Size size, dynamic item, CustomerController controller,
+      BuildContext context) {
     var length = item["trackingtime"].length;
     return InkWell(
       onTap: () {
@@ -348,8 +351,7 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
                   Text(
                     "Trạng thái :",
                     style: TextStyle(
-                      color: Colors.black.withOpacity(0.8),
-                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColorLight,
                       fontSize: 16,
                     ),
                   ),
@@ -384,7 +386,7 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
     );
   }
 
-  Widget _buildNameCar(dynamic item, Size size) {
+  Widget _buildNameCar(dynamic item, Size size, BuildContext context) {
     return Container(
       height: 60,
       decoration: BoxDecoration(
@@ -400,12 +402,15 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
                       "Loại xe",
-                      style: CustomTextStyle.titlePrimary,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorLight,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
@@ -433,12 +438,15 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
                       "Số xe",
-                      style: CustomTextStyle.titlePrimary,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorLight,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
@@ -461,7 +469,7 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
     );
   }
 
-  Widget _buildNameKH(dynamic item, Size size) {
+  Widget _buildNameKH(dynamic item, Size size, BuildContext context) {
     return Container(
       height: 60,
       decoration: BoxDecoration(
@@ -477,12 +485,15 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
                       "Tên khách hàng",
-                      style: CustomTextStyle.titlePrimary,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorLight,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),
@@ -510,12 +521,15 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
                       "Số điện thoại",
-                      style: CustomTextStyle.titlePrimary,
+                      style: TextStyle(
+                        color: Theme.of(context).primaryColorLight,
+                        fontSize: 16,
+                      ),
                     ),
                   ),
                 ),

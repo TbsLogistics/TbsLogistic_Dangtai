@@ -17,6 +17,11 @@ class ListTeamOfTallymanController extends GetxController {
   late Response response;
   Rx<ListEmployAwaitModel> listEmployAwait = ListEmployAwaitModel().obs;
   RxList listEmploy = <ListEmployeeWorkingModel>[].obs;
+  @override
+  void onInit() {
+    getEmployAwait();
+    super.onInit();
+  }
 
   Future<ListEmployAwaitModel> getEmployAwait() async {
     var tokens = await SharePerApi().getToken();
@@ -31,9 +36,7 @@ class ListTeamOfTallymanController extends GetxController {
       response = await dio.get(url, options: Options(headers: headers));
       if (response.statusCode == 200) {
         var data = ListEmployAwaitModel.fromJson(response.data);
-        print("data $data");
-        ListEmployAwaitModel results =
-            ListEmployAwaitModel.fromJson(response.data);
+
         listEmployAwait.value = data;
 
         return data;
@@ -51,6 +54,7 @@ class ListTeamOfTallymanController extends GetxController {
       required int maPhieuLamHang,
       required String routes,
       required String time}) async {
+    // ignore: unused_local_variable
     var tokens = await SharePerApi().getToken();
     var teamWorking = IDTeamWorking(maDoiLamHang: maDoiLamHang);
     var jsonData = teamWorking.toJson();
@@ -64,7 +68,7 @@ class ListTeamOfTallymanController extends GetxController {
             data.map((e) => ListEmployeeWorkingModel.fromJson(e)).toList();
         listEmploy.value = results;
         update();
-        print(listEmploy);
+        // print(listEmploy);
         Get.toNamed(
           routes,
           arguments: [results, maPhieuLamHang, time],
@@ -90,7 +94,7 @@ class ListTeamOfTallymanController extends GetxController {
       );
       if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
         var data = response.data;
-
+        getEmployAwait();
         Get.defaultDialog(
           title: "Thông báo",
           content: Text(data["detail"]),
@@ -132,6 +136,7 @@ class ListTeamOfTallymanController extends GetxController {
         data: jsonData,
       );
       if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
+        // ignore: unused_local_variable
         var data = response.data;
 
         Get.toNamed(Routes.LIST_TEAM_OF_TALLYMAN);
@@ -143,7 +148,6 @@ class ListTeamOfTallymanController extends GetxController {
 
   @override
   void onClose() {
-    // TODO: implement onClose
     Get.deleteAll();
     super.onClose();
   }

@@ -15,8 +15,9 @@ void main() async {
   await GetStorage.init('MyStorage');
   final box = GetStorage('MyStorage');
   bool? mode = box.read(AppConstants.THEME_KEY);
+  // ignore: unrelated_type_equality_checks
   bool isLightMode = (mode != null && mode == "light");
-  print(isLightMode);
+  // print(isLightMode);
   var locale = const Locale('vi', 'VN');
   Get.updateLocale(locale);
   runApp(

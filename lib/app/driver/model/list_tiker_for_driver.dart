@@ -30,37 +30,32 @@ class ListTicketForDriver {
 
   ListTicketForDriver.fromJson(Map<String, dynamic> json) {
     maPhieuvao = json['maPhieuvao'];
-    taixeRe = json['taixe_re'] != null
-        ?  TaixeRe.fromJson(json['taixe_re'])
-        : null;
-    loaixeRe = json['loaixe_re'] != null
-        ?  LoaixeRe.fromJson(json['loaixe_re'])
-        : null;
+    taixeRe =
+        json['taixe_re'] != null ? TaixeRe.fromJson(json['taixe_re']) : null;
+    loaixeRe =
+        json['loaixe_re'] != null ? LoaixeRe.fromJson(json['loaixe_re']) : null;
     giovao = json['giovao'];
-    phieuvao = json['phieuvao'] != null
-        ?  Phieuvao.fromJson(json['phieuvao'])
-        : null;
+    phieuvao =
+        json['phieuvao'] != null ? Phieuvao.fromJson(json['phieuvao']) : null;
     phieura =
-        json['phieura'] != null ?  Phieura.fromJson(json['phieura']) : null;
+        json['phieura'] != null ? Phieura.fromJson(json['phieura']) : null;
     giora = json['giora'];
     status = json['status'];
     dock = json['dock'];
     hinhanhminhhoa = json['hinhanhminhhoa'];
     if (json['trackingtime'] != null) {
-      trackingtime =  <Trackingtime>[];
+      trackingtime = <Trackingtime>[];
       json['trackingtime'].forEach((v) {
-        trackingtime!.add( Trackingtime.fromJson(v));
+        trackingtime!.add(Trackingtime.fromJson(v));
       });
     }
-    dockRe =
-        json['dock_re'] != null ?  DockRe.fromJson(json['dock_re']) : null;
-    loaihang = json['loaihang'] != null
-        ?  Loaihang.fromJson(json['loaihang'])
-        : null;
+    dockRe = json['dock_re'] != null ? DockRe.fromJson(json['dock_re']) : null;
+    loaihang =
+        json['loaihang'] != null ? Loaihang.fromJson(json['loaihang']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['maPhieuvao'] = maPhieuvao;
     if (taixeRe != null) {
       data['taixe_re'] = taixeRe!.toJson();
@@ -94,13 +89,13 @@ class ListTicketForDriver {
 
 class TaixeRe {
   int? maTaixe;
-  String ?tenTaixe;
-  String ?diaChi;
-  String ?email;
-  String ?cCCD;
-  String ?phone;
-  bool ?status;
-  KhachhangRe ?khachhangRe;
+  String? tenTaixe;
+  String? diaChi;
+  String? email;
+  String? cCCD;
+  String? phone;
+  bool? status;
+  KhachhangRe? khachhangRe;
 
   TaixeRe(
       {this.maTaixe,
@@ -121,12 +116,12 @@ class TaixeRe {
     phone = json['phone'];
     status = json['status'];
     khachhangRe = json['khachhang_re'] != null
-        ?  KhachhangRe.fromJson(json['khachhang_re'])
+        ? KhachhangRe.fromJson(json['khachhang_re'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['maTaixe'] = maTaixe;
     data['tenTaixe'] = tenTaixe;
     data['diaChi'] = diaChi;
@@ -176,7 +171,7 @@ class KhachhangRe {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['maKhachHang'] = maKhachHang;
     data['tenKhachhang'] = tenKhachhang;
     data['diaChi'] = diaChi;
@@ -202,7 +197,7 @@ class LoaixeRe {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['maLoaiXe'] = maLoaiXe;
     data['tenLoaiXe'] = tenLoaiXe;
     return data;
@@ -254,7 +249,7 @@ class Phieuvao {
   Phieuvao.fromJson(Map<String, dynamic> json) {
     giodukien = json['giodukien'];
     soxe = json['soxe'];
-    kho = json['kho'] != null ?  Kho.fromJson(json['kho']) : null;
+    kho = json['kho'] != null ? Kho.fromJson(json['kho']) : null;
     socont1 = json['socont1'];
     cont1seal1 = json['cont1seal1'];
     cont1seal2 = json['cont1seal2'];
@@ -274,7 +269,7 @@ class Phieuvao {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['giodukien'] = giodukien;
     data['soxe'] = soxe;
     if (kho != null) {
@@ -312,7 +307,7 @@ class Kho {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['maKho'] = maKho;
     data['tenKho'] = tenKho;
     return data;
@@ -357,7 +352,7 @@ class Phieura {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['contRa1'] = contRa1;
     data['contRa1seal1'] = contRa1seal1;
     data['contRa1seal2'] = contRa1seal2;
@@ -381,12 +376,12 @@ class Trackingtime {
   Trackingtime.fromJson(Map<String, dynamic> json) {
     thoigian = json['thoigian'];
     statustracking = json['Statustracking'] != null
-        ?  Statustracking.fromJson(json['Statustracking'])
+        ? Statustracking.fromJson(json['Statustracking'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['thoigian'] = thoigian;
     if (statustracking != null) {
       data['Statustracking'] = statustracking!.toJson();
@@ -409,7 +404,7 @@ class Statustracking {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['lv'] = lv;
     data['matrangthai'] = matrangthai;
@@ -433,7 +428,7 @@ class DockRe {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['maDock'] = maDock;
     data['status'] = status;
     data['tenDock'] = tenDock;
@@ -445,6 +440,7 @@ class DockRe {
 class Loaihang {
   String? maloaiHang;
   String? tenLoaiHang;
+  // ignore: prefer_void_to_null
   Null chiTiet;
 
   Loaihang({this.maloaiHang, this.tenLoaiHang, this.chiTiet});
@@ -456,7 +452,7 @@ class Loaihang {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  <String, dynamic>{};
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['maloaiHang'] = maloaiHang;
     data['tenLoaiHang'] = tenLoaiHang;
     data['chiTiet'] = chiTiet;

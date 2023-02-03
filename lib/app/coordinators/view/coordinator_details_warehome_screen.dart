@@ -48,6 +48,7 @@ class _DetailsWareHomeScreenState extends State<DetailsWareHomeScreen> {
                         child: ListView.builder(
                             itemCount: leftlenght,
                             itemBuilder: (context, index) {
+                              // ignore: unnecessary_null_comparison
                               return leftlenght == null
                                   ? Container()
                                   : Container(
@@ -111,6 +112,7 @@ class _DetailsWareHomeScreenState extends State<DetailsWareHomeScreen> {
                         child: ListView.builder(
                             itemCount: rightlenght,
                             itemBuilder: (context, index) {
+                              // ignore: unnecessary_null_comparison
                               return leftlenght == null
                                   ? Container()
                                   : Container(

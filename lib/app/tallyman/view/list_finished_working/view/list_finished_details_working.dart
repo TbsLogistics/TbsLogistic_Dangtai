@@ -7,11 +7,9 @@ import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 
 // ignore: must_be_immutable
 class ListFinishedDetailsWorking extends GetView<TallymanController> {
-  ListFinishedDetailsWorking({super.key});
+  const ListFinishedDetailsWorking({super.key});
   final String routes = "/LIST_FINISHED_DETAILS_WORKING";
 
-  var items;
-  var length;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

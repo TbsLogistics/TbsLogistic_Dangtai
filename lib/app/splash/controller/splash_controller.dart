@@ -14,7 +14,7 @@ class SplashController extends GetxController {
     var token = await SharePerApi().getToken();
     var role = await SharePerApi().getRole();
     var bophan = await SharePerApi().getIdBophan();
-    print(bophan);
+    // print(bophan);
     // print(role);
     if (token != null) {
       if (role == "TX") {
@@ -28,7 +28,11 @@ class SplashController extends GetxController {
           Get.toNamed(Routes.COORDINATOR_PAGE);
         } else if (bophan == "TL") {
           Get.toNamed(Routes.TALLYMAN_PAGE);
+        } else {
+          Get.toNamed(Routes.LOGIN_PAGE);
         }
+      } else {
+        Get.toNamed(Routes.LOGIN_PAGE);
       }
       // checkPage();
     } else {

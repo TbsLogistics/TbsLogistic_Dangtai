@@ -418,6 +418,7 @@ class Statustracking {
 class Loaihang {
   String? maloaiHang;
   String? tenLoaiHang;
+  // ignore: prefer_void_to_null
   Null chiTiet;
 
   Loaihang({this.maloaiHang, this.tenLoaiHang, this.chiTiet});

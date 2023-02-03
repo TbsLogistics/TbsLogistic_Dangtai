@@ -60,71 +60,107 @@ class LoginController extends GetxController {
         );
       } else if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
         jsonRespone = response.data;
-        var tokens = LoginUserModel.fromJson(jsonRespone);
-        // tokens_KH = LoginCustomerModel.fromJson(jsonData);
+        print(response.data["status_code"]);
 
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        // ignore: unused_local_variable
-        var accessToken = await prefs.setString(
-            AppConstants.KEY_ACCESS_TOKEN, "${tokens.accessToken}");
-        //ignore: unused_local_variable
-        var roleName = await prefs.setString(
-            AppConstants.KEY_ROLE, "${tokens.data!.role}");
-        var roles = tokens.data!.role;
-        switch (roles) {
-          case "TX":
-            // ignore: unused_local_variable
-            var idUser = await prefs.setString(
-                AppConstants.KEY_ID_USER, "${tokens.data!.taixe!.maTaixe}");
-            getDialog();
-            Future.delayed(const Duration(seconds: 1), () {
-              Get.toNamed(
-                Routes.DRIVER_PAGE,
-                arguments: tokens.data!.taixe as Taixe,
-              );
-            });
-            break;
-          case "KH":
-            // ignore: unused_local_variable
-            var idKH = await prefs.setString(AppConstants.KEY_ID_KH,
-                "${tokens.data!.khachHang!.maKhachHang}");
-            getDialog();
-            Future.delayed(const Duration(seconds: 1), () {
-              Get.toNamed(Routes.CUSTOMER_PAGE);
-            });
-            break;
-          case "NV":
-            // ignore: unused_local_variable
-            var idBoPhan = prefs.setString(
-              AppConstants.KEY_ID_MABOPHAN,
-              "${tokens.data!.nhanvien!.maBoPhan}",
-            );
-            print("${tokens.data!.nhanvien!.maBoPhan}");
-            if (tokens.data!.nhanvien!.maBoPhan == "BV") {
-              getDialog();
-              Future.delayed(const Duration(seconds: 1), () {
-                Get.toNamed(Routes.SERCURITY_PAGE);
-              });
-            } else if (tokens.data!.nhanvien!.maBoPhan == "DP") {
-              getDialog();
-              Future.delayed(const Duration(seconds: 1), () {
-                Get.toNamed(Routes.COORDINATOR_PAGE);
-              });
-            }
-            if (tokens.data!.nhanvien!.maBoPhan == "TL") {
+        if (response.data["status_code"] == 204) {
+          Get.defaultDialog(
+            title: "Thông báo",
+            titleStyle: const TextStyle(
+                color: Colors.redAccent,
+                fontSize: 20,
+                fontWeight: FontWeight.bold),
+            middleText: response.data["detail"],
+            confirmTextColor: Colors.white,
+            backgroundColor: Colors.orangeAccent,
+            confirm: TextButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.white),
+                  side: MaterialStateProperty.all(
+                    BorderSide(width: 1, color: Colors.white),
+                  ),
+                ),
+                onPressed: () {
+                  Get.back();
+                },
+                child: const Text(
+                  "Xác nhận",
+                  style: TextStyle(
+                    color: Colors.orangeAccent,
+                    fontSize: 16,
+                  ),
+                )),
+            onConfirm: () {
+              Get.back();
+            },
+          );
+        } else {
+          var tokens = LoginUserModel.fromJson(jsonRespone);
+          // tokens_KH = LoginCustomerModel.fromJson(jsonData);
+
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          // ignore: unused_local_variable
+          var accessToken = await prefs.setString(
+              AppConstants.KEY_ACCESS_TOKEN, "${tokens.accessToken}");
+          //ignore: unused_local_variable
+          var roleName = await prefs.setString(
+              AppConstants.KEY_ROLE, "${tokens.data!.role}");
+          var roles = tokens.data!.role;
+          switch (roles) {
+            case "TX":
               // ignore: unused_local_variable
-              var maNV = prefs.setString(
-                  AppConstants.KEY_ID_MANV, "${tokens.data!.nhanvien!.maNv}");
+              var idUser = await prefs.setString(
+                  AppConstants.KEY_ID_USER, "${tokens.data!.taixe!.maTaixe}");
               getDialog();
               Future.delayed(const Duration(seconds: 1), () {
-                Get.toNamed(Routes.TALLYMAN_PAGE);
+                Get.toNamed(
+                  Routes.DRIVER_PAGE,
+                  arguments: tokens.data!.taixe as Taixe,
+                );
               });
-            }
-            break;
-          default:
-            if (kDebugMode) {
-              print("Lỗi sai account");
-            }
+              break;
+            case "KH":
+              // ignore: unused_local_variable
+              var idKH = await prefs.setString(AppConstants.KEY_ID_KH,
+                  "${tokens.data!.khachHang!.maKhachHang}");
+              getDialog();
+              Future.delayed(const Duration(seconds: 1), () {
+                Get.toNamed(Routes.CUSTOMER_PAGE);
+              });
+              break;
+            case "NV":
+              // ignore: unused_local_variable
+              var idBoPhan = prefs.setString(
+                AppConstants.KEY_ID_MABOPHAN,
+                "${tokens.data!.nhanvien!.maBoPhan}",
+              );
+              // print("${tokens.data!.nhanvien!.maBoPhan}");
+              if (tokens.data!.nhanvien!.maBoPhan == "BV") {
+                getDialog();
+                Future.delayed(const Duration(seconds: 1), () {
+                  Get.toNamed(Routes.SERCURITY_PAGE);
+                });
+              } else if (tokens.data!.nhanvien!.maBoPhan == "DP") {
+                getDialog();
+                Future.delayed(const Duration(seconds: 1), () {
+                  Get.toNamed(Routes.COORDINATOR_PAGE);
+                });
+              }
+              if (tokens.data!.nhanvien!.maBoPhan == "TL") {
+                // ignore: unused_local_variable
+                var maNV = prefs.setString(
+                    AppConstants.KEY_ID_MANV, "${tokens.data!.nhanvien!.maNv}");
+                getDialog();
+                Future.delayed(const Duration(seconds: 1), () {
+                  Get.toNamed(Routes.TALLYMAN_PAGE);
+                });
+              }
+              break;
+            default:
+              if (kDebugMode) {
+                print("Lỗi sai account");
+              }
+          }
         }
       }
     } catch (e) {
@@ -137,12 +173,15 @@ class LoginController extends GetxController {
   void getDialog() {
     Get.defaultDialog(
       title: "Loading",
+      titleStyle: const TextStyle(
+        color: Colors.orangeAccent,
+      ),
       confirm: CircularProgressIndicator(
         color: Colors.orangeAccent.withOpacity(0.7),
       ),
       middleText: "",
       textConfirm: null,
-      confirmTextColor: Colors.white,
+      confirmTextColor: Colors.orangeAccent,
       backgroundColor: Colors.white,
       onConfirm: () {
         Get.back();

@@ -41,7 +41,7 @@ class CustomerSettings extends GetView<CustomerController> {
             ),
           ),
           body: SingleChildScrollView(
-            child: Container(
+            child: SizedBox(
               height: size.height,
               width: size.width,
               child: Column(
@@ -192,7 +192,7 @@ class CustomerSettings extends GetView<CustomerController> {
                         activeColor: Colors.amber,
                         value: controller.switchValue.value,
                         onChanged: (value) {
-                          print("value $value");
+                          // print("value $value");
                           controller.switchValue.value = value;
                           controller.switchLight(value);
                         },

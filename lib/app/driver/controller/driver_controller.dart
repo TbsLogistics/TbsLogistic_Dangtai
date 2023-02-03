@@ -32,7 +32,7 @@ class DriverController extends GetxController {
 
   void changelNumberCont(String? value) {
     selectedNumberCont = value.toString();
-    numberSelectCont = int.parse("${selectedNumberCont}");
+    numberSelectCont = int.parse("$selectedNumberCont");
     update();
   }
 
@@ -378,11 +378,37 @@ class DriverController extends GetxController {
           );
           // print(data["message"]);
         } else {
-          Get.toNamed(Routes.REGISTER_OUT_DETAILS_SCREEN);
+          Get.toNamed(
+            Routes.REGISTER_OUT_DETAILS_SCREEN,
+            arguments: PhieuraModel(
+              contRa1: contRa1,
+              contRa1seal1: contRa1seal1,
+              contRa1seal2: contRa1seal2,
+              contRa2: contRa2,
+              contRa2seal1: contRa2seal1,
+              contRa2seal2: contRa2seal2,
+              soBookra: soBookra,
+              soBookra1: soBookra1,
+              soKienra: soKienra,
+              soKienra1: soKienra1,
+              sokhoira: sokhoira,
+              sokhoira1: sokhoira1,
+              trangthaihangra: false,
+              trangthaihangra1: false,
+              trangthaikhoara: false,
+              trangthaikhoara1: false,
+            ),
+          );
         }
       }
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  void onClose() {
+    Get.deleteAll();
+    super.onClose();
   }
 }

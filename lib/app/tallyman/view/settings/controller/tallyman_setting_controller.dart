@@ -14,7 +14,6 @@ class TallymanSettingsController extends GetxController {
   RxBool hideShowMode = true.obs;
   @override
   void onInit() {
-    // TODO: implement onInit
     getUser();
     super.onInit();
   }
@@ -28,7 +27,7 @@ class TallymanSettingsController extends GetxController {
     GetStorage("MyStorage").write(AppConstants.THEME_KEY, value);
     Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
     switchValue.value;
-    print("switchValue ${switchValue.value}");
+
     update();
   }
 
@@ -71,7 +70,6 @@ class TallymanSettingsController extends GetxController {
 
   @override
   void onClose() {
-    // TODO: implement onClose
     Get.deleteAll();
     super.onClose();
   }

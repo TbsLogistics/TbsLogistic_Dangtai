@@ -3,8 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
 import 'package:tbs_logistics_dangtai/app/driver/model/list_tiker_for_driver.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 
 class StatusTikerDetailScreen extends GetView<DriverController> {
   const StatusTikerDetailScreen({super.key});
@@ -41,6 +39,8 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
         child: Column(
           children: [
             _buildDayTime(items, size, day, hour, context),
+            const SizedBox(height: 10),
+            _buildTimeWork(items, size, day, hour, context),
             const SizedBox(height: 10),
             _buildNumberCar(items, size, context),
             const SizedBox(height: 10),
@@ -160,6 +160,87 @@ class StatusTikerDetailScreen extends GetView<DriverController> {
                   child: Center(
                     child: Text(
                       hour.format(DateTime.parse(items.phieuvao!.giodukien!)),
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTimeWork(ListTicketForDriver items, Size size, DateFormat day,
+      DateFormat hour, BuildContext context) {
+    return Container(
+      height: size.width * 0.15,
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 1,
+          color: Colors.orangeAccent,
+        ),
+        borderRadius: BorderRadius.circular(15),
+        // color: Colors.white,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Expanded(
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Center(
+                    child: Text(
+                      "thời gian bắt đầu",
+                      style:
+                          TextStyle(color: Theme.of(context).primaryColorLight),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Center(
+                    child: Text(
+                      hour.format(DateTime.parse(items.giovao!)),
+                      style: const TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          const VerticalDivider(
+            width: 1,
+            indent: 10,
+            endIndent: 10,
+            color: Colors.orangeAccent,
+            thickness: 1,
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                Expanded(
+                  flex: 2,
+                  child: Center(
+                    child: Text(
+                      "Thời gian kết thúc",
+                      style:
+                          TextStyle(color: Theme.of(context).primaryColorLight),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Center(
+                    child: Text(
+                      hour.format(DateTime.parse(items.giora!)),
                       style: const TextStyle(
                         fontSize: 16,
                       ),

@@ -45,14 +45,30 @@ class ListFinishedWorking extends GetView<ListFinishedWorkingController> {
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   var items = snapshot.data as ListEmployAwaitModel;
-                  return ListView.builder(
-                    itemCount: items.daLam!.length,
-                    itemBuilder: (context, index) {
-                      return buildTitle(
-                          size, index, day, hour, controller, items, context);
-                      // return Container();
-                    },
-                  );
+                  return items.daLam!.isEmpty
+                      ? const Center(
+                          child: Text(
+                            "Chưa có danh sách !",
+                            style: TextStyle(
+                              color: Colors.green,
+                              fontSize: 20,
+                            ),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: items.daLam!.length,
+                          itemBuilder: (context, index) {
+                            return buildTitle(
+                              size,
+                              index,
+                              day,
+                              hour,
+                              controller,
+                              items,
+                              context,
+                            );
+                          },
+                        );
                 }
                 return const Center(
                   child: CircularProgressIndicator(
@@ -75,7 +91,6 @@ class ListFinishedWorking extends GetView<ListFinishedWorkingController> {
       BuildContext context) {
     return InkWell(
       onTap: () {
-        print(items.daLam![index].id.toString());
         controller.postDetailTicker(
             maPhieuLamHang: int.parse(
               items.daLam![index].id.toString(),
@@ -88,7 +103,6 @@ class ListFinishedWorking extends GetView<ListFinishedWorkingController> {
         width: size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          // color: Colors.white,
           border: Border.all(width: 1, color: Colors.orangeAccent),
         ),
         child: Row(

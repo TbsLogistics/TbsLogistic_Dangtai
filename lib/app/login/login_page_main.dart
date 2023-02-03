@@ -108,7 +108,7 @@ class LoginPage extends GetView<LoginController> {
                             hintText: "Mật khẩu",
                             suffixIcon: IconButton(
                               onPressed: () {
-                                print("oke");
+                                // print("oke");
                                 controller.updateObcureText();
                               },
                               icon: controller.obcureText.value == true
@@ -167,10 +167,10 @@ class LoginPage extends GetView<LoginController> {
                             //   accountController.text,
                             //   passwordController.text,
                             // );
-                            print([
-                              accountController.text,
-                              passwordController.text
-                            ]);
+                            // print([
+                            //   accountController.text,
+                            //   passwordController.text
+                            // ]);
                             _signUpProcess(context, controller);
                           },
                           child: const Text(

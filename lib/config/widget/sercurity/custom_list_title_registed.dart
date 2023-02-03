@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 
 class CustomListTitleRegisted extends StatelessWidget {
   const CustomListTitleRegisted({

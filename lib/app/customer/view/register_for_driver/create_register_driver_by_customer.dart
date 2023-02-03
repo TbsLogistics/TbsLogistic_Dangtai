@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controller.dart';
 import 'package:tbs_logistics_dangtai/app/customer/model/list_driver_by_customer_model.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/widget/buttom_form_submit.dart';
 import 'package:tbs_logistics_dangtai/config/widget/custom_text_form_fiels.dart';
 import 'package:tbs_logistics_dangtai/config/widget/drop_button.dart';

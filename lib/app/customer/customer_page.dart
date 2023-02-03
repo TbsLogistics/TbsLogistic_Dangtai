@@ -15,6 +15,7 @@ class _CustomerPageState extends State<CustomerPage> {
   final String routes = "/CUSTOMER_PAGE";
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     Size size = MediaQuery.of(context).size;
     return GetBuilder<CustomerController>(
       init: CustomerController(),

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +42,7 @@ class CustomerController extends GetxController {
     GetStorage("MyStorage").write(AppConstants.THEME_KEY, value);
     Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
     switchValue.value;
-    print("switchValue ${switchValue.value}");
+    // print("switchValue ${switchValue.value}");
     update();
   }
 
@@ -322,9 +321,10 @@ class CustomerController extends GetxController {
       if (response.statusCode == 200) {
         var data = CustomerModel.fromJson(response.data);
         myMap.value = data;
-        print("Mymap ${myMap.value}");
+        // print("Mymap ${myMap.value}");
 
         // print(data);
+        // ignore: unnecessary_cast
         return data as CustomerModel;
       } else {
         return response.data;

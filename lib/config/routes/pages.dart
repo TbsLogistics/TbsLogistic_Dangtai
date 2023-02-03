@@ -31,7 +31,6 @@ import 'package:tbs_logistics_dangtai/app/tallyman/view/list_finished_working/vi
 import 'package:tbs_logistics_dangtai/app/tallyman/view/list_team_of_tallyman/list_team_details_of_tallyman.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/list_team_of_tallyman/list_team_of_tallyman.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/tallyman_details_warehome_screen.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/tallyman_ware_home.dart';
 
 import '../../app/driver/view/create_register_view/create_register_screen.dart';
 import '../../app/tallyman/view/list_finished_working/view/list_finished_details_working.dart';
@@ -152,7 +151,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: Routes.LIST_FINISHED_DETAILS_WORKING,
-      page: () => ListFinishedDetailsWorking(),
+      page: () => const ListFinishedDetailsWorking(),
     ),
     GetPage(
       name: Routes.TALLYMAN_SETTINGS,

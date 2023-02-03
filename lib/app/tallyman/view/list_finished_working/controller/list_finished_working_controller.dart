@@ -15,6 +15,11 @@ class ListFinishedWorkingController extends GetxController {
   late Response response;
 
   RxBool isFinalling = true.obs;
+  @override
+  void onInit() {
+    getEmployAwait();
+    super.onInit();
+  }
 
   Future<ListEmployAwaitModel> getEmployAwait() async {
     var tokens = await SharePerApi().getToken();
@@ -29,7 +34,7 @@ class ListFinishedWorkingController extends GetxController {
 
       if (response.statusCode == 200) {
         var data = ListEmployAwaitModel.fromJson(response.data);
-        print(data);
+        // print(data);
 
         return data;
       } else {
@@ -42,6 +47,7 @@ class ListFinishedWorkingController extends GetxController {
     required int maPhieuLamHang,
     required String routes,
   }) async {
+    // ignore: unused_local_variable
     var tokens = await SharePerApi().getToken();
     var teamWorking = IDProduct(maPhieuLamHang: maPhieuLamHang);
     var jsonData = teamWorking.toJson();
@@ -54,7 +60,7 @@ class ListFinishedWorkingController extends GetxController {
         List<ListOfEmployeesModel> results =
             data.map((e) => ListOfEmployeesModel.fromJson(e)).toList();
         listOfEmploy.value = results;
-        print(listOfEmploy);
+        // print(listOfEmploy);
         Get.toNamed(
           routes,
           arguments: results,
@@ -68,7 +74,6 @@ class ListFinishedWorkingController extends GetxController {
 
   @override
   void onClose() {
-    // TODO: implement onClose
     Get.deleteAll();
     super.onClose();
   }

@@ -9,6 +9,7 @@ class TallymanPage extends GetView<TallymanController> {
   final String routes = "/TALLYMAN_PAGE";
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(

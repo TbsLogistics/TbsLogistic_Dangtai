@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/model/list_customer_model.dart';
 import 'package:tbs_logistics_dangtai/config/widget/buttom_form_submit.dart';
 import 'package:tbs_logistics_dangtai/config/widget/custom_text_form_fiels.dart';
@@ -288,7 +286,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
                   numberSelectCont >= 2 ? _contSecond(controller) : Container(),
                   ButtonFormSubmit(
                       onPressed: () {
-                        print(dateinput.text);
+                        // print(dateinput.text);
                         controller.postRegisterDriver(
                           time: dateinput.text,
                           idWarehome: selectedWarehome,

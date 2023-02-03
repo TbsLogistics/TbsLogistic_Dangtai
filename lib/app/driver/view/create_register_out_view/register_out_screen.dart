@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
+
 import 'package:tbs_logistics_dangtai/config/widget/buttom_form_submit.dart';
 import 'package:tbs_logistics_dangtai/config/widget/custom_text_form_fiels.dart';
 import 'package:tbs_logistics_dangtai/config/widget/drop_button.dart';
@@ -18,25 +17,26 @@ class RegisterOutScreen extends GetView<DriverController> {
   Widget build(BuildContext context) {
     var items = Get.arguments;
     var maPhieu = items[0] as int;
+    print(maPhieu);
     var loaixe = items[1];
 
     return GetBuilder<DriverController>(
       init: DriverController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          title: const Text(
+          title: Text(
             "Đăng ký phiếu ra",
-            style: CustomTextStyle.tilteAppbar,
+            style: TextStyle(color: Theme.of(context).primaryColorLight),
           ),
           centerTitle: true,
-          backgroundColor: CustomColor.backgroundAppbar,
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           leading: IconButton(
             onPressed: () {
               Get.back();
             },
-            icon: const Icon(
+            icon: Icon(
               Icons.arrow_back_ios_new,
-              color: Colors.white,
+              color: Theme.of(context).primaryColorLight,
               size: 25,
             ),
           ),
@@ -51,7 +51,10 @@ class RegisterOutScreen extends GetView<DriverController> {
   }
 
   Widget _buildTai(
-      DriverController controller, int item, BuildContext context) {
+    DriverController controller,
+    int item,
+    BuildContext context,
+  ) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: Column(
@@ -59,7 +62,7 @@ class RegisterOutScreen extends GetView<DriverController> {
           const Divider(),
           CustomFormFiels(
             title: "Số seal 1",
-            controller: controller.numberCont1Seal1,
+            controller: controller.contRa1seal1,
             hintText: "Nhập số seal",
             icon: Icons.abc,
             color: Theme.of(context).primaryColorLight,
@@ -90,7 +93,7 @@ class RegisterOutScreen extends GetView<DriverController> {
               controller.postRegisterOut(
                 contRa1: controller.contRa1.text,
                 contRa1seal1: controller.contRa1seal1.text,
-                contRa1seal2: controller.contRa1seal1.text,
+                contRa1seal2: controller.contRa1seal2.text,
                 contRa2: controller.contRa1.text,
                 contRa2seal1: controller.contRa2seal1.text,
                 contRa2seal2: controller.contRa2seal1.text,

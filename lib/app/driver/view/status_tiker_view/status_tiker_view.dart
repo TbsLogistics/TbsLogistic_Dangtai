@@ -40,6 +40,7 @@ class StatusDriver extends GetView<DriverController> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 var items = snapshot.data as List<ListTicketForDriver>;
+                // print(items);
                 return ListView.builder(
                     itemCount: items.length,
                     itemBuilder: (context, index) {

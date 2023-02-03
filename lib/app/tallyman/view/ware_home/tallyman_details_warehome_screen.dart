@@ -55,6 +55,7 @@ class WareHomePage extends GetView<WareHomeController> {
                               child: ListView.builder(
                                   itemCount: leftlenght,
                                   itemBuilder: (context, index) {
+                                    // ignore: unnecessary_null_comparison
                                     return leftlenght == null
                                         ? Container()
                                         : Container(
@@ -65,8 +66,9 @@ class WareHomePage extends GetView<WareHomeController> {
                                                 Center(
                                                   child: Text(
                                                     "${items[0].cuatrai![index].tenCua}",
-                                                    style: const TextStyle(
-                                                      color: Colors.black,
+                                                    style: TextStyle(
+                                                      color: Theme.of(context)
+                                                          .primaryColorLight,
                                                       fontSize: 16,
                                                     ),
                                                   ),
@@ -83,10 +85,10 @@ class WareHomePage extends GetView<WareHomeController> {
                                                       ? Colors.green
                                                       : Colors.red,
                                                   onTap: () {
-                                                    print(items[0]
-                                                        .cuatrai![index]
-                                                        .dock![0]
-                                                        .status);
+                                                    // print(items[0]
+                                                    //     .cuatrai![index]
+                                                    //     .dock![0]
+                                                    //     .status);
                                                     if (items[0]
                                                             .cuatrai![index]
                                                             .dock![0]
@@ -108,13 +110,14 @@ class WareHomePage extends GetView<WareHomeController> {
                                                                 .dock![0]
                                                                 .status ==
                                                             true;
-                                                        print(items[0]
-                                                            .cuatrai![index]
-                                                            .dock![0]
-                                                            .status);
+                                                        // print(items[0]
+                                                        //     .cuatrai![index]
+                                                        //     .dock![0]
+                                                        //     .status);
                                                       });
                                                     }
                                                   },
+                                                  context: context,
                                                 ),
                                                 showLane(
                                                   text:
@@ -127,10 +130,10 @@ class WareHomePage extends GetView<WareHomeController> {
                                                       ? Colors.green
                                                       : Colors.red,
                                                   onTap: () {
-                                                    print(items[0]
-                                                        .cuatrai![index]
-                                                        .dock![1]
-                                                        .maDock);
+                                                    // print(items[0]
+                                                    //     .cuatrai![index]
+                                                    //     .dock![1]
+                                                    //     .maDock);
                                                     if (items[0]
                                                             .cuatrai![index]
                                                             .dock![1]
@@ -152,14 +155,14 @@ class WareHomePage extends GetView<WareHomeController> {
                                                                 .dock![1]
                                                                 .status ==
                                                             true;
-                                                        print(items[0]
-                                                            .cuatrai![index]
-                                                            .dock![1]
-                                                            .status);
+                                                        // print(items[0]
+                                                        //     .cuatrai![index]
+                                                        //     .dock![1]
+                                                        //     .status);
                                                       });
-                                                      ;
                                                     }
                                                   },
+                                                  context: context,
                                                 ),
                                                 showLane(
                                                   text:
@@ -172,10 +175,10 @@ class WareHomePage extends GetView<WareHomeController> {
                                                       ? Colors.green
                                                       : Colors.red,
                                                   onTap: () {
-                                                    print(items[0]
-                                                        .cuatrai![index]
-                                                        .dock![2]
-                                                        .maDock);
+                                                    // print(items[0]
+                                                    //     .cuatrai![index]
+                                                    //     .dock![2]
+                                                    //     .maDock);
                                                     if (items[0]
                                                             .cuatrai![index]
                                                             .dock![2]
@@ -197,11 +200,11 @@ class WareHomePage extends GetView<WareHomeController> {
                                                                 .dock![2]
                                                                 .status ==
                                                             true;
-                                                        print("oke");
+                                                        // print("oke");
                                                       });
-                                                      ;
                                                     }
                                                   },
+                                                  context: context,
                                                 ),
                                                 const SizedBox(height: 10),
                                               ],
@@ -224,6 +227,7 @@ class WareHomePage extends GetView<WareHomeController> {
                               child: ListView.builder(
                                   itemCount: rightlenght,
                                   itemBuilder: (context, index) {
+                                    // ignore: unnecessary_null_comparison
                                     return leftlenght == null
                                         ? Container()
                                         : Container(
@@ -234,8 +238,9 @@ class WareHomePage extends GetView<WareHomeController> {
                                                 Center(
                                                     child: Text(
                                                   "Cửa ${index + 1}",
-                                                  style: const TextStyle(
-                                                    color: Colors.black,
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .primaryColorLight,
                                                     fontSize: 16,
                                                   ),
                                                 )),
@@ -267,6 +272,7 @@ class WareHomePage extends GetView<WareHomeController> {
                                                       );
                                                     }
                                                   },
+                                                  context: context,
                                                 ),
                                                 showLane(
                                                   text:
@@ -295,6 +301,7 @@ class WareHomePage extends GetView<WareHomeController> {
                                                       );
                                                     }
                                                   },
+                                                  context: context,
                                                 ),
                                                 showLane(
                                                   text:
@@ -321,12 +328,13 @@ class WareHomePage extends GetView<WareHomeController> {
                                                               .toString(),
                                                         ),
                                                       );
-                                                      print(items[0]
-                                                          .cuatrai![index]
-                                                          .dock![2]
-                                                          .status);
+                                                      // print(items[0]
+                                                      //     .cuatrai![index]
+                                                      //     .dock![2]
+                                                      //     .status);
                                                     }
                                                   },
+                                                  context: context,
                                                 ),
                                                 const SizedBox(height: 10),
                                               ],
@@ -342,7 +350,7 @@ class WareHomePage extends GetView<WareHomeController> {
                 ),
               );
             }
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(
                 color: Colors.orangeAccent,
               ),
@@ -354,12 +362,13 @@ class WareHomePage extends GetView<WareHomeController> {
   Widget showLane(
       {required String text,
       required Color color,
-      required VoidCallback onTap}) {
+      required VoidCallback onTap,
+      required BuildContext context}) {
     return InkWell(
       onTap: onTap,
       child: Container(
         margin: const EdgeInsets.all(5.0),
-        height: 50,
+        height: 60,
         decoration: BoxDecoration(
           border: Border.all(
             width: 1,
@@ -375,7 +384,11 @@ class WareHomePage extends GetView<WareHomeController> {
             children: [
               Text(
                 text,
-                style: const TextStyle(color: Colors.black, fontSize: 14),
+                style: TextStyle(
+                    color: Theme.of(context).primaryColorLight, fontSize: 14),
+              ),
+              const SizedBox(
+                height: 5,
               ),
               Container(
                 width: 25,
