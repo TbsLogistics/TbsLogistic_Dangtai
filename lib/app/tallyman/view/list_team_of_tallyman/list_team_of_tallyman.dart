@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/list_employ_await.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/view/list_finished_working/controller/list_finished_working_controller.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/view/list_team_of_tallyman/controller/list_team_of_tallyman_controller.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/controller/list_finished_working_controller.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/controller/list_team_of_tallyman_controller.dart';
 
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
@@ -37,7 +37,7 @@ class _ListTeamOfTallymanState extends State<ListTeamOfTallyman> {
             ),
           ),
           title: Text(
-            "Danh sách đội làm hàng",
+            "Danh sách công việc ",
             style: TextStyle(
               color: Theme.of(context).primaryColorLight,
             ),
@@ -86,8 +86,10 @@ class _ListTeamOfTallymanState extends State<ListTeamOfTallyman> {
       ListTeamOfTallymanController controller, ListEmployAwaitModel items) {
     return InkWell(
       onTap: () {
+        print(
+          items.chuaLam![index].id.toString(),
+        );
         controller.postListEmployee(
-          maDoiLamHang: '${items.chuaLam![index].maDoiLamHang}',
           maPhieuLamHang: int.parse(
             items.chuaLam![index].id.toString(),
           ),

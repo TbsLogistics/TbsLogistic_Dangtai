@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:tbs_logistics_dangtai/app/tallyman/model/id_product_model.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/list_employ_await.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/model/list_mem_in_team.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/list_of_emfloy.dart';
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/share_preferences/share_prefer.dart';
@@ -11,7 +12,7 @@ import 'package:tbs_logistics_dangtai/config/share_preferences/share_prefer.dart
 class ListFinishedWorkingController extends GetxController {
   var dio = Dio();
   Rx<ListEmployAwaitModel> listEmployAwait = ListEmployAwaitModel().obs;
-  RxList<ListOfEmployeesModel> listOfEmploy = <ListOfEmployeesModel>[].obs;
+  RxList<ListMemInTeamModel> listOfEmploy = <ListMemInTeamModel>[].obs;
   late Response response;
 
   RxBool isFinalling = true.obs;
@@ -43,7 +44,7 @@ class ListFinishedWorkingController extends GetxController {
     } finally {}
   }
 
-  Future<List<ListOfEmployeesModel>> postDetailTicker({
+  Future<List<ListMemInTeamModel>> postDetailTicker({
     required int maPhieuLamHang,
     required String routes,
   }) async {
@@ -52,13 +53,13 @@ class ListFinishedWorkingController extends GetxController {
     var teamWorking = IDProduct(maPhieuLamHang: maPhieuLamHang);
     var jsonData = teamWorking.toJson();
 
-    const url = "${AppConstants.urlBase}/chi-tiet-phieu-lam-hang";
+    const url = "${AppConstants.urlBase}/chi-tiet-phieu-lam-hang-vs02";
     try {
       response = await dio.post(url, data: jsonData);
       if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
-        List<dynamic> data = response.data;
-        List<ListOfEmployeesModel> results =
-            data.map((e) => ListOfEmployeesModel.fromJson(e)).toList();
+        List<dynamic> data = response.data["doilamhang"];
+        List<ListMemInTeamModel> results =
+            data.map((e) => ListMemInTeamModel.fromJson(e)).toList();
         listOfEmploy.value = results;
         // print(listOfEmploy);
         Get.toNamed(

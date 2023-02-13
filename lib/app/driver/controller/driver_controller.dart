@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:get_storage/get_storage.dart';
+import 'package:tbs_logistics_dangtai/app/driver/model/list_customer_for_driver_model.dart';
 import 'package:tbs_logistics_dangtai/app/driver/model/list_tiker_for_driver.dart';
 import 'package:tbs_logistics_dangtai/app/driver/model/register_driver_model.dart';
 import 'package:tbs_logistics_dangtai/app/driver/model/register_out_model.dart';
@@ -17,16 +18,15 @@ class DriverController extends GetxController {
   RxBool switchValue = true.obs;
   RxBool switchLanguage = true.obs;
   RxBool hideShowMode = true.obs;
-  RxBool showForm = false.obs;
-  final getStatusDriver = StatusDriverModel().obs;
+
   String? selectedNumberCont;
   int numberSelectCont = 0;
 
   @override
   void onInit() {
     getInfor();
-    getStatus();
-    getListTiker();
+
+    // getListTiker();
     super.onInit();
   }
 
@@ -38,11 +38,6 @@ class DriverController extends GetxController {
 
   void saveNumberCont(String? value) {
     selectedNumberCont = value.toString();
-    update();
-  }
-
-  void showFormStatus() {
-    showForm.value = !showForm.value;
     update();
   }
 
@@ -107,6 +102,7 @@ class DriverController extends GetxController {
     required double? numberKhoi1,
     required String? numberBook1,
     required String? idProduct,
+    required String maKhachHang,
   }) async {
     var dio = Dio();
     Response response;
@@ -137,6 +133,7 @@ class DriverController extends GetxController {
       trangthaihang1: false,
       trangthaikhoa1: false,
       maloaiHang: idProduct,
+      maKhachHang: maKhachHang,
     );
     var jsonData = create.toJson();
     try {
@@ -190,12 +187,43 @@ class DriverController extends GetxController {
               trangthaihang1: false,
               trangthaikhoa1: false,
               maloaiHang: idProduct,
+              maKhachHang: maKhachHang,
             ),
           );
         }
       }
     } catch (e) {
       // print(e);
+      rethrow;
+    }
+  }
+
+  Future<List<ListCustomerForDriverModel>> getData(query) async {
+    var dio = Dio();
+    Response response;
+    var token = await SharePerApi().getToken();
+
+    const url = '${AppConstants.urlBase}/danh-sach-khach-hang';
+    Map<String, dynamic> headers = {
+      HttpHeaders.authorizationHeader: "Bearer $token"
+    };
+    try {
+      response = await dio.get(
+        url,
+        options: Options(headers: headers),
+        queryParameters: {"query": query},
+      );
+
+      if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
+        var customer = response.data["data"];
+        if (customer != null) {
+          return ListCustomerForDriverModel.fromJsonList(customer);
+        }
+        return [];
+      } else {
+        return [];
+      }
+    } catch (error) {
       rethrow;
     }
   }
@@ -247,36 +275,6 @@ class DriverController extends GetxController {
         // print(data);
         Get.toNamed(Routes.QR_CODE_SCREEN, arguments: data);
       }
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  Future<StatusDriverModel> getStatus() async {
-    var dio = Dio();
-    Response response;
-    var tokens = await SharePerApi().getToken();
-    Map<String, dynamic> headers = {
-      HttpHeaders.authorizationHeader: "Bearer $tokens"
-    };
-    const url = "${AppConstants.urlBase}/LayThongTinPhieuVaoHienTaiCuaTaiXe";
-    try {
-      response = await dio.get(
-        url,
-        options: Options(
-          headers: headers, followRedirects: false,
-          // will not throw errors
-          validateStatus: (status) => true,
-        ),
-      );
-      if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
-        var data = StatusDriverModel.fromJson(response.data);
-        // print(data);
-        getStatusDriver.value = data;
-        update();
-        return data;
-      }
-      return response.data;
     } catch (e) {
       rethrow;
     }

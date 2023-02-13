@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controller.dart';
+import 'package:tbs_logistics_dangtai/app/customer/view/change_password_/change_password_screen.dart';
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
@@ -49,7 +50,7 @@ class CustomerSettings extends GetView<CustomerController> {
                 children: [
                   ListTile(
                     leading: Text(
-                      "Profile",
+                      "Hồ sơ",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -100,7 +101,7 @@ class CustomerSettings extends GetView<CustomerController> {
                                             MainAxisAlignment.center,
                                         children: const [
                                           Text(
-                                            "UserName",
+                                            "Họ và tên",
                                             style: TextStyle(
                                               color: Colors.orangeAccent,
                                               fontSize: 15,
@@ -110,9 +111,9 @@ class CustomerSettings extends GetView<CustomerController> {
                                         ],
                                       ),
                                       title: Text(
-                                        "${controller.myMap.value.usernameAccount}",
-                                        style: const TextStyle(
-                                          color: Colors.black,
+                                        "${controller.myMap.value.tenKhachhang}",
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
                                           fontSize: 14,
                                         ),
                                       ),
@@ -123,7 +124,7 @@ class CustomerSettings extends GetView<CustomerController> {
                                             MainAxisAlignment.center,
                                         children: const [
                                           Text(
-                                            "Phone",
+                                            "Số điện thoại",
                                             style: TextStyle(
                                               color: Colors.orangeAccent,
                                               fontSize: 15,
@@ -134,8 +135,8 @@ class CustomerSettings extends GetView<CustomerController> {
                                       ),
                                       title: Text(
                                         "${controller.myMap.value.phone}",
-                                        style: const TextStyle(
-                                          color: Colors.black,
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
                                           fontSize: 14,
                                         ),
                                       ),
@@ -157,8 +158,8 @@ class CustomerSettings extends GetView<CustomerController> {
                                       ),
                                       title: Text(
                                         "${controller.myMap.value.email}",
-                                        style: const TextStyle(
-                                          color: Colors.black,
+                                        style: TextStyle(
+                                          color: Theme.of(context).primaryColor,
                                           fontSize: 14,
                                         ),
                                       ),
@@ -187,7 +188,7 @@ class CustomerSettings extends GetView<CustomerController> {
                         ),
                     child: ListTile(
                       leading: const Icon(Icons.light_mode),
-                      title: const Text("Change mode light"),
+                      title: const Text("Chế độ tối"),
                       trailing: CupertinoSwitch(
                         activeColor: Colors.amber,
                         value: controller.switchValue.value,
@@ -218,6 +219,17 @@ class CustomerSettings extends GetView<CustomerController> {
                   //     ),
                   //   ),
                   // ),
+                  Card(
+                    shape: const RoundedRectangleBorder(
+                        side: BorderSide(color: CustomColor.backgroundAppbar)),
+                    child: ListTile(
+                      onTap: () {
+                        Get.to(() => ChangePasswordCustomerScreen());
+                      },
+                      leading: const Icon(Icons.lock),
+                      title: const Text("Đổi mật khẩu"),
+                    ),
+                  ),
                   const SizedBox(height: 20),
                   const Divider(
                     height: 1,

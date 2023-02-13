@@ -4,14 +4,17 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart' hide Response;
+import 'package:intl/intl.dart';
 import 'package:tbs_logistics_dangtai/app/coordinators/model/ware_home_model.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/id_dock.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/model/list_dock_by_warehome_model.dart';
+
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/share_preferences/share_prefer.dart';
 
 class WareHomeController extends GetxController {
   var dio = Dio();
+  var time = DateFormat("dd-MM-yyyy hh:mm a");
 
   late Response response;
   //Lấy thông tin kho /lines
@@ -59,20 +62,19 @@ class WareHomeController extends GetxController {
   Future<void> putDock({
     required int maDock,
   }) async {
-    const url = "${AppConstants.urlBase}/CapNhatTrangThaiDock";
+    const url = "${AppConstants.urlBase}/curentDockDetail";
     // ignore: non_constant_identifier_names
     var IdDock = IDDock(maDock: maDock);
     var jsonData = IdDock.toJson();
     try {
-      response = await dio.put(url, data: jsonData);
+      response = await dio.post(url, data: jsonData);
       if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
-        var data = response.data;
+        var data = response.data["PhieuLamHang"];
 
-        if (data["detail"] ==
-            "Cập nhật dock không thành công có xe đang chờ làm hàng") {
+        if (data == null) {
           Get.defaultDialog(
             title: "Thông báo",
-            content: Text(data["detail"], textAlign: TextAlign.center),
+            content: const Text("Lỗi máy chủ", textAlign: TextAlign.center),
             confirm: TextButton(
               onPressed: () {
                 // Get.toNamed(Routes.TALLYMAN_WAREHOME_SCREEN);
@@ -83,20 +85,188 @@ class WareHomeController extends GetxController {
           );
         } else {
           Get.defaultDialog(
-            title: "Thông báo",
-            content: Text(data["detail"], textAlign: TextAlign.center),
+            title: "Chi tiết Dock",
+            titleStyle: const TextStyle(
+              color: Colors.green,
+            ),
+            content: SizedBox(
+              height: 400,
+              width: 400,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            margin: const EdgeInsets.only(bottom: 40),
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                side: const BorderSide(
+                                  color: Colors.orangeAccent,
+                                  width: 1,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10, vertical: 10),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Tên đội làm hàng : ${data[index]["tenDoiLamHang"]}",
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Số xe : ${data[index]["soxe"]}",
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        data[index]["socont"] != null
+                                            ? Text(
+                                                "Số cont : ${data[index]["socont"]}",
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                              )
+                                            : const Text(
+                                                "Số cont :",
+                                                style: TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                              ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Số kiện : ${data[index]["soKien"]}",
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Số khối : ${data[index]["soKhoi"]}",
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        data[index]["thoiGianBatDau"] != null
+                                            ? Text(
+                                                "Thời gian bắt đầu : ${time.format(
+                                                  DateTime.parse(data[index]
+                                                      ["thoiGianBatDau"]),
+                                                )}",
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                              )
+                                            : const Text(
+                                                "Thời gian bắt đầu : Chưa làm",
+                                                style: TextStyle(fontSize: 14),
+                                              )
+                                      ],
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        data[index]["thoiGianKetThuc"] != null
+                                            ? Text(
+                                                "Thời gian kết thúc : ${time.format(
+                                                  DateTime.parse(data[index]
+                                                      ["thoiGianKetThuc"]),
+                                                )}",
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                ),
+                                              )
+                                            : const Text(
+                                                "Thời gian kết thúc : Chưa làm",
+                                                style: TextStyle(fontSize: 14),
+                                              )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }),
+                  ),
+                ],
+              ),
+            ),
             confirm: TextButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Colors.orangeAccent,
+                ),
+              ),
               onPressed: () {
                 // Get.toNamed(Routes.TALLYMAN_WAREHOME_SCREEN);
-
-                Get.back(result: getLisDock());
-                // Get.back();
+                Get.back();
               },
-              child: const Text("Oke"),
+              child: const Text(
+                "Oke",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           );
         }
-        update();
       }
     } catch (e) {
       rethrow;

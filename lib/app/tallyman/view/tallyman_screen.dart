@@ -55,7 +55,7 @@ class TallymanScreen extends StatelessWidget {
                         width: size.width * 0.05,
                       ),
                       Text(
-                        "Danh sách đội làm hàng",
+                        "Danh sách đội chờ làm hàng",
                         style: TextStyle(
                           color: Theme.of(context).primaryColorLight,
                           fontSize: 20,

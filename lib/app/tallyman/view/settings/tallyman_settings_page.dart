@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/view/change_password/change_password_screen.dart';
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
@@ -47,7 +48,7 @@ class TallymanSettings extends GetView<TallymanSettingsController> {
                     children: [
                       ListTile(
                         leading: Text(
-                          "Profile",
+                          "Hồ sơ",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 18,
@@ -94,7 +95,7 @@ class TallymanSettings extends GetView<TallymanSettingsController> {
                                                 MainAxisAlignment.center,
                                             children: const [
                                               Text(
-                                                "UserName :",
+                                                "Họ và tên :",
                                                 style: TextStyle(
                                                   color: Colors.orangeAccent,
                                                   fontSize: 15,
@@ -104,7 +105,7 @@ class TallymanSettings extends GetView<TallymanSettingsController> {
                                             ],
                                           ),
                                           title: Text(
-                                            "${controller.tallyman.value.usernameAccount}",
+                                            "${controller.tallyman.value.tenNV}",
                                             style: const TextStyle(
                                               fontSize: 14,
                                             ),
@@ -116,7 +117,7 @@ class TallymanSettings extends GetView<TallymanSettingsController> {
                                                 MainAxisAlignment.center,
                                             children: const [
                                               Text(
-                                                "Phone :",
+                                                "Số điện thoại :",
                                                 style: TextStyle(
                                                   color: Colors.orangeAccent,
                                                   fontSize: 15,
@@ -179,7 +180,7 @@ class TallymanSettings extends GetView<TallymanSettingsController> {
                             ),
                         child: ListTile(
                           leading: const Icon(Icons.light_mode),
-                          title: const Text("Change mode light"),
+                          title: const Text("Chế độ tối"),
                           trailing: CupertinoSwitch(
                             activeColor: Colors.amber,
                             value: controller.switchValue.value,
@@ -210,6 +211,18 @@ class TallymanSettings extends GetView<TallymanSettingsController> {
                       //     ),
                       //   ),
                       // ),
+                      Card(
+                        shape: const RoundedRectangleBorder(
+                            side: BorderSide(
+                                color: CustomColor.backgroundAppbar)),
+                        child: ListTile(
+                          onTap: () {
+                            Get.to(() => ChangePasswordTallymanScreen());
+                          },
+                          leading: const Icon(Icons.lock_outline_sharp),
+                          title: const Text("Đổi mật khẩu"),
+                        ),
+                      ),
                       const Padding(
                         padding: EdgeInsets.only(top: 20),
                         child: Divider(

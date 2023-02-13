@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
 
 import 'package:tbs_logistics_dangtai/app/driver/view/create_register_view/create_register_screen.dart';
-import 'package:tbs_logistics_dangtai/app/driver/view/status_screen.dart';
+import 'package:tbs_logistics_dangtai/app/driver/view/status/status_screen.dart';
 import 'package:tbs_logistics_dangtai/app/driver/view/status_tiker_view/status_tiker_view.dart';
 
 class DriverScreen extends GetView<DriverController> {

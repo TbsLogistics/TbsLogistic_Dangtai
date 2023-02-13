@@ -151,7 +151,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: Routes.LIST_FINISHED_DETAILS_WORKING,
-      page: () => const ListFinishedDetailsWorking(),
+      page: () => ListFinishedDetailsWorking(),
     ),
     GetPage(
       name: Routes.TALLYMAN_SETTINGS,

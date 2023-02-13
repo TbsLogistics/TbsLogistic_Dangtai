@@ -1,7 +1,9 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
+import 'package:tbs_logistics_dangtai/app/driver/model/list_customer_for_driver_model.dart';
 import 'package:tbs_logistics_dangtai/config/model/list_customer_model.dart';
 import 'package:tbs_logistics_dangtai/config/widget/buttom_form_submit.dart';
 import 'package:tbs_logistics_dangtai/config/widget/custom_text_form_fiels.dart';
@@ -18,13 +20,14 @@ class RegisterFormScreen extends StatefulWidget {
 class _RegisterFormScreenState extends State<RegisterFormScreen> {
   final String routes = "/CREATE_REGISTER_DRIVER";
   final formKey = GlobalKey<FormState>();
+  ListCustomerForDriverModel? selectedKhachhang;
+  String? idKhachhang;
   String? selectedTeamCar;
   String? selectedCar;
   String? selectedWarehome;
   String? selectedNumberCont;
   int numberSelectCont = 0;
   String? selectedProduct;
-  ListCustomerModel? selectedKhachhang;
   bool isCheckProduct = false;
   bool isCheckNotProduct = true;
 
@@ -171,6 +174,93 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
                     icon: Icons.abc,
                     color: Theme.of(context).primaryColorLight,
                   ),
+                  SizedBox(
+                    height: 100,
+                    child: Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Row(
+                            children: [
+                              Text(
+                                "Tài xế *",
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  color: Theme.of(context).primaryColorLight,
+                                  fontSize: 16,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Theme(
+                                data: ThemeData(
+                                  inputDecorationTheme:
+                                      const InputDecorationTheme(
+                                          border: InputBorder.none),
+                                ),
+                                child:
+                                    DropdownSearch<ListCustomerForDriverModel>(
+                                  asyncItems: (String? query) {
+                                    return controller.getData(query);
+                                  },
+                                  popupProps:
+                                      PopupPropsMultiSelection.modalBottomSheet(
+                                    showSelectedItems: true,
+                                    itemBuilder:
+                                        _customPopupItemBuilderExample2,
+                                    showSearchBox: true,
+                                  ),
+                                  compareFn: (item, sItem) {
+                                    return item.maKhachHang ==
+                                        sItem.maKhachHang;
+                                  },
+                                  onChanged:
+                                      (ListCustomerForDriverModel? newValue) {
+                                    setState(() {
+                                      selectedKhachhang = newValue;
+                                      // idKhachhang = int.parse(
+                                      //     newValue!.maKhachHang.toString());
+                                      // print("idtaixe: $idTaixe");
+                                      idKhachhang = newValue!.maKhachHang;
+                                    });
+                                  },
+                                  dropdownDecoratorProps:
+                                      DropDownDecoratorProps(
+                                    dropdownSearchDecoration: InputDecoration(
+                                      hintText: "Chọn khách hàng",
+                                      hintStyle: TextStyle(
+                                        color:
+                                            Theme.of(context).primaryColorLight,
+                                      ),
+                                      filled: true,
+                                      iconColor: const Color(0xFFF3BD60),
+                                      focusColor: const Color(0xFFF3BD60),
+                                      // fillColor: Colors.white,
+                                      focusedBorder: const OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color(0xFFF3BD60),
+                                            width: 1.0),
+                                      ),
+                                      enabledBorder: const OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Color(0xFFF3BD60),
+                                            width: 1.0),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
                   CustomDropdownButton(
                     items: idKho
                         .map((item) => DropdownMenuItem<String>(
@@ -307,6 +397,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
                               double.parse(controller.numberKien1.text),
                           numberBook1: controller.numberBook1.text,
                           idProduct: selectedProduct,
+                          maKhachHang: '',
                         );
                       },
                       text: "Đăng ký")
@@ -314,6 +405,38 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _customPopupItemBuilderExample2(
+    BuildContext context,
+    ListCustomerForDriverModel? item,
+    bool isSelected,
+  ) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: Card(
+        // color: Colors.green,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(
+            color: Color(0xFFF3BD60),
+          ),
+
+          borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
+        ),
+        child: ListTile(
+          style: ListTileStyle.drawer,
+          focusColor: Colors.white,
+          title: Text(
+            item?.tenKhachhang ?? '',
+            style: const TextStyle(color: Colors.blueGrey),
+          ),
+          leading: const CircleAvatar(
+              // this does not work - throws 404 error
+              // backgroundImage: NetworkImage(item.avatar ?? ''),
+              ),
         ),
       ),
     );

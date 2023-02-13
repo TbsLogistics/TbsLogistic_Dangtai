@@ -3,26 +3,22 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
-import 'package:tbs_logistics_dangtai/app/tallyman/model/id_team_working.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/model/id_product_model.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/list_employ_await.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/model/list_employ_working.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/model/list_mem_in_team.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/status_working_model.dart';
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 import 'package:tbs_logistics_dangtai/config/share_preferences/share_prefer.dart';
 
-class ListTeamOfTallymanController extends GetxController {
-  RxBool isLoadWoking = true.obs;
-  var dio = Dio();
+class ListTeamDetailsOfTallymanController extends GetxController {
   late Response response;
+  var dio = Dio();
+  RxBool isLoadWoking = true.obs;
   Rx<ListEmployAwaitModel> listEmployAwait = ListEmployAwaitModel().obs;
-  RxList listEmploy = <ListEmployeeWorkingModel>[].obs;
-  @override
-  void onInit() {
-    getEmployAwait();
-    super.onInit();
-  }
+  RxList<ListMemInTeamModel> listOfEmploy = <ListMemInTeamModel>[].obs;
 
+  RxBool isHide = true.obs;
   Future<ListEmployAwaitModel> getEmployAwait() async {
     var tokens = await SharePerApi().getToken();
     Map<String, dynamic> headers = {
@@ -48,30 +44,27 @@ class ListTeamOfTallymanController extends GetxController {
     }
   }
 
-  //ListEmployeeWorking
-  Future<List<ListEmployeeWorkingModel>> postListEmployee(
-      {required String maDoiLamHang,
-      required int maPhieuLamHang,
-      required String routes,
-      required String time}) async {
+  Future<List<ListMemInTeamModel>> postDetailTicker({
+    required int maPhieuLamHang,
+    required String routes,
+  }) async {
     // ignore: unused_local_variable
     var tokens = await SharePerApi().getToken();
-    var teamWorking = IDTeamWorking(maDoiLamHang: maDoiLamHang);
+    var teamWorking = IDProduct(maPhieuLamHang: maPhieuLamHang);
     var jsonData = teamWorking.toJson();
 
-    const url = "${AppConstants.urlBase}/DanhSachNhanVienCoTrongDoiLamHang";
+    const url = "${AppConstants.urlBase}/chi-tiet-phieu-lam-hang-vs01";
     try {
       response = await dio.post(url, data: jsonData);
       if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
         List<dynamic> data = response.data;
-        List<ListEmployeeWorkingModel> results =
-            data.map((e) => ListEmployeeWorkingModel.fromJson(e)).toList();
-        listEmploy.value = results;
-        update();
-        // print(listEmploy);
+        List<ListMemInTeamModel> results =
+            data.map((e) => ListMemInTeamModel.fromJson(e)).toList();
+        listOfEmploy.value = results;
+
         Get.toNamed(
           routes,
-          arguments: [results, maPhieuLamHang, time],
+          arguments: results,
         );
       }
       return [];
@@ -95,12 +88,14 @@ class ListTeamOfTallymanController extends GetxController {
       if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
         var data = response.data;
         getEmployAwait();
+
+        update();
         Get.defaultDialog(
           title: "Thông báo",
-          content: Text(data["detail"]),
+          content: Center(child: Text(data["detail"])),
           confirm: TextButton(
             onPressed: () {
-              Get.back();
+              Get.toNamed(Routes.LIST_TEAM_OF_TALLYMAN);
             },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all<Color>(
@@ -138,17 +133,13 @@ class ListTeamOfTallymanController extends GetxController {
       if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
         // ignore: unused_local_variable
         var data = response.data;
-
+        print("end");
+        isHide.value = true;
+        update();
         Get.toNamed(Routes.LIST_TEAM_OF_TALLYMAN);
       }
     } catch (e) {
       rethrow;
     }
-  }
-
-  @override
-  void onClose() {
-    Get.deleteAll();
-    super.onClose();
   }
 }

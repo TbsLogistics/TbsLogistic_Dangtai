@@ -6,6 +6,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:tbs_logistics_dangtai/app/customer/model/customer_model.dart';
 import 'package:tbs_logistics_dangtai/app/customer/model/list_driver_by_customer_model.dart';
 import 'package:tbs_logistics_dangtai/app/customer/model/register_customer_model.dart';
+import 'package:tbs_logistics_dangtai/app/driver/model/list_customer_for_driver_model.dart';
 import 'package:tbs_logistics_dangtai/app/sercurity/model/id_taixe_model.dart';
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/model/list_traking_model.dart';
@@ -120,6 +121,36 @@ class CustomerController extends GetxController {
     }
   }
 
+  Future<List<ListCustomerForDriverModel>> getDataCustomer(query) async {
+    var dio = Dio();
+    Response response;
+    var token = await SharePerApi().getToken();
+
+    const url = '${AppConstants.urlBase}/danh-sach-khach-hang';
+    Map<String, dynamic> headers = {
+      HttpHeaders.authorizationHeader: "Bearer $token"
+    };
+    try {
+      response = await dio.get(
+        url,
+        options: Options(headers: headers),
+        queryParameters: {"query": query},
+      );
+
+      if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
+        var customer = response.data["data"];
+        if (customer != null) {
+          return ListCustomerForDriverModel.fromJsonList(customer);
+        }
+        return [];
+      } else {
+        return [];
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
+
   Future<void> postRegisterCustomer({
     required String? numberCar,
     required String? numberCont1,
@@ -128,10 +159,10 @@ class CustomerController extends GetxController {
     required String? numberCont1Seal2,
     required String? numberCont2Seal1,
     required String? numberCont2Seal2,
-    required int? numberKien,
-    required int? numberKien1,
-    required int? numberKhoi,
-    required int? numberKhoi1,
+    required double? numberKien,
+    required double? numberKien1,
+    required double? numberKhoi,
+    required double? numberKhoi1,
     required String? numberBook,
     required String? numberBook1,
     required String? time,
@@ -139,6 +170,7 @@ class CustomerController extends GetxController {
     required String? idCar,
     required int? idTaixe,
     required String? idProduct,
+    required String maKhachHang,
   }) async {
     Response response;
     var token = await SharePerApi().getToken();
@@ -147,28 +179,30 @@ class CustomerController extends GetxController {
     };
     const url = "${AppConstants.urlBase}/doituongkhactaophieuvaocong";
     var create = RegisterForCustomerModel(
-        giodukien: time,
-        kho: idKho,
-        loaixe: idCar,
-        soxe: numberCar,
-        socont1: numberCont1,
-        socont2: numberCont2,
-        cont1seal1: numberCont1Seal1,
-        cont1seal2: numberCont1Seal2,
-        soKien: numberKien ?? 0,
-        sokhoi: numberKhoi ?? 0,
-        soBook: numberBook,
-        trangthaihang: false,
-        trangthaikhoa: false,
-        cont2seal1: numberCont2Seal1,
-        cont2seal2: numberCont2Seal2,
-        sokien1: numberKien1 ?? 0,
-        sokhoi1: numberKhoi1 ?? 0,
-        soBook1: numberBook1,
-        trangthaihang1: false,
-        trangthaikhoa1: false,
-        maTaixe: idTaixe,
-        maloaiHang: idProduct);
+      giodukien: time,
+      kho: idKho,
+      loaixe: idCar,
+      soxe: numberCar,
+      socont1: numberCont1,
+      socont2: numberCont2,
+      cont1seal1: numberCont1Seal1,
+      cont1seal2: numberCont1Seal2,
+      soKien: numberKien ?? 0,
+      sokhoi: numberKhoi ?? 0,
+      soBook: numberBook,
+      trangthaihang: false,
+      trangthaikhoa: false,
+      cont2seal1: numberCont2Seal1,
+      cont2seal2: numberCont2Seal2,
+      sokien1: numberKien1 ?? 0,
+      sokhoi1: numberKhoi1 ?? 0,
+      soBook1: numberBook1,
+      trangthaihang1: false,
+      trangthaikhoa1: false,
+      maTaixe: idTaixe,
+      maloaiHang: idProduct,
+      maKhachHang: maKhachHang,
+    );
     var jsonData = create.toJson();
     try {
       response = await dio.post(
@@ -181,7 +215,19 @@ class CustomerController extends GetxController {
         if (data["status_code"] == 204) {
           Get.defaultDialog(
             title: "Thông báo",
-            content: Center(child: Text("${data["detail"]}")),
+            titleStyle: const TextStyle(
+              color: Colors.red,
+            ),
+            content: Column(
+              children: [
+                Center(
+                  child: Text(
+                    "${data["detail"]}",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
             confirm: TextButton(
               onPressed: () {
                 Get.back();
@@ -215,6 +261,7 @@ class CustomerController extends GetxController {
               trangthaikhoa1: false,
               maloaiHang: idProduct,
               maTaixe: idTaixe,
+              maKhachHang: maKhachHang,
             ),
           );
         }

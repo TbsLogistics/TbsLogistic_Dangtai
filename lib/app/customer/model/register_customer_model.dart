@@ -1,4 +1,5 @@
 class RegisterForCustomerModel {
+  String? maKhachHang;
   String? giodukien;
   String? kho;
   String? loaixe;
@@ -7,15 +8,15 @@ class RegisterForCustomerModel {
   String? socont2;
   String? cont1seal1;
   String? cont1seal2;
-  int? soKien;
-  int? sokhoi;
+  double? soKien;
+  double? sokhoi;
   String? soBook;
   bool? trangthaihang;
   bool? trangthaikhoa;
   String? cont2seal1;
   String? cont2seal2;
-  int? sokien1;
-  int? sokhoi1;
+  double? sokien1;
+  double? sokhoi1;
   String? soBook1;
   bool? trangthaihang1;
   bool? trangthaikhoa1;
@@ -23,30 +24,32 @@ class RegisterForCustomerModel {
   int? maTaixe;
 
   RegisterForCustomerModel(
-      {required this.giodukien,
-      required this.kho,
-      required this.loaixe,
-      required this.soxe,
-      required this.socont1,
-      required this.socont2,
-      required this.cont1seal1,
-      required this.cont1seal2,
-      required this.soKien,
-      required this.sokhoi,
-      required this.soBook,
-      required this.trangthaihang,
-      required this.trangthaikhoa,
-      required this.cont2seal1,
-      required this.cont2seal2,
-      required this.sokien1,
-      required this.sokhoi1,
-      required this.soBook1,
-      required this.trangthaihang1,
-      required this.trangthaikhoa1,
-      required this.maloaiHang,
-      required this.maTaixe});
+      {this.maKhachHang,
+      this.giodukien,
+      this.kho,
+      this.loaixe,
+      this.soxe,
+      this.socont1,
+      this.socont2,
+      this.cont1seal1,
+      this.cont1seal2,
+      this.soKien,
+      this.sokhoi,
+      this.soBook,
+      this.trangthaihang,
+      this.trangthaikhoa,
+      this.cont2seal1,
+      this.cont2seal2,
+      this.sokien1,
+      this.sokhoi1,
+      this.soBook1,
+      this.trangthaihang1,
+      this.trangthaikhoa1,
+      this.maloaiHang,
+      this.maTaixe});
 
   RegisterForCustomerModel.fromJson(Map<String, dynamic> json) {
+    maKhachHang = json['maKhachHang'];
     giodukien = json['giodukien'];
     kho = json['kho'];
     loaixe = json['loaixe'];
@@ -73,6 +76,7 @@ class RegisterForCustomerModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    data['maKhachHang'] = maKhachHang;
     data['giodukien'] = giodukien;
     data['kho'] = kho;
     data['loaixe'] = loaixe;

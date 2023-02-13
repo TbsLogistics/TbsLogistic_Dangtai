@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
+import 'package:tbs_logistics_dangtai/app/driver/view/change_password_/change_password_screen.dart';
+import 'package:tbs_logistics_dangtai/app/driver/view/change_password_/controller/change_password_controller.dart';
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
@@ -48,7 +50,7 @@ class DriverSettings extends GetView<DriverController> {
                 children: [
                   ListTile(
                     leading: Text(
-                      "Profile",
+                      "Hồ sơ",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -98,7 +100,7 @@ class DriverSettings extends GetView<DriverController> {
                                             MainAxisAlignment.center,
                                         children: const [
                                           Text(
-                                            "UserName",
+                                            "Họ và tên",
                                             style: TextStyle(
                                               color: Colors.orangeAccent,
                                               fontSize: 15,
@@ -121,7 +123,7 @@ class DriverSettings extends GetView<DriverController> {
                                             MainAxisAlignment.center,
                                         children: const [
                                           Text(
-                                            "Phone",
+                                            "Số điện thoại",
                                             style: TextStyle(
                                               color: Colors.orangeAccent,
                                               fontSize: 15,
@@ -185,7 +187,7 @@ class DriverSettings extends GetView<DriverController> {
                     ),
                     child: ListTile(
                       leading: const Icon(Icons.light_mode),
-                      title: const Text("Change mode light"),
+                      title: const Text("Chế độ tối"),
                       trailing: CupertinoSwitch(
                         activeColor: Colors.amber,
                         value: controller.switchValue.value,
@@ -216,6 +218,20 @@ class DriverSettings extends GetView<DriverController> {
                   //     ),
                   //   ),
                   // ),
+                  Card(
+                    shape: const RoundedRectangleBorder(
+                      side: BorderSide(
+                        color: Colors.orangeAccent,
+                      ),
+                    ),
+                    child: ListTile(
+                      onTap: () {
+                        Get.to(() => ChangePasswordDriverScreen());
+                      },
+                      leading: const Icon(Icons.lock),
+                      title: const Text("Đổi mật khẩu"),
+                    ),
+                  ),
                   const Divider(
                     height: 1,
                     indent: 10,

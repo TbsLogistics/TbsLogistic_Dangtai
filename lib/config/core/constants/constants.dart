@@ -23,7 +23,7 @@ class AppConstants {
   // static const String urlBase = "http://192.168.0.89:200";
   // static const String urlBase = "http://192.168.0.100:200";
   // static const String urlBase = "http://192.168.0.42:200";
-  // static const String urlBase = "http://192.168.0.64:200";
+  // static const String urlBase = "https://192.168.0.21:200";
 
   // Url Client
   //Tài xế

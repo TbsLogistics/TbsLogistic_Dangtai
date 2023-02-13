@@ -1,4 +1,5 @@
 class RegisterForDriverModel {
+  String? maKhachHang;
   String? giodukien;
   String? kho;
   String? loaixe;
@@ -22,29 +23,31 @@ class RegisterForDriverModel {
   String? maloaiHang;
 
   RegisterForDriverModel(
-      {required this.giodukien,
-      required this.kho,
-      required this.loaixe,
-      required this.soxe,
-      required this.socont1,
-      required this.socont2,
-      required this.cont1seal1,
-      required this.cont1seal2,
-      required this.soKien,
-      required this.sokhoi,
-      required this.soBook,
-      required this.trangthaihang,
-      required this.trangthaikhoa,
-      required this.cont2seal1,
-      required this.cont2seal2,
-      required this.sokien1,
-      required this.sokhoi1,
-      required this.soBook1,
-      required this.trangthaihang1,
-      required this.trangthaikhoa1,
-      required this.maloaiHang});
+      {this.maKhachHang,
+      this.giodukien,
+      this.kho,
+      this.loaixe,
+      this.soxe,
+      this.socont1,
+      this.socont2,
+      this.cont1seal1,
+      this.cont1seal2,
+      this.soKien,
+      this.sokhoi,
+      this.soBook,
+      this.trangthaihang,
+      this.trangthaikhoa,
+      this.cont2seal1,
+      this.cont2seal2,
+      this.sokien1,
+      this.sokhoi1,
+      this.soBook1,
+      this.trangthaihang1,
+      this.trangthaikhoa1,
+      this.maloaiHang});
 
   RegisterForDriverModel.fromJson(Map<String, dynamic> json) {
+    maKhachHang = json['maKhachHang'];
     giodukien = json['giodukien'];
     kho = json['kho'];
     loaixe = json['loaixe'];
@@ -69,28 +72,29 @@ class RegisterForDriverModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['giodukien'] = giodukien;
-    data['kho'] = kho;
-    data['loaixe'] = loaixe;
-    data['soxe'] = soxe;
-    data['socont1'] = socont1;
-    data['socont2'] = socont2;
-    data['cont1seal1'] = cont1seal1;
-    data['cont1seal2'] = cont1seal2;
-    data['SoKien'] = soKien;
-    data['sokhoi'] = sokhoi;
-    data['soBook'] = soBook;
-    data['trangthaihang'] = trangthaihang;
-    data['trangthaikhoa'] = trangthaikhoa;
-    data['cont2seal1'] = cont2seal1;
-    data['cont2seal2'] = cont2seal2;
-    data['Sokien1'] = sokien1;
-    data['sokhoi1'] = sokhoi1;
-    data['soBook1'] = soBook1;
-    data['trangthaihang1'] = trangthaihang1;
-    data['trangthaikhoa1'] = trangthaikhoa1;
-    data['maloaiHang'] = maloaiHang;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['maKhachHang'] = this.maKhachHang;
+    data['giodukien'] = this.giodukien;
+    data['kho'] = this.kho;
+    data['loaixe'] = this.loaixe;
+    data['soxe'] = this.soxe;
+    data['socont1'] = this.socont1;
+    data['socont2'] = this.socont2;
+    data['cont1seal1'] = this.cont1seal1;
+    data['cont1seal2'] = this.cont1seal2;
+    data['SoKien'] = this.soKien;
+    data['sokhoi'] = this.sokhoi;
+    data['soBook'] = this.soBook;
+    data['trangthaihang'] = this.trangthaihang;
+    data['trangthaikhoa'] = this.trangthaikhoa;
+    data['cont2seal1'] = this.cont2seal1;
+    data['cont2seal2'] = this.cont2seal2;
+    data['Sokien1'] = this.sokien1;
+    data['sokhoi1'] = this.sokhoi1;
+    data['soBook1'] = this.soBook1;
+    data['trangthaihang1'] = this.trangthaihang1;
+    data['trangthaikhoa1'] = this.trangthaikhoa1;
+    data['maloaiHang'] = this.maloaiHang;
     return data;
   }
 }

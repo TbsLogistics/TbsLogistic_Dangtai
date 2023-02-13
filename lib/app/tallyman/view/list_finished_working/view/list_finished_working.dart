@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/controller/list_finished_detail_working_controller.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/list_employ_await.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/view/list_finished_working/controller/list_finished_working_controller.dart';
+import 'package:tbs_logistics_dangtai/app/tallyman/controller/list_finished_working_controller.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
-class ListFinishedWorking extends GetView<ListFinishedWorkingController> {
+class ListFinishedWorking
+    extends GetView<ListFinishedDetailsOfTallymanController> {
   final String routes = "/LIST_FINISHED_WORKING";
 
   const ListFinishedWorking({super.key});
@@ -15,8 +17,8 @@ class ListFinishedWorking extends GetView<ListFinishedWorkingController> {
     var hour = DateFormat("hh:mm a");
     Size size = MediaQuery.of(context).size;
 
-    return GetBuilder<ListFinishedWorkingController>(
-      init: ListFinishedWorkingController(),
+    return GetBuilder<ListFinishedDetailsOfTallymanController>(
+      init: ListFinishedDetailsOfTallymanController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -30,7 +32,7 @@ class ListFinishedWorking extends GetView<ListFinishedWorkingController> {
             ),
           ),
           title: Text(
-            "Danh sách đội đã làm hàng",
+            "Danh sách công việc hoàn thành",
             style: TextStyle(
               color: Theme.of(context).primaryColorLight,
             ),
@@ -86,16 +88,21 @@ class ListFinishedWorking extends GetView<ListFinishedWorkingController> {
       int index,
       DateFormat day,
       DateFormat hour,
-      ListFinishedWorkingController controller,
+      ListFinishedDetailsOfTallymanController controller,
       ListEmployAwaitModel items,
       BuildContext context) {
     return InkWell(
       onTap: () {
-        controller.postDetailTicker(
-            maPhieuLamHang: int.parse(
-              items.daLam![index].id.toString(),
-            ),
-            routes: Routes.LIST_FINISHED_DETAILS_WORKING);
+        print(
+          items.chuaLam![index].id.toString(),
+        );
+        controller.postListEmployee(
+          maPhieuLamHang: int.parse(
+            items.chuaLam![index].id.toString(),
+          ),
+          routes: Routes.LIST_FINISHED_DETAILS_WORKING,
+          time: items.chuaLam![index].thoiGianBatDau.toString(),
+        );
       },
       child: Container(
         margin: const EdgeInsets.only(bottom: 10),

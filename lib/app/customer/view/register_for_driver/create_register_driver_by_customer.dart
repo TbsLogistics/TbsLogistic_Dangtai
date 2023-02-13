@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controller.dart';
 import 'package:tbs_logistics_dangtai/app/customer/model/list_driver_by_customer_model.dart';
+import 'package:tbs_logistics_dangtai/app/driver/model/list_customer_for_driver_model.dart';
 import 'package:tbs_logistics_dangtai/config/widget/buttom_form_submit.dart';
 import 'package:tbs_logistics_dangtai/config/widget/custom_text_form_fiels.dart';
 import 'package:tbs_logistics_dangtai/config/widget/drop_button.dart';
@@ -17,13 +18,15 @@ class RegisterCustomer extends StatefulWidget {
 
 class _RegisterCustomerState extends State<RegisterCustomer> {
   final String routes = "/REGISTER_CUSTOMER";
+  ListCustomerForDriverModel? selectedKhachhang;
+  String? idKhachhang;
   ListDriverByCustomerModel? selectedTaixe;
   String? selectedTeamCar;
   String? selectedCar;
   String? selectedWarehome;
   String? selectedNumberCont;
   int numberSelectCont = 0;
-  ListDriverByCustomerModel? selectedKhachhang;
+
   int? idTaixe;
   String? selectedProduct;
 
@@ -303,6 +306,87 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                     ],
                   ),
                 ),
+                SizedBox(
+                  height: 100,
+                  child: Column(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: Row(
+                          children: [
+                            Text(
+                              "Khách hàng *",
+                              textAlign: TextAlign.left,
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                                fontSize: 16,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Theme(
+                              data: ThemeData(
+                                inputDecorationTheme:
+                                    const InputDecorationTheme(
+                                        border: InputBorder.none),
+                              ),
+                              child: DropdownSearch<ListCustomerForDriverModel>(
+                                asyncItems: (String? query) {
+                                  return controller.getDataCustomer(query);
+                                },
+                                popupProps:
+                                    PopupPropsMultiSelection.modalBottomSheet(
+                                  showSelectedItems: true,
+                                  itemBuilder: _customPopupItemBuilderExample3,
+                                  showSearchBox: true,
+                                ),
+                                compareFn: (item, sItem) {
+                                  return item.maKhachHang == sItem.maKhachHang;
+                                },
+                                onChanged:
+                                    (ListCustomerForDriverModel? newValue) {
+                                  setState(() {
+                                    selectedKhachhang = newValue;
+                                    // idKhachhang = int.parse(
+                                    //     newValue!.maKhachHang.toString());
+                                    // print("idtaixe: $idTaixe");
+                                    idKhachhang = newValue!.maKhachHang;
+                                  });
+                                },
+                                dropdownDecoratorProps: DropDownDecoratorProps(
+                                  dropdownSearchDecoration: InputDecoration(
+                                    hintText: "Chọn khách hàng",
+                                    hintStyle: TextStyle(
+                                      color:
+                                          Theme.of(context).primaryColorLight,
+                                    ),
+                                    filled: true,
+                                    iconColor: const Color(0xFFF3BD60),
+                                    focusColor: const Color(0xFFF3BD60),
+                                    // fillColor: Colors.white,
+                                    focusedBorder: const OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFFF3BD60), width: 1.0),
+                                    ),
+                                    enabledBorder: const OutlineInputBorder(
+                                      borderSide: BorderSide(
+                                          color: Color(0xFFF3BD60), width: 1.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
                 CustomDropdownButton(
                   items: idKho
                       .map((item) => DropdownMenuItem<String>(
@@ -433,10 +517,10 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                         numberCont2: controller.numberCont2.text,
                         numberCont2Seal1: controller.numberCont2Seal1.text,
                         numberCont2Seal2: controller.numberCont2Seal2.text,
-                        numberKhoi: int.parse(controller.numberKhoi.text),
-                        numberKhoi1: int.parse(controller.numberKhoi1.text),
-                        numberKien: int.parse(controller.numberKien.text),
-                        numberKien1: int.parse(controller.numberKien1.text),
+                        numberKhoi: double.parse(controller.numberKhoi.text),
+                        numberKhoi1: double.parse(controller.numberKhoi1.text),
+                        numberKien: double.parse(controller.numberKien.text),
+                        numberKien1: double.parse(controller.numberKien1.text),
                         numberBook: controller.numberBook.text,
                         numberBook1: controller.numberBook1.text,
                         idCar: selectedCar,
@@ -444,6 +528,7 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                         idKho: selectedWarehome,
                         time: dateinput.text,
                         idProduct: selectedProduct,
+                        maKhachHang: '',
                       );
                     },
                     text: "Đăng ký")
@@ -579,6 +664,39 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
             style: const TextStyle(color: Colors.blueGrey),
           ),
           subtitle: Text(item?.phone ?? ''),
+          leading: const CircleAvatar(
+              // this does not work - throws 404 error
+              // backgroundImage: NetworkImage(item.avatar ?? ''),
+              ),
+        ),
+      ),
+    );
+  }
+
+  Widget _customPopupItemBuilderExample3(
+    BuildContext context,
+    ListCustomerForDriverModel? item,
+    bool isSelected,
+  ) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 5),
+      child: Card(
+        // color: Colors.green,
+        shape: RoundedRectangleBorder(
+          side: const BorderSide(
+            color: Color(0xFFF3BD60),
+          ),
+
+          borderRadius: BorderRadius.circular(10.0), //<-- SEE HERE
+        ),
+        child: ListTile(
+          style: ListTileStyle.drawer,
+          focusColor: Colors.white,
+          title: Text(
+            item?.tenKhachhang ?? '',
+            style: const TextStyle(color: Colors.blueGrey),
+          ),
+          subtitle: Text(item?.maKhachHang ?? ''),
           leading: const CircleAvatar(
               // this does not work - throws 404 error
               // backgroundImage: NetworkImage(item.avatar ?? ''),
