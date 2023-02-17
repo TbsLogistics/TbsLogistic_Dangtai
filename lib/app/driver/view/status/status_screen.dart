@@ -8,7 +8,7 @@ import 'package:timeline_list/timeline_model.dart';
 import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
-class StatusDriverScreen extends GetView<StatusDriverCotroller> {
+class StatusDriverScreen extends GetView<StatusDriverController> {
   bool showFormStatus = false;
 
   StatusDriverScreen({super.key});
@@ -16,99 +16,93 @@ class StatusDriverScreen extends GetView<StatusDriverCotroller> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return GetBuilder<StatusDriverCotroller>(
-      init: StatusDriverCotroller(),
+    return GetBuilder<StatusDriverController>(
+      init: StatusDriverController(),
       builder: (controller) => Scaffold(
-          appBar: AppBar(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-            title: Text(
-              "Chi tiết trạng thái",
-              style: TextStyle(
-                color: Theme.of(context).primaryColorLight,
-              ),
-            ),
-            centerTitle: true,
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios_new,
-                color: Theme.of(context).primaryColorLight,
-              ),
-              onPressed: () {
-                Get.back();
-              },
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          title: Text(
+            "Chi tiết trạng thái",
+            style: TextStyle(
+              color: Theme.of(context).primaryColorLight,
             ),
           ),
-          body: FutureBuilder(
-            future: controller.getStatus(),
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                var items = snapshot.data as StatusDriverModel;
-                print(items.giovao);
-                return items.trackingtime == null
-                    ? const Center(
-                        child: Text(
-                          "Tài xế chưa hoạt động ! ",
-                          style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 22,
-                          ),
-                        ),
-                      )
-                    : Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 15, horizontal: 10),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              _buildNameKH(controller, size, context, items),
-                              SizedBox(
-                                height: size.width * 0.05,
-                              ),
-                              _buildNameCar(controller, size, context, items),
-                              SizedBox(
-                                height: size.width * 0.05,
-                              ),
-                              _buildStatus(size, controller, context, items),
-                              SizedBox(
-                                height: size.width * 0.05,
-                              ),
-                              controller.showForm.value
-                                  ? _buildFormStatus(controller, size, items)
-                                  : Container(),
-                              SizedBox(
-                                height: size.width * 0.05,
-                              ),
-                              _buildButton(controller, size, () {
-                                Get.toNamed(
-                                  Routes.REGISTER_OUT_SCREEN,
-                                  arguments: [
-                                    items.maPhieuvao,
-                                    items.loaixeRe!.maLoaiXe,
-                                  ],
-                                );
-                              }),
-                            ],
-                          ),
-                        ),
-                      );
-              }
-              return Center(
-                child: Text(
-                  "Tài xế chưa hoạt động !",
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 20,
-                  ),
-                ),
-              );
+          centerTitle: true,
+          leading: IconButton(
+            icon: Icon(
+              Icons.arrow_back_ios_new,
+              color: Theme.of(context).primaryColorLight,
+            ),
+            onPressed: () {
+              Get.back();
             },
-          )),
+          ),
+        ),
+        body: FutureBuilder(
+          future: controller.getStatus(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              var items = snapshot.data as StatusDriverModel;
+
+              return items.trackingtime == null
+                  ? const Center(
+                      child: Text(
+                        "Tài xế chưa hoạt động ! ",
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 22,
+                        ),
+                      ),
+                    )
+                  : Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15, horizontal: 10),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            _buildNameKH(controller, size, context, items),
+                            SizedBox(
+                              height: size.width * 0.05,
+                            ),
+                            _buildNameCar(controller, size, context, items),
+                            SizedBox(
+                              height: size.width * 0.05,
+                            ),
+                            _buildStatus(size, controller, context, items),
+                            SizedBox(
+                              height: size.width * 0.05,
+                            ),
+                            controller.showForm.value
+                                ? _buildFormStatus(controller, size, items)
+                                : Container(),
+                            SizedBox(
+                              height: size.width * 0.05,
+                            ),
+                            _buildButton(controller, size, () {
+                              Get.toNamed(
+                                Routes.REGISTER_OUT_SCREEN,
+                                arguments: items,
+                              );
+                            }),
+                          ],
+                        ),
+                      ),
+                    );
+            }
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Colors.orangeAccent,
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 
   Widget _buildFormStatus(
-      StatusDriverCotroller controller, Size size, StatusDriverModel items) {
+      StatusDriverController controller, Size size, StatusDriverModel items) {
     var length = items.trackingtime!.length;
 
     var day = DateFormat("yyy-MM-dd");
@@ -381,7 +375,7 @@ class StatusDriverScreen extends GetView<StatusDriverCotroller> {
         : Container();
   }
 
-  Widget _buildStatus(Size size, StatusDriverCotroller controller,
+  Widget _buildStatus(Size size, StatusDriverController controller,
       BuildContext context, StatusDriverModel items) {
     return items.trackingtime != null
         ? InkWell(
@@ -446,7 +440,7 @@ class StatusDriverScreen extends GetView<StatusDriverCotroller> {
         : Container();
   }
 
-  Widget _buildNameKH(StatusDriverCotroller controller, Size size,
+  Widget _buildNameKH(StatusDriverController controller, Size size,
       BuildContext context, StatusDriverModel items) {
     return items.taixeRe != null
         ? Container(
@@ -530,7 +524,7 @@ class StatusDriverScreen extends GetView<StatusDriverCotroller> {
         : Container();
   }
 
-  Widget _buildNameCar(StatusDriverCotroller controller, Size size,
+  Widget _buildNameCar(StatusDriverController controller, Size size,
       BuildContext context, StatusDriverModel items) {
     return items.loaixeRe != null
         ? Container(
@@ -615,7 +609,7 @@ class StatusDriverScreen extends GetView<StatusDriverCotroller> {
   }
 
   Widget _buildButton(
-    StatusDriverCotroller controllers,
+    StatusDriverController controllers,
     Size size,
     VoidCallback onTap,
   ) {

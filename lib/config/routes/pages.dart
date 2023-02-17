@@ -19,7 +19,7 @@ import 'package:tbs_logistics_dangtai/app/driver/view/create_register_view/detai
 import 'package:tbs_logistics_dangtai/app/driver/view/status_tiker_view/status_ticker_details_view.dart';
 import 'package:tbs_logistics_dangtai/app/login/controller/login_bindings.dart';
 
-import 'package:tbs_logistics_dangtai/app/driver/view/qr_code_screen.dart';
+import 'package:tbs_logistics_dangtai/app/driver/view/settings/qr_code_screen.dart';
 import 'package:tbs_logistics_dangtai/app/login/login_page_main.dart';
 import 'package:tbs_logistics_dangtai/app/sercurity/sercurity_page.dart';
 import 'package:tbs_logistics_dangtai/app/splash/controller/splash_binding.dart';

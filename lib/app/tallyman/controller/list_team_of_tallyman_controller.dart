@@ -1,7 +1,5 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:tbs_logistics_dangtai/app/tallyman/model/id_product_model.dart';
 

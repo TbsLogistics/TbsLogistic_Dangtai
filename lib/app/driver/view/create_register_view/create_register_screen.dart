@@ -2,9 +2,8 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
+import 'package:tbs_logistics_dangtai/app/driver/controller/register_driver_controller.dart';
 import 'package:tbs_logistics_dangtai/app/driver/model/list_customer_for_driver_model.dart';
-import 'package:tbs_logistics_dangtai/config/model/list_customer_model.dart';
 import 'package:tbs_logistics_dangtai/config/widget/buttom_form_submit.dart';
 import 'package:tbs_logistics_dangtai/config/widget/custom_text_form_fiels.dart';
 import 'package:tbs_logistics_dangtai/config/widget/drop_button.dart';
@@ -139,8 +138,8 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return GetBuilder<DriverController>(
-      init: DriverController(),
+    return GetBuilder<RegisterDriverController>(
+      init: RegisterDriverController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -183,7 +182,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
                           child: Row(
                             children: [
                               Text(
-                                "Tài xế *",
+                                "Khách hàng *",
                                 textAlign: TextAlign.left,
                                 style: TextStyle(
                                   color: Theme.of(context).primaryColorLight,
@@ -208,8 +207,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
                                   asyncItems: (String? query) {
                                     return controller.getData(query);
                                   },
-                                  popupProps:
-                                      PopupPropsMultiSelection.modalBottomSheet(
+                                  popupProps: PopupProps.dialog(
                                     showSelectedItems: true,
                                     itemBuilder:
                                         _customPopupItemBuilderExample2,
@@ -221,18 +219,15 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
                                   },
                                   onChanged:
                                       (ListCustomerForDriverModel? newValue) {
-                                    setState(() {
-                                      selectedKhachhang = newValue;
-                                      // idKhachhang = int.parse(
-                                      //     newValue!.maKhachHang.toString());
-                                      // print("idtaixe: $idTaixe");
-                                      idKhachhang = newValue!.maKhachHang;
-                                    });
+                                    controller.selectedKhachhang =
+                                        newValue!.maKhachHang.toString();
+                                    print(controller.selectedKhachhang
+                                        .toString());
                                   },
                                   dropdownDecoratorProps:
                                       DropDownDecoratorProps(
                                     dropdownSearchDecoration: InputDecoration(
-                                      hintText: "Chọn khách hàng",
+                                      hintText: "Chọn khách hàng ",
                                       hintStyle: TextStyle(
                                         color:
                                             Theme.of(context).primaryColorLight,
@@ -376,29 +371,55 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
                   numberSelectCont >= 2 ? _contSecond(controller) : Container(),
                   ButtonFormSubmit(
                       onPressed: () {
+                        if (dateinput.text == "" ||
+                            selectedWarehome!.isEmpty ||
+                            selectedCar!.isEmpty ||
+                            controller.numberCar.text == "" ||
+                            selectedProduct!.isEmpty ||
+                            controller.selectedKhachhang.isEmpty) {
+                          Get.snackbar(
+                            "",
+                            "",
+                            titleText: const Text(
+                              "Thông báo",
+                              style: TextStyle(
+                                color: Colors.red,
+                              ),
+                            ),
+                            messageText: const Text(
+                              "Bạn nhập thiếu thông tin *",
+                              style: TextStyle(
+                                color: Colors.green,
+                              ),
+                            ),
+                          );
+                        } else {
+                          controller.postRegisterDriver(
+                            time: dateinput.text,
+                            idWarehome: selectedWarehome,
+                            idCar: selectedCar,
+                            numberCar: controller.numberCar.text,
+                            numberCont1: controller.numberCont1.text,
+                            numberCont2: controller.numberCont2.text,
+                            numberCont1Seal1: controller.numberCont1Seal1.text,
+                            numberCont1Seal2: controller.numberCont1Seal2.text,
+                            numberKhoi:
+                                double.parse(controller.numberKhoi.text),
+                            numberKien:
+                                double.parse(controller.numberKien.text),
+                            numberBook: controller.numberBook.text,
+                            numberCont2Seal1: controller.numberCont2Seal1.text,
+                            numberCont2Seal2: controller.numberCont2Seal2.text,
+                            numberKhoi1:
+                                double.parse(controller.numberKhoi1.text),
+                            numberKien1:
+                                double.parse(controller.numberKien1.text),
+                            numberBook1: controller.numberBook1.text,
+                            idProduct: selectedProduct,
+                            maKhachHang: controller.selectedKhachhang,
+                          );
+                        }
                         // print(dateinput.text);
-                        controller.postRegisterDriver(
-                          time: dateinput.text,
-                          idWarehome: selectedWarehome,
-                          idCar: selectedCar,
-                          numberCar: controller.numberCar.text,
-                          numberCont1: controller.numberCont1.text,
-                          numberCont2: controller.numberCont2.text,
-                          numberCont1Seal1: controller.numberCont1Seal1.text,
-                          numberCont1Seal2: controller.numberCont1Seal2.text,
-                          numberKhoi: double.parse(controller.numberKhoi.text),
-                          numberKien: double.parse(controller.numberKien.text),
-                          numberBook: controller.numberBook.text,
-                          numberCont2Seal1: controller.numberCont2Seal1.text,
-                          numberCont2Seal2: controller.numberCont2Seal2.text,
-                          numberKhoi1:
-                              double.parse(controller.numberKhoi1.text),
-                          numberKien1:
-                              double.parse(controller.numberKien1.text),
-                          numberBook1: controller.numberBook1.text,
-                          idProduct: selectedProduct,
-                          maKhachHang: '',
-                        );
                       },
                       text: "Đăng ký")
                 ],
@@ -433,10 +454,6 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
             item?.tenKhachhang ?? '',
             style: const TextStyle(color: Colors.blueGrey),
           ),
-          leading: const CircleAvatar(
-              // this does not work - throws 404 error
-              // backgroundImage: NetworkImage(item.avatar ?? ''),
-              ),
         ),
       ),
     );
@@ -451,7 +468,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
           child: Row(
             children: [
               Text(
-                "Thời gian dự kiến",
+                "Thời gian dự kiến *",
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   color: Theme.of(context).primaryColorLight,
@@ -500,7 +517,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
     );
   }
 
-  Widget _contFirt(DriverController controller) {
+  Widget _contFirt(RegisterDriverController controller) {
     return Column(
       children: [
         const Divider(),
@@ -550,7 +567,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
     );
   }
 
-  Widget _contSecond(DriverController controller) {
+  Widget _contSecond(RegisterDriverController controller) {
     return Column(
       children: [
         const Divider(),
@@ -617,6 +634,8 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
     {"value": "K3", "name": "Kho 3"},
     {"value": "K4", "name": "Kho 4"},
     {"value": "K5", "name": "Kho 5"},
+    {"value": "K6", "name": "Kho 6"},
+    {"value": "K7", "name": "Kho 7"},
   ];
   final List<Map<String, dynamic>> idProduct = [
     {'value': "HN", "name": "Nhập hàng"},

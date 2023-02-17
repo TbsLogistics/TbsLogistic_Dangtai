@@ -35,11 +35,11 @@ class PhieuraModel {
   bool? trangthaikhoara;
   bool? trangthaihangra1;
   bool? trangthaikhoara1;
-  double? soKienra;
-  double? sokhoira;
+  int? soKienra;
+  int? sokhoira;
   String? soBookra;
-  double? soKienra1;
-  double? sokhoira1;
+  int? soKienra1;
+  int? sokhoira1;
   String? soBookra1;
 
   PhieuraModel(

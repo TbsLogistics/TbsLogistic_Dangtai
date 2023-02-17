@@ -15,7 +15,7 @@ class CustomTextField extends StatelessWidget {
             Text(
               title,
               style: const TextStyle(
-                color: Colors.orangeAccent,
+                color: Colors.black,
                 fontSize: 18,
               ),
             ),
@@ -26,8 +26,8 @@ class CustomTextField extends StatelessWidget {
           children: [
             Text(
               content,
-              style: const TextStyle(
-                color: Colors.black,
+              style: TextStyle(
+                color: Theme.of(context).primaryColorLight,
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),

@@ -16,8 +16,11 @@ import 'package:tbs_logistics_dangtai/config/share_preferences/share_prefer.dart
 class CustomerController extends GetxController {
   var dio = Dio();
 
+  final formKey = GlobalKey<FormState>();
+
   @override
   void onInit() {
+    formKey;
     getUser();
     super.onInit();
   }
@@ -26,6 +29,9 @@ class CustomerController extends GetxController {
   RxBool switchLanguage = true.obs;
   RxBool hideShowMode = false.obs;
   RxBool showForm = false.obs;
+
+  var selectedKhachhang = "";
+  var selectedTaixe = "";
 
   void showFormStatus() {
     showForm.value = !showForm.value;

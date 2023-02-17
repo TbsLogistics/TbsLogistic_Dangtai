@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
+import 'package:tbs_logistics_dangtai/app/driver/controller/status_controller.dart';
+import 'package:tbs_logistics_dangtai/app/driver/model/status_driver_model.dart';
 
 import 'package:tbs_logistics_dangtai/config/widget/buttom_form_submit.dart';
 import 'package:tbs_logistics_dangtai/config/widget/custom_text_form_fiels.dart';
 import 'package:tbs_logistics_dangtai/config/widget/drop_button.dart';
 
 // ignore: must_be_immutable
-class RegisterOutScreen extends GetView<DriverController> {
+class RegisterOutScreen extends GetView<StatusDriverController> {
   final String routes = "/REGISTER_OUT_SCREEN";
   // String? selectedNumberCont;
   // int numberSelectCont = 0;
@@ -15,46 +16,68 @@ class RegisterOutScreen extends GetView<DriverController> {
   RegisterOutScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    var items = Get.arguments;
-    var maPhieu = items[0] as int;
-    print(maPhieu);
-    var loaixe = items[1];
+    if (Get.arguments != null && Get.arguments is StatusDriverModel) {
+      var items = Get.arguments as StatusDriverModel;
+      var maPhieu = items.maPhieuvao as int;
+      print(maPhieu);
+      var loaixe = items.loaixeRe!.maLoaiXe;
 
-    return GetBuilder<DriverController>(
-      init: DriverController(),
-      builder: (controller) => Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Đăng ký phiếu ra",
-            style: TextStyle(color: Theme.of(context).primaryColorLight),
-          ),
-          centerTitle: true,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_new,
-              color: Theme.of(context).primaryColorLight,
-              size: 25,
+      return GetBuilder<StatusDriverController>(
+        init: StatusDriverController(),
+        builder: (controller) => Scaffold(
+          appBar: AppBar(
+            title: Text(
+              "Đăng ký phiếu ra",
+              style: TextStyle(color: Theme.of(context).primaryColorLight),
+            ),
+            centerTitle: true,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            leading: IconButton(
+              onPressed: () {
+                Get.back();
+              },
+              icon: Icon(
+                Icons.arrow_back_ios_new,
+                color: Theme.of(context).primaryColorLight,
+                size: 25,
+              ),
             ),
           ),
+          body: SingleChildScrollView(
+            child: loaixe == "con"
+                ? _buildContainer(controller, maPhieu, context, items)
+                : _buildTai(controller, maPhieu, context, items),
+          ),
         ),
-        body: SingleChildScrollView(
-          child: loaixe == "con"
-              ? _buildContainer(controller, maPhieu, context)
-              : _buildTai(controller, maPhieu, context),
+      );
+    }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Đăng ký phiếu ra",
+          style: TextStyle(color: Theme.of(context).primaryColorLight),
         ),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(
+            Icons.arrow_back_ios_new,
+            color: Theme.of(context).primaryColorLight,
+            size: 25,
+          ),
+        ),
+      ),
+      body: const Center(
+        child: Text("Lỗi dữ liệu !"),
       ),
     );
   }
 
-  Widget _buildTai(
-    DriverController controller,
-    int item,
-    BuildContext context,
-  ) {
+  Widget _buildTai(StatusDriverController controller, int item,
+      BuildContext context, StatusDriverModel items) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: Column(
@@ -100,10 +123,11 @@ class RegisterOutScreen extends GetView<DriverController> {
                 soBookra: controller.numberBook.text,
                 maphieuvao: item,
                 soBookra1: controller.numberBook1.text,
-                soKienra: double.parse(controller.numberKien.text),
-                soKienra1: double.parse(controller.numberKien1.text),
-                sokhoira: double.parse(controller.numberKhoi.text),
-                sokhoira1: double.parse(controller.numberKhoi1.text),
+                soKienra: int.parse(controller.numberKien.text),
+                soKienra1: int.parse(controller.numberKien1.text),
+                sokhoira: int.parse(controller.numberKhoi.text),
+                sokhoira1: int.parse(controller.numberKhoi1.text),
+                items: items,
               );
             },
             text: "Đăng ký",
@@ -113,8 +137,8 @@ class RegisterOutScreen extends GetView<DriverController> {
     );
   }
 
-  Widget _buildContainer(
-      DriverController controller, int item, BuildContext context) {
+  Widget _buildContainer(StatusDriverController controller, int item,
+      BuildContext context, StatusDriverModel items) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
       child: Column(
@@ -161,10 +185,11 @@ class RegisterOutScreen extends GetView<DriverController> {
                 soBookra: controller.numberBook.text,
                 maphieuvao: item,
                 soBookra1: controller.numberBook1.text,
-                soKienra: double.parse(controller.numberKien.text),
-                soKienra1: double.parse(controller.numberKien1.text),
-                sokhoira: double.parse(controller.numberKhoi.text),
-                sokhoira1: double.parse(controller.numberKhoi1.text),
+                soKienra: int.parse(controller.numberKien.text),
+                soKienra1: int.parse(controller.numberKien1.text),
+                sokhoira: int.parse(controller.numberKhoi.text),
+                sokhoira1: int.parse(controller.numberKhoi1.text),
+                items: items,
               );
             },
             text: "Đăng ký",
@@ -174,7 +199,7 @@ class RegisterOutScreen extends GetView<DriverController> {
     );
   }
 
-  Widget _contFirt(DriverController controller, BuildContext context) {
+  Widget _contFirt(StatusDriverController controller, BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.orangeAccent),
@@ -230,7 +255,7 @@ class RegisterOutScreen extends GetView<DriverController> {
     );
   }
 
-  Widget _contSecond(DriverController controller, BuildContext context) {
+  Widget _contSecond(StatusDriverController controller, BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.orangeAccent),

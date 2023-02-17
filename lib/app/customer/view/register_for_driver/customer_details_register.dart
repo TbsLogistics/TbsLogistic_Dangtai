@@ -43,36 +43,45 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
       body: Container(
         padding: const EdgeInsets.all(10),
         child: Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              width: 3,
-              color: Colors.white,
-            ),
-            borderRadius: BorderRadius.circular(5),
-          ),
           child: SingleChildScrollView(
               child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
             child: Column(
               children: [
-                _buildDayTime(items, size, day, hour),
+                _buildDayTime(items, size, day, hour, context),
                 const SizedBox(height: 10),
-                _buildNumberCar(items, size),
+                _buildNumberCar(
+                  items: items,
+                  size: size,
+                  context: context,
+                  content: items.loaixe == "tai" ? "Xe tải" : "Xe container",
+                  title: 'Loại xe',
+                  title2: 'Số xe',
+                  content2: items.soxe.toString(),
+                ),
                 const SizedBox(
                   height: 15,
                 ),
-                const SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: CustomTextField(
-                        title: 'Loại hàng',
-                        content: '${items.maloaiHang}',
-                      ),
-                    ),
-                  ],
+                _buildNumberCar(
+                  items: items,
+                  size: size,
+                  context: context,
+                  content: items.maloaiHang == "HN" ? "Hàng nhập" : "Hàng xuất",
+                  title: 'Loại Hàng',
+                  title2: 'Kho',
+                  content2: items.kho.toString(),
                 ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.start,
+                //   children: [
+                //     Expanded(
+                //       child: CustomTextField(
+                //         title: 'Loại hàng',
+                //         content: '${items.maloaiHang}',
+                //       ),
+                //     ),
+                //   ],
+                // ),
                 const SizedBox(height: 10),
                 Divider(
                   indent: size.width * 0.2,
@@ -82,7 +91,7 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                   color: Colors.black.withOpacity(0.2),
                 ),
                 const SizedBox(height: 10),
-                _buildNumberCont(items, size),
+                _buildNumberCont(items, size, context),
               ],
             ),
           )),
@@ -91,7 +100,8 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
     );
   }
 
-  Widget _buildNumberCont(RegisterForCustomerModel items, Size size) {
+  Widget _buildNumberCont(
+      RegisterForCustomerModel items, Size size, BuildContext context) {
     return Container(
       height: size.width * 0.7,
       decoration: BoxDecoration(
@@ -100,7 +110,7 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
           color: Colors.orangeAccent,
         ),
         borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
+        // color: Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -118,7 +128,12 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                         "Số công 1",
                         style: CustomTextStyle.titlePrimary,
                       ),
-                      Text("${items.socont1}"),
+                      Text(
+                        "${items.socont1}",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColorLight,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -140,7 +155,12 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.cont1seal1}"),
+                            Text(
+                              "${items.cont1seal1}",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -165,7 +185,12 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.cont1seal2}"),
+                            Text(
+                              "${items.cont1seal2}",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -190,7 +215,12 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.soKien}"),
+                            Text(
+                              "${items.soKien}",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -215,7 +245,12 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.soBook}"),
+                            Text(
+                              "${items.soBook}",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -240,7 +275,12 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.sokhoi}"),
+                            Text(
+                              "${items.sokhoi}",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -270,7 +310,12 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                         "Số công 2",
                         style: CustomTextStyle.titlePrimary,
                       ),
-                      Text("${items.socont1}"),
+                      Text(
+                        "${items.socont1}",
+                        style: TextStyle(
+                          color: Theme.of(context).primaryColorLight,
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -292,7 +337,12 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.cont2seal1}"),
+                            Text(
+                              "${items.cont2seal1}",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -317,7 +367,12 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.cont2seal2}"),
+                            Text(
+                              "${items.cont2seal2}",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -342,7 +397,12 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.sokien1}"),
+                            Text(
+                              "${items.sokien1}",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -367,7 +427,12 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.soBook1}"),
+                            Text(
+                              "${items.soBook1}",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -392,7 +457,12 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text("${items.sokhoi1}"),
+                            Text(
+                              "${items.sokhoi1}",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColorLight,
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -407,7 +477,14 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
     );
   }
 
-  Widget _buildNumberCar(RegisterForCustomerModel items, Size size) {
+  Widget _buildNumberCar(
+      {required RegisterForCustomerModel items,
+      required Size size,
+      required BuildContext context,
+      required String title,
+      required String content,
+      required String title2,
+      required String content2}) {
     return Container(
       height: size.width * 0.2,
       decoration: BoxDecoration(
@@ -416,7 +493,7 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
           color: Colors.orangeAccent,
         ),
         borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
+        // color: Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -424,11 +501,11 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
-                      "Loại xe",
+                      title,
                       style: CustomTextStyle.titlePrimary,
                     ),
                   ),
@@ -437,9 +514,10 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                   flex: 3,
                   child: Center(
                     child: Text(
-                      "${items.loaixe}",
-                      style: const TextStyle(
+                      content,
+                      style: TextStyle(
                         fontSize: 16,
+                        color: Theme.of(context).primaryColorLight,
                       ),
                     ),
                   ),
@@ -457,11 +535,11 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
           Expanded(
             child: Column(
               children: [
-                const Expanded(
+                Expanded(
                   flex: 2,
                   child: Center(
                     child: Text(
-                      "Số xe",
+                      title2,
                       style: CustomTextStyle.titlePrimary,
                     ),
                   ),
@@ -470,9 +548,10 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                   flex: 3,
                   child: Center(
                     child: Text(
-                      "${items.soxe}",
-                      style: const TextStyle(
+                      content2,
+                      style: TextStyle(
                         fontSize: 16,
+                        color: Theme.of(context).primaryColorLight,
                       ),
                     ),
                   ),
@@ -486,7 +565,7 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
   }
 
   Widget _buildDayTime(RegisterForCustomerModel items, Size size,
-      DateFormat day, DateFormat hour) {
+      DateFormat day, DateFormat hour, BuildContext context) {
     return Container(
       height: size.width * 0.2,
       decoration: BoxDecoration(
@@ -495,7 +574,7 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
           color: Colors.orangeAccent,
         ),
         borderRadius: BorderRadius.circular(15),
-        color: Colors.white,
+        // color: Colors.white,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -517,8 +596,9 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                   child: Center(
                     child: Text(
                       day.format(DateTime.parse(items.giodukien!)),
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
+                        color: Theme.of(context).primaryColorLight,
                       ),
                     ),
                   ),
@@ -550,8 +630,9 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
                   child: Center(
                     child: Text(
                       hour.format(DateTime.parse(items.giodukien!)),
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16,
+                        color: Theme.of(context).primaryColorLight,
                       ),
                     ),
                   ),

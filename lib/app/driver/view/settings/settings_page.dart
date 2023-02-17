@@ -2,14 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
+import 'package:tbs_logistics_dangtai/app/driver/controller/setting_driver_controller.dart';
 import 'package:tbs_logistics_dangtai/app/driver/view/change_password_/change_password_screen.dart';
-import 'package:tbs_logistics_dangtai/app/driver/view/change_password_/controller/change_password_controller.dart';
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
-class DriverSettings extends GetView<DriverController> {
+class DriverSettings extends GetView<SettingDriverController> {
   const DriverSettings({super.key});
 
   final String routes = "/DRIVER_SETTINGS";
@@ -17,8 +16,8 @@ class DriverSettings extends GetView<DriverController> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return GetBuilder<DriverController>(
-      init: DriverController(),
+    return GetBuilder<SettingDriverController>(
+      init: SettingDriverController(),
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(

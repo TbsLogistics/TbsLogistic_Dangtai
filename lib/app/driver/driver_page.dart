@@ -11,48 +11,45 @@ class DriverPage extends GetView<DriverController> {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<DriverController>(
-      init: DriverController(),
-      builder: (controller) => Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text(
-            "TBS Logistic",
-            style: TextStyle(
+    return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text(
+          "TBS Logistic",
+          style: TextStyle(
+            color: Theme.of(context).primaryColorLight,
+          ),
+        ),
+        centerTitle: true,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.toNamed(
+                Routes.QR_CODE_SCREEN,
+              );
+            },
+            icon: Icon(
+              Icons.qr_code_rounded,
               color: Theme.of(context).primaryColorLight,
+              size: 25,
             ),
           ),
-          centerTitle: true,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          actions: [
-            IconButton(
-              onPressed: () {
-                Get.toNamed(
-                  Routes.QR_CODE_SCREEN,
-                );
-              },
-              icon: Icon(
-                Icons.qr_code_rounded,
-                color: Theme.of(context).primaryColorLight,
-                size: 25,
-              ),
+          const SizedBox(width: 5),
+          IconButton(
+            onPressed: () {
+              Get.to(() => const DriverSettings());
+            },
+            icon: Icon(
+              Icons.settings,
+              color: Theme.of(context).primaryColorLight,
+              size: 25,
             ),
-            const SizedBox(width: 5),
-            IconButton(
-              onPressed: () {
-                Get.to(() => const DriverSettings());
-              },
-              icon: Icon(
-                Icons.settings,
-                color: Theme.of(context).primaryColorLight,
-                size: 25,
-              ),
-            ),
-            const SizedBox(width: 15),
-          ],
-        ),
-        body: const DriverScreen(),
+          ),
+          const SizedBox(width: 15),
+        ],
       ),
+      body: const DriverScreen(),
     );
   }
 }

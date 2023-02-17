@@ -37,7 +37,7 @@ class CustomerSettings extends GetView<CustomerController> {
               icon: Icon(
                 Icons.arrow_back_ios_new_outlined,
                 size: 25,
-                color: Theme.of(context).primaryColor,
+                color: Theme.of(context).primaryColorLight,
               ),
             ),
           ),

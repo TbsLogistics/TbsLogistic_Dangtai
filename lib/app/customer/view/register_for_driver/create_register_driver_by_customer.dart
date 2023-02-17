@@ -163,9 +163,6 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
         ),
         body: Container(
           height: size.height,
-          // decoration: const BoxDecoration(
-          //   gradient: CustomColor.gradient,
-          // ),
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
           child: SingleChildScrollView(
             child: Column(
@@ -179,7 +176,7 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                       child: Row(
                         children: [
                           Text(
-                            "Thời gian dự kiến",
+                            "Thời gian dự kiến *",
                             textAlign: TextAlign.left,
                             style: TextStyle(
                               color: Theme.of(context).primaryColorLight,
@@ -259,8 +256,7 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                                 asyncItems: (String? query) {
                                   return controller.getData(query);
                                 },
-                                popupProps:
-                                    PopupPropsMultiSelection.modalBottomSheet(
+                                popupProps: PopupProps.dialog(
                                   showSelectedItems: true,
                                   itemBuilder: _customPopupItemBuilderExample2,
                                   showSearchBox: true,
@@ -270,12 +266,8 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                                 },
                                 onChanged:
                                     (ListDriverByCustomerModel? newValue) {
-                                  setState(() {
-                                    selectedTaixe = newValue;
-                                    idTaixe =
-                                        int.parse(newValue!.maTaixe.toString());
-                                    // print("idtaixe: $idTaixe");
-                                  });
+                                  controller.selectedTaixe =
+                                      newValue!.maTaixe.toString();
                                 },
                                 dropdownDecoratorProps: DropDownDecoratorProps(
                                   dropdownSearchDecoration: InputDecoration(
@@ -339,8 +331,7 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                                 asyncItems: (String? query) {
                                   return controller.getDataCustomer(query);
                                 },
-                                popupProps:
-                                    PopupPropsMultiSelection.modalBottomSheet(
+                                popupProps: PopupProps.dialog(
                                   showSelectedItems: true,
                                   itemBuilder: _customPopupItemBuilderExample3,
                                   showSearchBox: true,
@@ -350,13 +341,8 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                                 },
                                 onChanged:
                                     (ListCustomerForDriverModel? newValue) {
-                                  setState(() {
-                                    selectedKhachhang = newValue;
-                                    // idKhachhang = int.parse(
-                                    //     newValue!.maKhachHang.toString());
-                                    // print("idtaixe: $idTaixe");
-                                    idKhachhang = newValue!.maKhachHang;
-                                  });
+                                  controller.selectedKhachhang =
+                                      newValue!.maKhachHang.toString();
                                 },
                                 dropdownDecoratorProps: DropDownDecoratorProps(
                                   dropdownSearchDecoration: InputDecoration(
@@ -406,10 +392,10 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                   onSaved: (value) {
                     selectedWarehome = value.toString();
                   },
-                  text: 'Kho',
+                  text: 'Kho *',
                 ),
                 CustomFormFiels(
-                  title: "Số xe",
+                  title: "Số xe *",
                   controller: controller.numberCar,
                   hintText: "Nhập số xe",
                   icon: Icons.abc,
@@ -465,7 +451,7 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                       selectedCar = value.toString();
                     });
                   },
-                  text: 'Loại xe',
+                  text: 'Loại xe *',
                 ),
                 selectedCar == "tai"
                     ? CustomFormFiels(
@@ -502,34 +488,61 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
                             selectedNumberCont = value.toString();
                           });
                         },
-                        text: 'Chọn tổng số cont',
+                        text: 'Chọn tổng số cont *',
                       ),
                 numberSelectCont >= 1 ? _contFirt(controller) : Container(),
                 numberSelectCont >= 2 ? _contFirt(controller) : Container(),
                 ButtonFormSubmit(
                     onPressed: () {
+                      if (selectedCar == null ||
+                          controller.selectedTaixe.isEmpty ||
+                          selectedWarehome!.isEmpty ||
+                          dateinput.text == "" ||
+                          selectedProduct!.isEmpty ||
+                          controller.selectedKhachhang.isEmpty) {
+                        Get.snackbar(
+                          "",
+                          "",
+                          titleText: const Text(
+                            "Thông báo",
+                            style: TextStyle(
+                              color: Colors.red,
+                            ),
+                          ),
+                          messageText: const Text(
+                            "Bạn nhập thiếu thông tin *",
+                            style: TextStyle(
+                              color: Colors.green,
+                            ),
+                          ),
+                        );
+                      }
                       // print(dateinput.text);
-                      controller.postRegisterCustomer(
-                        numberCar: controller.numberCar.text,
-                        numberCont1: controller.numberCont1.text,
-                        numberCont1Seal1: controller.numberCont1Seal1.text,
-                        numberCont1Seal2: controller.numberCont1Seal2.text,
-                        numberCont2: controller.numberCont2.text,
-                        numberCont2Seal1: controller.numberCont2Seal1.text,
-                        numberCont2Seal2: controller.numberCont2Seal2.text,
-                        numberKhoi: double.parse(controller.numberKhoi.text),
-                        numberKhoi1: double.parse(controller.numberKhoi1.text),
-                        numberKien: double.parse(controller.numberKien.text),
-                        numberKien1: double.parse(controller.numberKien1.text),
-                        numberBook: controller.numberBook.text,
-                        numberBook1: controller.numberBook1.text,
-                        idCar: selectedCar,
-                        idTaixe: idTaixe,
-                        idKho: selectedWarehome,
-                        time: dateinput.text,
-                        idProduct: selectedProduct,
-                        maKhachHang: '',
-                      );
+                      else {
+                        controller.postRegisterCustomer(
+                          numberCar: controller.numberCar.text,
+                          numberCont1: controller.numberCont1.text,
+                          numberCont1Seal1: controller.numberCont1Seal1.text,
+                          numberCont1Seal2: controller.numberCont1Seal2.text,
+                          numberCont2: controller.numberCont2.text,
+                          numberCont2Seal1: controller.numberCont2Seal1.text,
+                          numberCont2Seal2: controller.numberCont2Seal2.text,
+                          numberKhoi: double.parse(controller.numberKhoi.text),
+                          numberKhoi1:
+                              double.parse(controller.numberKhoi1.text),
+                          numberKien: double.parse(controller.numberKien.text),
+                          numberKien1:
+                              double.parse(controller.numberKien1.text),
+                          numberBook: controller.numberBook.text,
+                          numberBook1: controller.numberBook1.text,
+                          idCar: selectedCar,
+                          idTaixe: int.parse(controller.selectedTaixe),
+                          idKho: selectedWarehome,
+                          time: dateinput.text,
+                          idProduct: selectedProduct,
+                          maKhachHang: controller.selectedKhachhang,
+                        );
+                      }
                     },
                     text: "Đăng ký")
               ],
@@ -728,5 +741,7 @@ class _RegisterCustomerState extends State<RegisterCustomer> {
     {"value": "K3", "name": "Kho 3"},
     {"value": "K4", "name": "Kho 4"},
     {"value": "K5", "name": "Kho 5"},
+    {"value": "K6", "name": "Kho 6"},
+    {"value": "K7", "name": "Kho 7"},
   ];
 }

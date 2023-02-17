@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
+import 'package:tbs_logistics_dangtai/app/driver/controller/setting_driver_controller.dart';
 
 class QrCodeScreen extends StatelessWidget {
   const QrCodeScreen({super.key});
@@ -10,8 +10,8 @@ class QrCodeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return GetBuilder<DriverController>(
-      init: DriverController(),
+    return GetBuilder<SettingDriverController>(
+      init: SettingDriverController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
           leading: IconButton(

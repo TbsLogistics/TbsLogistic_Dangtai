@@ -94,14 +94,14 @@ class ListFinishedWorking
     return InkWell(
       onTap: () {
         print(
-          items.chuaLam![index].id.toString(),
+          items.daLam![index].id.toString(),
         );
         controller.postListEmployee(
           maPhieuLamHang: int.parse(
-            items.chuaLam![index].id.toString(),
+            items.daLam![index].id.toString(),
           ),
           routes: Routes.LIST_FINISHED_DETAILS_WORKING,
-          time: items.chuaLam![index].thoiGianBatDau.toString(),
+          time: items.daLam![index].thoiGianBatDau.toString(),
         );
       },
       child: Container(

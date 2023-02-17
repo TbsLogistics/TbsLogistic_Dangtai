@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:tbs_logistics_dangtai/app/driver/controller/driver_controller.dart';
+import 'package:tbs_logistics_dangtai/app/driver/controller/status_ticker_controller.dart';
 import 'package:tbs_logistics_dangtai/app/driver/model/list_tiker_for_driver.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 import 'package:tbs_logistics_dangtai/config/widget/custom_list_title.dart';
 
-class StatusDriver extends GetView<DriverController> {
+class StatusDriver extends GetView<StatusTickerController> {
   const StatusDriver({super.key});
 
   @override
   Widget build(BuildContext context) {
     var day = DateFormat("dd/MM/yyyy");
-    return GetBuilder<DriverController>(
-      init: DriverController(),
+    return GetBuilder<StatusTickerController>(
+      init: StatusTickerController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
           title: Text(

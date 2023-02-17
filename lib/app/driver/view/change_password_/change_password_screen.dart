@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:tbs_logistics_dangtai/app/driver/view/change_password_/controller/change_password_controller.dart';
+import 'package:tbs_logistics_dangtai/app/driver/controller/change_password_controller.dart';
 
 // ignore: must_be_immutable
 class ChangePasswordDriverScreen
