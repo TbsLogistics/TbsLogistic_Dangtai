@@ -106,6 +106,7 @@ class Dock {
 class Cua {
   int? maCua;
   String? tenCua;
+  String? local;
   Kho? kho;
 
   Cua({this.maCua, this.tenCua, this.kho});
@@ -113,6 +114,7 @@ class Cua {
   Cua.fromJson(Map<String, dynamic> json) {
     maCua = json['maCua'];
     tenCua = json['tenCua'];
+    local = json['local'];
     kho = json['kho'] != null ? Kho.fromJson(json['kho']) : null;
   }
 
@@ -120,6 +122,7 @@ class Cua {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['maCua'] = maCua;
     data['tenCua'] = tenCua;
+    data['local'] = local;
     if (kho != null) {
       data['kho'] = kho!.toJson();
     }

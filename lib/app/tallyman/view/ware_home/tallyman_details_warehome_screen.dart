@@ -75,141 +75,35 @@ class WareHomePage extends GetView<WareHomeController> {
                                                   ),
                                                 ),
                                                 const SizedBox(height: 10),
-                                                showLane(
-                                                  text:
-                                                      "${items[0].cuatrai![index].dock![0].tenDock}",
-                                                  color: items[0]
-                                                              .cuatrai![index]
-                                                              .dock![0]
-                                                              .status ==
-                                                          true
-                                                      ? Colors.green
-                                                      : Colors.red,
-                                                  onTap: () {
-                                                    print(items[0]
+                                                SizedBox(
+                                                  height: 80.0 *
+                                                      items[0]
+                                                          .cuatrai![index]
+                                                          .dock!
+                                                          .length,
+                                                  child: ListView.builder(
+                                                    itemCount: items[0]
                                                         .cuatrai![index]
-                                                        .dock![0]
-                                                        .maDock);
-                                                    // print(items[0]
-                                                    //     .cuatrai![index]
-                                                    //     .dock![0]
-                                                    //     .status);
-                                                    // if (items[0]
-                                                    //         .cuatrai![index]
-                                                    //         .dock![0]
-                                                    //         .status ==
-                                                    //     false) {
-                                                    //   controller
-                                                    //       .putDock(
-                                                    //     maDock: int.parse(
-                                                    //       items[0]
-                                                    //           .cuatrai![index]
-                                                    //           .dock![0]
-                                                    //           .maDock
-                                                    //           .toString(),
-                                                    //     ),
-                                                    //   )
-                                                    //       .whenComplete(() {
-                                                    //     items[0]
-                                                    //         .cuatrai![index]
-                                                    //         .dock![0]
-                                                    //         .status = true;
-                                                    //     // print(items[0]
-                                                    //     //     .cuatrai![index]
-                                                    //     //     .dock![0]
-                                                    //     //     .status);
-                                                    //   });
-                                                    // }
-                                                  },
-                                                  context: context,
+                                                        .dock!
+                                                        .length,
+                                                    itemBuilder: (context, i) {
+                                                      return showLane(
+                                                        text:
+                                                            "${items[0].cuatrai![index].dock![i].tenDock}",
+                                                        color: items[0]
+                                                                    .cuatrai![
+                                                                        index]
+                                                                    .dock![i]
+                                                                    .status ==
+                                                                true
+                                                            ? Colors.green
+                                                            : Colors.red,
+                                                        onTap: () {},
+                                                        context: context,
+                                                      );
+                                                    },
+                                                  ),
                                                 ),
-                                                showLane(
-                                                  text:
-                                                      "${items[0].cuatrai![index].dock![1].tenDock}",
-                                                  color: items[0]
-                                                              .cuatrai![index]
-                                                              .dock![1]
-                                                              .status ==
-                                                          true
-                                                      ? Colors.green
-                                                      : Colors.red,
-                                                  onTap: () {
-                                                    // print(items[0]
-                                                    //     .cuatrai![index]
-                                                    //     .dock![1]
-                                                    //     .maDock);
-                                                    if (items[0]
-                                                            .cuatrai![index]
-                                                            .dock![1]
-                                                            .status ==
-                                                        false) {
-                                                      controller
-                                                          .putDock(
-                                                        maDock: int.parse(
-                                                          items[0]
-                                                              .cuatrai![index]
-                                                              .dock![1]
-                                                              .maDock
-                                                              .toString(),
-                                                        ),
-                                                      )
-                                                          .whenComplete(() {
-                                                        items[0]
-                                                            .cuatrai![index]
-                                                            .dock![1]
-                                                            .status = true;
-                                                        // print(items[0]
-                                                        //     .cuatrai![index]
-                                                        //     .dock![1]
-                                                        //     .status);
-                                                      });
-                                                    }
-                                                  },
-                                                  context: context,
-                                                ),
-                                                showLane(
-                                                  text:
-                                                      "${items[0].cuatrai![index].dock![2].tenDock}",
-                                                  color: items[0]
-                                                              .cuatrai![index]
-                                                              .dock![2]
-                                                              .status ==
-                                                          true
-                                                      ? Colors.green
-                                                      : Colors.red,
-                                                  onTap: () {
-                                                    // print(items[0]
-                                                    //     .cuatrai![index]
-                                                    //     .dock![2]
-                                                    //     .maDock);
-                                                    if (items[0]
-                                                            .cuatrai![index]
-                                                            .dock![2]
-                                                            .status ==
-                                                        false) {
-                                                      controller
-                                                          .putDock(
-                                                        maDock: int.parse(
-                                                          items[0]
-                                                              .cuatrai![index]
-                                                              .dock![2]
-                                                              .maDock
-                                                              .toString(),
-                                                        ),
-                                                      )
-                                                          .whenComplete(() {
-                                                        items[0]
-                                                                .cuatrai![index]
-                                                                .dock![2]
-                                                                .status ==
-                                                            true;
-                                                        // print("oke");
-                                                      });
-                                                    }
-                                                  },
-                                                  context: context,
-                                                ),
-                                                const SizedBox(height: 10),
                                               ],
                                             ),
                                           );
@@ -231,7 +125,7 @@ class WareHomePage extends GetView<WareHomeController> {
                                   itemCount: rightlenght,
                                   itemBuilder: (context, index) {
                                     // ignore: unnecessary_null_comparison
-                                    return leftlenght == null
+                                    return rightlenght == null
                                         ? Container()
                                         : Container(
                                             margin: const EdgeInsets.only(
@@ -248,43 +142,35 @@ class WareHomePage extends GetView<WareHomeController> {
                                                   ),
                                                 )),
                                                 const SizedBox(height: 10),
-                                                ShowLane(
-                                                  indexDock: 0,
-                                                  indexDoor: index,
-                                                  items: items,
-                                                  maDock: int.parse(
-                                                    items[0]
+                                                SizedBox(
+                                                  height: 80.0 *
+                                                      items[0]
+                                                          .cuaphai![index]
+                                                          .dock!
+                                                          .length,
+                                                  child: ListView.builder(
+                                                    itemCount: items[0]
                                                         .cuaphai![index]
-                                                        .dock![0]
-                                                        .maDock
-                                                        .toString(),
+                                                        .dock!
+                                                        .length,
+                                                    itemBuilder: (context, i) {
+                                                      return showLane(
+                                                        text:
+                                                            "${items[0].cuaphai![index].dock![i].tenDock}",
+                                                        color: items[0]
+                                                                    .cuaphai![
+                                                                        index]
+                                                                    .dock![i]
+                                                                    .status ==
+                                                                true
+                                                            ? Colors.green
+                                                            : Colors.red,
+                                                        onTap: () {},
+                                                        context: context,
+                                                      );
+                                                    },
                                                   ),
                                                 ),
-                                                ShowLane(
-                                                  indexDock: 1,
-                                                  indexDoor: index,
-                                                  items: items,
-                                                  maDock: int.parse(
-                                                    items[0]
-                                                        .cuaphai![index]
-                                                        .dock![1]
-                                                        .maDock
-                                                        .toString(),
-                                                  ),
-                                                ),
-                                                ShowLane(
-                                                  indexDock: 2,
-                                                  indexDoor: index,
-                                                  items: items,
-                                                  maDock: int.parse(
-                                                    items[0]
-                                                        .cuaphai![index]
-                                                        .dock![2]
-                                                        .maDock
-                                                        .toString(),
-                                                  ),
-                                                ),
-                                                const SizedBox(height: 10),
                                               ],
                                             ),
                                           );
