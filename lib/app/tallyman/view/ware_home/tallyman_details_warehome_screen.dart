@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/controller/warehome_controller.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/view/ware_home/model/list_dock_by_warehome_model.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/widgets/showlane_tallyman.dart';
 
 // ignore: must_be_immutable
 class WareHomePage extends GetView<WareHomeController> {
@@ -40,6 +39,7 @@ class WareHomePage extends GetView<WareHomeController> {
               var items = snapshot.data as List<ListDockByWareHomeModel>;
               var leftlenght = items[0].cuatrai!.length;
               var rightlenght = items[0].cuaphai!.length;
+              print([leftlenght, rightlenght]);
               return Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
@@ -82,6 +82,8 @@ class WareHomePage extends GetView<WareHomeController> {
                                                           .dock!
                                                           .length,
                                                   child: ListView.builder(
+                                                    physics:
+                                                        const NeverScrollableScrollPhysics(),
                                                     itemCount: items[0]
                                                         .cuatrai![index]
                                                         .dock!
@@ -149,6 +151,8 @@ class WareHomePage extends GetView<WareHomeController> {
                                                           .dock!
                                                           .length,
                                                   child: ListView.builder(
+                                                    physics:
+                                                        const NeverScrollableScrollPhysics(),
                                                     itemCount: items[0]
                                                         .cuaphai![index]
                                                         .dock!
