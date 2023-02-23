@@ -61,10 +61,10 @@ class _ListDriverByCustomerState extends State<ListDriverByCustomer> {
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
-                                  // print(items[index].maTaixe);
+
                                   controller.postInforDriver(
                                       idTaixe: items[index].maTaixe);
-                                  print(items[index].maTaixe);
+
                                 },
                                 child: CustomListTitle(
                                   Stt: "${index + 1}",

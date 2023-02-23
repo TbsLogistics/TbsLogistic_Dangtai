@@ -86,9 +86,6 @@ class _ListTeamOfTallymanState extends State<ListTeamOfTallyman> {
       ListTeamOfTallymanController controller, ListEmployAwaitModel items) {
     return InkWell(
       onTap: () {
-        print(
-          items.chuaLam![index].id.toString(),
-        );
         controller.postListEmployee(
           maPhieuLamHang: int.parse(
             items.chuaLam![index].id.toString(),

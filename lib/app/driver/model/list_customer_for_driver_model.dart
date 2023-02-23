@@ -23,10 +23,12 @@ class ListCustomerForDriverModel {
   }
 
   String userAsString() {
+    // ignore: unnecessary_this
     return "#${this.maKhachHang} ${this.tenKhachhang}";
   }
 
   bool isEqual(ListCustomerForDriverModel model) {
+    // ignore: unnecessary_this
     return this.tenKhachhang == model.tenKhachhang;
   }
 

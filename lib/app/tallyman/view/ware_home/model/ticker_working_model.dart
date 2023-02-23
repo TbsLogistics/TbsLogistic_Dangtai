@@ -57,24 +57,24 @@ class TickerWorkingModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['maPhieuvao'] = this.maPhieuvao;
-    data['tenLoaiXe'] = this.tenLoaiXe;
-    data['soxe'] = this.soxe;
-    data['tenLoaiHang'] = this.tenLoaiHang;
-    data['socont'] = this.socont;
-    data['soKien'] = this.soKien;
-    data['soKhoi'] = this.soKhoi;
-    data['soBook'] = this.soBook;
-    data['thoiGianDuKienBatDau'] = this.thoiGianDuKienBatDau;
-    data['thoiGianDuKienKetThuc'] = this.thoiGianDuKienKetThuc;
-    data['maDoiLamHang'] = this.maDoiLamHang;
-    data['thoiGianBatDau'] = this.thoiGianBatDau;
-    data['thoiGianKetThuc'] = this.thoiGianKetThuc;
-    data['tenDock'] = this.tenDock;
-    data['tenCua'] = this.tenCua;
-    data['tenKho'] = this.tenKho;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['maPhieuvao'] = maPhieuvao;
+    data['tenLoaiXe'] = tenLoaiXe;
+    data['soxe'] = soxe;
+    data['tenLoaiHang'] = tenLoaiHang;
+    data['socont'] = socont;
+    data['soKien'] = soKien;
+    data['soKhoi'] = soKhoi;
+    data['soBook'] = soBook;
+    data['thoiGianDuKienBatDau'] = thoiGianDuKienBatDau;
+    data['thoiGianDuKienKetThuc'] = thoiGianDuKienKetThuc;
+    data['maDoiLamHang'] = maDoiLamHang;
+    data['thoiGianBatDau'] = thoiGianBatDau;
+    data['thoiGianKetThuc'] = thoiGianKetThuc;
+    data['tenDock'] = tenDock;
+    data['tenCua'] = tenCua;
+    data['tenKho'] = tenKho;
     return data;
   }
 }

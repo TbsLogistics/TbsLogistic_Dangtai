@@ -32,8 +32,6 @@ class _ShowLaneState extends State<ShowLane> {
         .items[0].cuaphai![widget.indexDoor].dock![widget.indexDock].maDock;
     return InkWell(
       onTap: () {
-        print(widget.items[0].cuaphai![widget.indexDoor].dock![widget.indexDock]
-            .maDock);
         controller.putDock(maDock: int.parse(maDock.toString()));
       },
       child: Container(
@@ -81,6 +79,5 @@ class _ShowLaneState extends State<ShowLane> {
         ),
       ),
     );
-    ;
   }
 }

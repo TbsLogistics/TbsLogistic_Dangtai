@@ -39,7 +39,7 @@ class WareHomePage extends GetView<WareHomeController> {
               var items = snapshot.data as List<ListDockByWareHomeModel>;
               var leftlenght = items[0].cuatrai!.length;
               var rightlenght = items[0].cuaphai!.length;
-              print([leftlenght, rightlenght]);
+
               return Container(
                 padding:
                     const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
@@ -100,7 +100,14 @@ class WareHomePage extends GetView<WareHomeController> {
                                                                 true
                                                             ? Colors.green
                                                             : Colors.red,
-                                                        onTap: () {},
+                                                        onTap: () {
+                                                          controller.putDock(
+                                                            maDock: items[0]
+                                                                .cuatrai![index]
+                                                                .dock![i]
+                                                                .maDock!,
+                                                          );
+                                                        },
                                                         context: context,
                                                       );
                                                     },
@@ -169,7 +176,14 @@ class WareHomePage extends GetView<WareHomeController> {
                                                                 true
                                                             ? Colors.green
                                                             : Colors.red,
-                                                        onTap: () {},
+                                                        onTap: () {
+                                                          controller.putDock(
+                                                            maDock: items[0]
+                                                                .cuaphai![index]
+                                                                .dock![i]
+                                                                .maDock!,
+                                                          );
+                                                        },
                                                         context: context,
                                                       );
                                                     },

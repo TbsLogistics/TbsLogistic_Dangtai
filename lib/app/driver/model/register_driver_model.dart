@@ -72,29 +72,29 @@ class RegisterForDriverModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['maKhachHang'] = this.maKhachHang;
-    data['giodukien'] = this.giodukien;
-    data['kho'] = this.kho;
-    data['loaixe'] = this.loaixe;
-    data['soxe'] = this.soxe;
-    data['socont1'] = this.socont1;
-    data['socont2'] = this.socont2;
-    data['cont1seal1'] = this.cont1seal1;
-    data['cont1seal2'] = this.cont1seal2;
-    data['SoKien'] = this.soKien;
-    data['sokhoi'] = this.sokhoi;
-    data['soBook'] = this.soBook;
-    data['trangthaihang'] = this.trangthaihang;
-    data['trangthaikhoa'] = this.trangthaikhoa;
-    data['cont2seal1'] = this.cont2seal1;
-    data['cont2seal2'] = this.cont2seal2;
-    data['Sokien1'] = this.sokien1;
-    data['sokhoi1'] = this.sokhoi1;
-    data['soBook1'] = this.soBook1;
-    data['trangthaihang1'] = this.trangthaihang1;
-    data['trangthaikhoa1'] = this.trangthaikhoa1;
-    data['maloaiHang'] = this.maloaiHang;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['maKhachHang'] = maKhachHang;
+    data['giodukien'] = giodukien;
+    data['kho'] = kho;
+    data['loaixe'] = loaixe;
+    data['soxe'] = soxe;
+    data['socont1'] = socont1;
+    data['socont2'] = socont2;
+    data['cont1seal1'] = cont1seal1;
+    data['cont1seal2'] = cont1seal2;
+    data['SoKien'] = soKien;
+    data['sokhoi'] = sokhoi;
+    data['soBook'] = soBook;
+    data['trangthaihang'] = trangthaihang;
+    data['trangthaikhoa'] = trangthaikhoa;
+    data['cont2seal1'] = cont2seal1;
+    data['cont2seal2'] = cont2seal2;
+    data['Sokien1'] = sokien1;
+    data['sokhoi1'] = sokhoi1;
+    data['soBook1'] = soBook1;
+    data['trangthaihang1'] = trangthaihang1;
+    data['trangthaikhoa1'] = trangthaikhoa1;
+    data['maloaiHang'] = maloaiHang;
     return data;
   }
 }
