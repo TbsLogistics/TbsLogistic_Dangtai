@@ -5,7 +5,6 @@ import 'package:get/get.dart' hide Response;
 import 'package:tbs_logistics_dangtai/app/tallyman/model/id_product_model.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/list_employ_await.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/list_mem_in_team.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/model/list_of_emfloy.dart';
 import 'package:tbs_logistics_dangtai/config/core/constants/constants.dart';
 import 'package:tbs_logistics_dangtai/config/share_preferences/share_prefer.dart';
 

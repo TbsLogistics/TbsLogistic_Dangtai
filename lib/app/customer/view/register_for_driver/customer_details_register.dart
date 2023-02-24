@@ -6,7 +6,7 @@ import 'package:tbs_logistics_dangtai/app/customer/model/register_customer_model
 import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
 import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
-import 'package:tbs_logistics_dangtai/config/widget/custom_text_fiels.dart';
+
 
 class DetailsRegisterCustomer extends GetView<CustomerController> {
   const DetailsRegisterCustomer({super.key});
@@ -42,60 +42,58 @@ class DetailsRegisterCustomer extends GetView<CustomerController> {
       ),
       body: Container(
         padding: const EdgeInsets.all(10),
-        child: Container(
-          child: SingleChildScrollView(
-              child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-            child: Column(
-              children: [
-                _buildDayTime(items, size, day, hour, context),
-                const SizedBox(height: 10),
-                _buildNumberCar(
-                  items: items,
-                  size: size,
-                  context: context,
-                  content: items.loaixe == "tai" ? "Xe tải" : "Xe container",
-                  title: 'Loại xe',
-                  title2: 'Số xe',
-                  content2: items.soxe.toString(),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                _buildNumberCar(
-                  items: items,
-                  size: size,
-                  context: context,
-                  content: items.maloaiHang == "HN" ? "Hàng nhập" : "Hàng xuất",
-                  title: 'Loại Hàng',
-                  title2: 'Kho',
-                  content2: items.kho.toString(),
-                ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.start,
-                //   children: [
-                //     Expanded(
-                //       child: CustomTextField(
-                //         title: 'Loại hàng',
-                //         content: '${items.maloaiHang}',
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                const SizedBox(height: 10),
-                Divider(
-                  indent: size.width * 0.2,
-                  endIndent: size.width * 0.2,
-                  height: 2,
-                  thickness: 2,
-                  color: Colors.black.withOpacity(0.2),
-                ),
-                const SizedBox(height: 10),
-                _buildNumberCont(items, size, context),
-              ],
-            ),
-          )),
-        ),
+        child: SingleChildScrollView(
+            child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+          child: Column(
+            children: [
+              _buildDayTime(items, size, day, hour, context),
+              const SizedBox(height: 10),
+              _buildNumberCar(
+                items: items,
+                size: size,
+                context: context,
+                content: items.loaixe == "tai" ? "Xe tải" : "Xe container",
+                title: 'Loại xe',
+                title2: 'Số xe',
+                content2: items.soxe.toString(),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              _buildNumberCar(
+                items: items,
+                size: size,
+                context: context,
+                content: items.maloaiHang == "HN" ? "Hàng nhập" : "Hàng xuất",
+                title: 'Loại Hàng',
+                title2: 'Kho',
+                content2: items.kho.toString(),
+              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.start,
+              //   children: [
+              //     Expanded(
+              //       child: CustomTextField(
+              //         title: 'Loại hàng',
+              //         content: '${items.maloaiHang}',
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              const SizedBox(height: 10),
+              Divider(
+                indent: size.width * 0.2,
+                endIndent: size.width * 0.2,
+                height: 2,
+                thickness: 2,
+                color: Colors.black.withOpacity(0.2),
+              ),
+              const SizedBox(height: 10),
+              _buildNumberCont(items, size, context),
+            ],
+          ),
+        )),
       ),
     );
   }

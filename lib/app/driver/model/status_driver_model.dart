@@ -1,5 +1,6 @@
 class StatusDriverModel {
   int? maPhieuvao;
+  KhachhangRe? khachhangRe;
   TaixeRe? taixeRe;
   LoaixeRe? loaixeRe;
   String? giovao;
@@ -32,6 +33,9 @@ class StatusDriverModel {
     maPhieuvao = json['maPhieuvao'];
     taixeRe =
         json['taixe_re'] != null ? TaixeRe.fromJson(json['taixe_re']) : null;
+    khachhangRe = json['khachhang_re'] != null
+        ? KhachhangRe.fromJson(json['khachhang_re'])
+        : null;
     loaixeRe =
         json['loaixe_re'] != null ? LoaixeRe.fromJson(json['loaixe_re']) : null;
     giovao = json['giovao'];
@@ -61,6 +65,9 @@ class StatusDriverModel {
     if (taixeRe != null) {
       data['taixe_re'] = taixeRe!.toJson();
     }
+    if (khachhangRe != null) {
+      data['khachhang_re'] = khachhangRe!.toJson();
+    }
     if (loaixeRe != null) {
       data['loaixe_re'] = loaixeRe!.toJson();
     }
@@ -86,6 +93,28 @@ class StatusDriverModel {
     if (loaihang != null) {
       data['loaihang'] = loaihang!.toJson();
     }
+    return data;
+  }
+}
+
+class KhachhangRe {
+  String? maKhachHang;
+  String? tenKhachhang;
+  String? type;
+
+  KhachhangRe({this.maKhachHang, this.tenKhachhang, this.type});
+
+  KhachhangRe.fromJson(Map<String, dynamic> json) {
+    maKhachHang = json['maKhachHang'];
+    tenKhachhang = json['tenKhachhang'];
+    type = json['type'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['maKhachHang'] = maKhachHang;
+    data['tenKhachhang'] = tenKhachhang;
+    data['type'] = type;
     return data;
   }
 }
@@ -135,55 +164,6 @@ class TaixeRe {
     if (khachhangRe != null) {
       data['khachhang_re'] = khachhangRe!.toJson();
     }
-    return data;
-  }
-}
-
-class KhachhangRe {
-  String? maKhachHang;
-  String? tenKhachhang;
-  String? diaChi;
-  String? phone;
-  String? email;
-  String? website;
-  String? maSothue;
-  String? mota;
-  bool? status;
-
-  KhachhangRe(
-      {this.maKhachHang,
-      this.tenKhachhang,
-      this.diaChi,
-      this.phone,
-      this.email,
-      this.website,
-      this.maSothue,
-      this.mota,
-      this.status});
-
-  KhachhangRe.fromJson(Map<String, dynamic> json) {
-    maKhachHang = json['maKhachHang'];
-    tenKhachhang = json['tenKhachhang'];
-    diaChi = json['diaChi'];
-    phone = json['phone'];
-    email = json['email'];
-    website = json['website'];
-    maSothue = json['maSothue'];
-    mota = json['mota'];
-    status = json['status'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['maKhachHang'] = maKhachHang;
-    data['tenKhachhang'] = tenKhachhang;
-    data['diaChi'] = diaChi;
-    data['phone'] = phone;
-    data['email'] = email;
-    data['website'] = website;
-    data['maSothue'] = maSothue;
-    data['mota'] = mota;
-    data['status'] = status;
     return data;
   }
 }

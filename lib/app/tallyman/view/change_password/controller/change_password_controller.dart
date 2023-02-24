@@ -24,7 +24,7 @@ class ChangePasswordTallymanController extends GetxController {
     var tokens = await SharePerApi().getToken();
 
     const url = "${AppConstants.urlBase}/account/change-password-use-token";
-    print(url);
+
     Map<String, dynamic> headers = {
       HttpHeaders.authorizationHeader: "Bearer $tokens"
     };

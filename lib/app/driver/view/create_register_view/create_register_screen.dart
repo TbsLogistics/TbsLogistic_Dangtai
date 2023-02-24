@@ -221,8 +221,7 @@ class _RegisterFormScreenState extends State<RegisterFormScreen> {
                                       (ListCustomerForDriverModel? newValue) {
                                     controller.selectedKhachhang =
                                         newValue!.maKhachHang.toString();
-                                    print(controller.selectedKhachhang
-                                        .toString());
+                              
                                   },
                                   dropdownDecoratorProps:
                                       DropDownDecoratorProps(

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controller.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/controller/tallyman_controller.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
+
 import 'package:tbs_logistics_dangtai/config/model/list_traking_model.dart';
 
 class DetailsListTickerOfCustomer extends GetView<CustomerController> {

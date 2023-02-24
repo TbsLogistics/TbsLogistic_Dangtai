@@ -17,11 +17,14 @@ class ListFinishedDetailsWorking
   bool isChangeColorRight = false;
   @override
   var controller = Get.put(ListFinishedDetailsOfTallymanController());
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     if (Get.arguments != null) {
       var items = Get.arguments[0] as TickerWorkingModel;
+      // ignore: unused_local_variable
       var maPhieuLamHang = Get.arguments[1];
+      // ignore: unused_local_variable
       var timeBatdau = Get.arguments[2];
       var listTeam = Get.arguments[3] as List<ListMemInTeamModel>;
       var day = DateFormat("dd-MM-yyyy");
@@ -114,7 +117,7 @@ class ListFinishedDetailsWorking
                                 child: Center(
                                   child: Text(
                                     "${index + 1}",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 14,
                                     ),
                                   ),

@@ -297,7 +297,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [],
+                            children: const [],
                           ),
                         ],
                       ),
@@ -385,7 +385,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 "Số seal 1",
                                 style: CustomTextStyle.titlePrimary,
@@ -416,7 +416,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 "Số seal 2",
                                 style: CustomTextStyle.titlePrimary,
@@ -447,7 +447,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 "Số Kiện",
                                 style: CustomTextStyle.titlePrimary,
@@ -478,7 +478,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 "Số Book",
                                 style: CustomTextStyle.titlePrimary,
@@ -509,7 +509,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 "Số Khối",
                                 style: CustomTextStyle.titlePrimary,
@@ -552,7 +552,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
+                        const Text(
                           "Số công 2",
                           style: CustomTextStyle.titlePrimary,
                         ),
@@ -567,7 +567,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 "Số seal 1",
                                 style: CustomTextStyle.titlePrimary,
@@ -592,7 +592,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 "Số seal 2",
                                 style: CustomTextStyle.titlePrimary,
@@ -623,7 +623,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 "Số Kiện",
                                 style: CustomTextStyle.titlePrimary,
@@ -654,7 +654,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 "Số Book",
                                 style: CustomTextStyle.titlePrimary,
@@ -685,7 +685,7 @@ class _DetailsFormRegisterDriverState extends State<DetailsFormRegisterDriver> {
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
+                            children: const [
                               Text(
                                 "Số Khối",
                                 style: CustomTextStyle.titlePrimary,

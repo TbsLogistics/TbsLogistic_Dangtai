@@ -19,7 +19,7 @@ class RegisterOutScreen extends GetView<StatusDriverController> {
     if (Get.arguments != null && Get.arguments is StatusDriverModel) {
       var items = Get.arguments as StatusDriverModel;
       var maPhieu = items.maPhieuvao as int;
-      print(maPhieu);
+
       var loaixe = items.loaixeRe!.maLoaiXe;
 
       return GetBuilder<StatusDriverController>(

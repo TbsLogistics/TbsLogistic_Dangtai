@@ -43,6 +43,12 @@ class StatusDriverController extends GetxController {
   var selectedKhachhang = "";
   String? selectedNumberCont;
 
+  @override
+  void onInit() {
+    getStatus();
+    super.onInit();
+  }
+
   void changelNumberCont(String? value) {
     selectedNumberCont = value.toString();
     numberSelectCont = int.parse("$selectedNumberCont");
@@ -52,12 +58,6 @@ class StatusDriverController extends GetxController {
   void saveNumberCont(String? value) {
     selectedNumberCont = value.toString();
     update();
-  }
-
-  @override
-  void onInit() {
-    getStatus();
-    super.onInit();
   }
 
   void showFormStatus() {
@@ -76,11 +76,7 @@ class StatusDriverController extends GetxController {
     try {
       response = await dio.get(
         url,
-        options: Options(
-          headers: headers, followRedirects: false,
-          // will not throw errors
-          validateStatus: (status) => true,
-        ),
+        options: Options(headers: headers),
       );
       if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
         var data = StatusDriverModel.fromJson(response.data);

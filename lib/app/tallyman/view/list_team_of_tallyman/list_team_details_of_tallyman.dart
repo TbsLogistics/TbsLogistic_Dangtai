@@ -16,6 +16,7 @@ class ListTeamDetailsOfTallyman
   bool isChangeColorRight = false;
   @override
   var controller = Get.put(ListTeamDetailsOfTallymanController());
+  @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     if (Get.arguments != null) {
@@ -113,7 +114,7 @@ class ListTeamDetailsOfTallyman
                                 child: Center(
                                   child: Text(
                                     "${index + 1}",
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 14,
                                     ),
                                   ),

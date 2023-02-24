@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/controller/list_finished_detail_working_controller.dart';
 import 'package:tbs_logistics_dangtai/app/tallyman/model/list_employ_await.dart';
-import 'package:tbs_logistics_dangtai/app/tallyman/controller/list_finished_working_controller.dart';
 import 'package:tbs_logistics_dangtai/config/routes/pages.dart';
 
 class ListFinishedWorking
@@ -93,9 +92,7 @@ class ListFinishedWorking
       BuildContext context) {
     return InkWell(
       onTap: () {
-        print(
-          items.daLam![index].id.toString(),
-        );
+      
         controller.postListEmployee(
           maPhieuLamHang: int.parse(
             items.daLam![index].id.toString(),

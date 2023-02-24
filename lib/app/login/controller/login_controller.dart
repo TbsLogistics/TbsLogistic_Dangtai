@@ -60,7 +60,6 @@ class LoginController extends GetxController {
         );
       } else if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
         jsonRespone = response.data;
-        print(response.data["status_code"]);
 
         if (response.data["status_code"] == 204) {
           Get.defaultDialog(
@@ -77,7 +76,7 @@ class LoginController extends GetxController {
                   backgroundColor:
                       MaterialStateProperty.all<Color>(Colors.white),
                   side: MaterialStateProperty.all(
-                    BorderSide(width: 1, color: Colors.white),
+                    const BorderSide(width: 1, color: Colors.white),
                   ),
                 ),
                 onPressed: () {
@@ -188,5 +187,11 @@ class LoginController extends GetxController {
       },
       buttonColor: Colors.orangeAccent.withOpacity(0.4),
     );
+  }
+
+  @override
+  void onClose() {
+    Get.deleteAll();
+    super.onClose();
   }
 }

@@ -169,7 +169,7 @@ class ListFinishedDetailsOfTallymanController extends GetxController {
       if (response.statusCode == AppConstants.RESPONSE_CODE_SUCCESS) {
         // ignore: unused_local_variable
         var data = response.data;
-        print("end");
+       
         isHide.value = true;
         update();
         Get.toNamed(Routes.LIST_TEAM_OF_TALLYMAN);

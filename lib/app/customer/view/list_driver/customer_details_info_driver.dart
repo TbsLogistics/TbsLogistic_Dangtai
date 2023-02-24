@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tbs_logistics_dangtai/app/customer/controller/customer_controller.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/color.dart';
-import 'package:tbs_logistics_dangtai/config/core/data/text_style.dart';
+import 'package:tbs_logistics_dangtai/config/widget/custom_time_lines.dart';
+
 import 'package:timeline_list/timeline.dart';
 import 'package:timeline_list/timeline_model.dart';
 
@@ -77,251 +77,155 @@ class CustomerDetailsInfoDriver extends GetView<CustomerController> {
     var day = DateFormat("dd-MM-yyyy");
     // ignore: unused_local_variable
     var hour = DateFormat("hh:mm a");
-    return SizedBox(
-      height: size.width,
-      child: Timeline(
-        children: <TimelineModel>[
-          length >= 1
-              ? TimelineModel(
-                  SizedBox(
-                    height: size.width * 0.2,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              "${item["trackingtime"][0]["Statustracking"]["name"]}",
+    return item["trackingtime"] != null
+        ? SizedBox(
+            height: 80 * 4,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                CustomTimeLines(
+                  contentLeft: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      Text(
+                        "Đã đăng tài",
+                        style: TextStyle(
+                          color: Colors.orangeAccent,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  contentRight: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("Ngày : ${day.format(
+                        DateTime.parse(
+                          item["trackingtime"]![0].thoigian.toString(),
+                        ),
+                      )}"),
+                      Text("Giờ : ${hour.format(
+                        DateTime.parse(
+                          item["trackingtime"]![0].thoigian.toString(),
+                        ),
+                      )}"),
+                    ],
+                  ),
+                  image: const AssetImage("assets/timelines/result.png"),
+                  height: 80,
+                  colorLine: Colors.orangeAccent,
+                ),
+                CustomTimeLines(
+                  contentLeft: item["trackingtime"]![1].thoigian != null
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: const [
+                            Text(
+                              "Đã vào cổng",
                               style: TextStyle(
-                                color: Colors.orangeAccent.withOpacity(0.8),
+                                color: Colors.orangeAccent,
                                 fontSize: 16,
                               ),
                             ),
-                          ),
+                          ],
+                        )
+                      : Container(),
+                  contentRight: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text("Ngày : ${day.format(
+                        DateTime.parse(
+                          item["trackingtime"]![1].thoigian.toString(),
                         ),
-                        Expanded(
-                          child: Center(
-                            child: Text("Ngày : ${day.format(
-                              DateTime.parse(
-                                item["trackingtime"][0]["thoigian"].toString(),
-                              ),
-                            )}"),
-                          ),
+                      )}"),
+                      Text("Giờ : ${hour.format(
+                        DateTime.parse(
+                          item["trackingtime"][1].thoigian.toString(),
                         ),
-                        Expanded(
-                          child: Center(
-                            child: Text("Giờ : ${hour.format(
-                              DateTime.parse(
-                                item["trackingtime"][0]["thoigian"].toString(),
-                              ),
-                            )}"),
-                          ),
-                        ),
-                      ],
-                    ),
+                      )}"),
+                    ],
                   ),
-                  icon: const Icon(Icons.local_shipping, color: Colors.white),
-                  iconBackground: Colors.cyan,
-                  position: TimelineItemPosition.left,
-                )
-              : TimelineModel(
-                  Container(height: size.width * 0.2),
-                  icon: const Icon(Icons.local_shipping, color: Colors.white),
-                  iconBackground: Colors.cyan,
+                  image: item["trackingtime"]![1].thoigian == null
+                      ? const AssetImage("assets/timelines/in_car.png")
+                      : const AssetImage("assets/timelines/in_cared.png"),
+                  height: 80,
+                  colorLine: Colors.orangeAccent,
                 ),
-          length >= 2
-              ? TimelineModel(
-                  SizedBox(
-                    height: size.width * 0.2,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              "${item["trackingtime"][1]["Statustracking"]["name"]}",
-                              style: TextStyle(
-                                color: Colors.orangeAccent.withOpacity(0.8),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
+                CustomTimeLines(
+                  contentLeft: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      Text(
+                        "Bắt đầu làm hàng",
+                        style: TextStyle(
+                          color: Colors.orangeAccent,
+                          fontSize: 16,
                         ),
-                        Expanded(
-                          child: Center(
-                            child: Text("Ngày : ${day.format(
-                              DateTime.parse(
-                                item["trackingtime"][1]["thoigian"].toString(),
-                              ),
-                            )}"),
-                          ),
-                        ),
-                        Expanded(
-                          child: Center(
-                            child: Text("Giờ : ${hour.format(
-                              DateTime.parse(
-                                item["trackingtime"][1]["thoigian"].toString(),
-                              ),
-                            )}"),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  icon: const Icon(Icons.meeting_room, color: Colors.white),
-                  iconBackground: Colors.cyan,
-                  position: TimelineItemPosition.right,
-                )
-              : TimelineModel(
-                  Container(height: size.width * 0.2),
-                  icon: const Icon(Icons.meeting_room, color: Colors.white),
-                  iconBackground: Colors.cyan,
+                  contentRight: item["trackingtime"]!.length == 3
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text("Ngày : ${day.format(
+                              DateTime.parse(
+                                item["trackingtime"]![0].thoigian.toString(),
+                              ),
+                            )}"),
+                            Text("Giờ : ${hour.format(
+                              DateTime.parse(
+                                item["trackingtime"]![0].thoigian.toString(),
+                              ),
+                            )}"),
+                          ],
+                        )
+                      : Container(),
+                  image: item["trackingtime"]!.length == 3
+                      ? const AssetImage("assets/timelines/start_working.png")
+                      : const AssetImage("assets/timelines/start_worked.png"),
+                  height: 80,
+                  colorLine: Colors.orangeAccent,
                 ),
-          length >= 3
-              ? TimelineModel(
-                  SizedBox(
-                    height: size.width * 0.2,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              "${item["trackingtime"][2]["Statustracking"]["name"]}",
-                              style: TextStyle(
-                                color: Colors.orangeAccent.withOpacity(0.8),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
+                CustomTimeLines(
+                  contentLeft: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      Text(
+                        "Làm hàng xong",
+                        style: TextStyle(
+                          color: Colors.orangeAccent,
+                          fontSize: 16,
                         ),
-                        Expanded(
-                          child: Center(
-                            child: Text("Ngày : ${day.format(
-                              DateTime.parse(
-                                item["trackingtime"][2]["thoigian"].toString(),
-                              ),
-                            )}"),
-                          ),
-                        ),
-                        Expanded(
-                          child: Center(
-                            child: Text("Giờ : ${hour.format(
-                              DateTime.parse(
-                                item["trackingtime"][2]["thoigian"].toString(),
-                              ),
-                            )}"),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  icon: const Icon(Icons.table_rows, color: Colors.white),
-                  iconBackground: Colors.cyan,
-                  position: TimelineItemPosition.left,
-                )
-              : TimelineModel(
-                  Container(height: size.width * 0.2),
-                  icon: const Icon(Icons.table_rows, color: Colors.white),
-                  iconBackground: Colors.cyan,
+                  contentRight: item["trackingtime"]!.length == 4
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text("Ngày : ${day.format(
+                              DateTime.parse(
+                                item["trackingtime"]![0].thoigian.toString(),
+                              ),
+                            )}"),
+                            Text("Giờ : ${hour.format(
+                              DateTime.parse(
+                                item["trackingtime"]![0].thoigian.toString(),
+                              ),
+                            )}"),
+                          ],
+                        )
+                      : Container(),
+                  image: item["trackingtime"]!.length == 4
+                      ? const AssetImage("assets/timelines/finish.png")
+                      : const AssetImage("assets/timelines/finished.png"),
+                  height: 80,
+                  colorLine: Colors.orangeAccent,
                 ),
-          length >= 4
-              ? TimelineModel(
-                  SizedBox(
-                    height: size.width * 0.2,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              "${item["trackingtime"][3]["Statustracking"]["name"]}",
-                              style: TextStyle(
-                                color: Colors.orangeAccent.withOpacity(0.8),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Center(
-                            child: Text("Ngày : ${day.format(
-                              DateTime.parse(
-                                item["trackingtime"][3]["thoigian"].toString(),
-                              ),
-                            )}"),
-                          ),
-                        ),
-                        Expanded(
-                          child: Center(
-                            child: Text("Giờ : ${hour.format(
-                              DateTime.parse(
-                                item["trackingtime"][3]["thoigian"].toString(),
-                              ),
-                            )}"),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  icon: const Icon(Icons.local_shipping, color: Colors.white),
-                  iconBackground: Colors.cyan,
-                  position: TimelineItemPosition.right,
-                )
-              : TimelineModel(
-                  Container(height: size.width * 0.2),
-                  icon: const Icon(Icons.android, color: Colors.white),
-                  iconBackground: Colors.cyan,
-                ),
-          length >= 5
-              ? TimelineModel(
-                  SizedBox(
-                    height: size.width * 0.2,
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: Center(
-                            child: Text(
-                              "${item["trackingtime"][4]["Statustracking"]["name"]}",
-                              style: TextStyle(
-                                color: Colors.orangeAccent.withOpacity(0.8),
-                                fontSize: 16,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          child: Center(
-                            child: Text("Ngày : ${day.format(
-                              DateTime.parse(
-                                item["trackingtime"][4]["thoigian"].toString(),
-                              ),
-                            )}"),
-                          ),
-                        ),
-                        Expanded(
-                          child: Center(
-                            child: Text("Giờ : ${hour.format(
-                              DateTime.parse(
-                                item["trackingtime"][4]["thoigian"].toString(),
-                              ),
-                            )}"),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  icon: const Icon(Icons.done, color: Colors.white),
-                  iconBackground: Colors.cyan,
-                  position: TimelineItemPosition.left,
-                )
-              : TimelineModel(
-                  Container(height: size.width * 0.2),
-                  icon: const Icon(Icons.done, color: Colors.white),
-                  iconBackground: Colors.cyan,
-                ),
-        ],
-        // position: TimelinePosition.Left,
-        iconSize: 40,
-        lineColor: Colors.orangeAccent.withOpacity(0.4),
-      ),
-    );
+              ],
+            ))
+        : Container();
   }
 
   Widget _buildStatus(Size size, dynamic item, CustomerController controller,
